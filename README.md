@@ -1,4 +1,4 @@
-📊 Repositório de Estatística
+# 📊 Repositório de Estatística
 
 Bem-vindo ao meu repositório de Estatística!
 Aqui você encontrará anotações, exercícios, exemplos práticos e implementações que auxiliam no estudo e aplicação de conceitos estatísticos.
