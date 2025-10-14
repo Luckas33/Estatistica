@@ -1,0 +1,384 @@
+\documentclass[a4paper,11pt]{article}
+
+
+\usepackage{preambulo} 
+ 
+\renewcommand{\lstlistingname}{Listado}
+\lstset{
+    backgroundcolor=\color[rgb]{0.86,0.88,0.93},
+    language=R, keywordstyle=\color[rgb]{0,0,1},
+    basicstyle=\footnotesize \ttfamily,breaklines=true,
+    escapeinside={\%*}{*)}
+}
+\usepackage{footmisc} \renewcommand{\labelitemi}{$\circ$}
+\usepackage{enumitem} \setlist[itemize]{leftmargin=*}
+
+\usepackage{scrextend}
+\deffootnote[1em]{1em}{1em}{\textsuperscript{\thefootnotemark}\,}
+
+%%%%%%%%%% Document starts here %%%%%%%%%%%
+
+\begin{document}
+%%%%%%%%%% Title %%%%%%%%%%%
+\begin{figure}[!h] \includegraphics [scale=0.3] {Imagens/Course-logo} \end{figure}
+
+\begin{spacing}{1.5}
+{\Large\sc \noindent Homework I} \\
+
+{\large\sc \noindent Nome completo: Lucas de Oliveira Sobral}\\
+%{\large\sc \noindent Nome completo:}\\
+{\large\sc \noindent Numero de matricula: 556944}\\
+%{\large\sc \noindent Numero de matricula: }\\
+{\large\sc \noindent Nome completo:Álvaro José Passos de Freitas Neto}\\
+%{\large\sc \noindent Nome completo:}\\
+{\large\sc \noindent Numero de matricula: 567593}
+%{\large\sc \noindent Numero de matricula: }
+\end{spacing}
+
+\vskip1cm
+
+%%%%%%%%%% Content starts here %%%%%%%%%%%
+\section{Questão}  \label{sec:q1}
+As emissões diárias de um gás poluente de uma planta industrial foram registradas 80
+vezes, em uma determinada unidade de medida. Os dados obtidos estão apresentados na
+Tabela \ref{tab:ex1}:
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{*{12}{c}} % Define 12 colunas centradas
+        15.8 & 22.7 & 26.8 & 19.1 & 18.5 & 14.4 & 8.3 & 25.9 & 26.4 & 9.8 & 21.9 & 10.5 \\
+        17.3 & 6.2 & 18.0 & 22.9 & 24.6 & 19.4 & 12.3 & 15.9 & 20.1 & 17.0 & 22.3 & 27.5 \\
+        23.9 & 17.5 & 11.0 & 20.4 & 16.2 & 20.8 & 20.9 & 21.4 & 18.0 & 24.3 & 11.8 & 17.9 \\
+        18.7 & 12.8 & 15.5 & 19.2 & 13.9 & 28.6 & 19.4 & 21.6 & 13.5 & 24.6 & 20.0 & 24.1 \\
+        9.0 & 17.6 & 25.7 & 20.1 & 13.2 & 23.7 & 10.7 & 19.0 & 14.5 & 18.1 & 31.8 & 28.5 \\
+        22.7 & 15.2 & 23.0 & 29.6 & 11.2 & 14.7 & 20.5 & 26.6 & 13.3 & 18.1 & 24.8 & 26.1 \\
+        7.7 & 22.5 & 19.3 & 19.4 & 16.7 & 16.9 & 23.5 & 18.4 
+    \end{tabular}
+    \caption{Emissões diárias de gás poluente (questão 1).} % Legenda posicionada corretamente.
+    \label{tab:ex1}
+\end{table}
+
+
+\begin{enumerate}[leftmargin=*]
+\item Calcule as medidas de tendência central (média, mediana e moda) e as medidas de
+dispersão (amplitude, variância, desvio padrão e coeficiente de variação) para o conjunto de dados da Tabela \ref{tab:ex1}.  Interprete os resultados
+
+\item Construa um histograma e um boxplot para os dados de emissões. Os dados parecem
+estar simetricamente distribuídos? Existem valores atípicos?
+
+\item Determine os quartis (Q1, Q2, Q3) e o intervalo interquartil (IQR). Utilize esses valores
+para reforçar sua análise sobre a presença de valores atípicos
+
+\item Suponha que o limite máximo aceitável diário para as emissões seja de 25 unidades.
+Qual a proporção de dias em que a planta excedeu esse limite? O comportamento
+geral das emissões estaria em conformidade com esse padrão regulatório? 
+
+\end{enumerate} 
+
+
+\subsection*{Solução da questão} 					
+
+\subsubsection*{Distribuição de frequência - Base Teórica:} 
+
+\begin{itemize}
+\item[]
+
+\text{\large Classes ou valores (\(x_i\))}
+    \item São diferentes valores que  a variável assume ou intervalos (classes) em que os dados são agrupados.
+
+\text{\large Frequência Absoluta (\(n_i\))}
+    \item A frequência absoluta o número de vezes que um determinado valor ou intervalo de valores aparece em um conjunto de dados. A soma de todas as frequências absolutas deve ser igual ao número total de observações (N)
+
+    \[\sum n_i = N\]
+
+\text{\large Frequência Relativa (\(f_i\))}
+    \item A frequência relativa é a proporção de observações pertencentes ao valor (Xi) em relação ao total de observações.
+
+    \[f_i = \frac{ni}{N}\]
+
+\text{\large Frequência Percentual (\(p_i\))}
+    \item É a frequência relativa multiplicada por 100, deixando o dado em forma de porcentagem.
+
+    \[p_i = f_i * 100\]
+
+\text{\large Frequência Acumulada (\(N_i\))}
+    \item É a soma das frequências absolutas de 1 até o valor $x_i$. Serve para mostrar o total de observações que possuem um valor menor ou igual ao limite superior da classe.
+
+    \[N_i = \sum_{j=1}^{i} n_j = n_1 + n_2 + ... + n_i\]
+
+\text{\large Frequência Relativa Acumulada (\(F_i\))}
+    \item É a soma das frequências relativas de 1 até o valor $x_i$. Serve para mostrar o total de observações que possuem um valor menor ou igual ao limite superior da classe.
+
+    \[F_i = \sum_{j=1}^{i} f_j = f_1 + f_2 + ... + f_i\]
+
+\text{\large Frequência Percentual Acumulada (\(P_i\))}
+    \item É a soma das frequência percentuais de 1 até o valor $x_i$.
+
+    \[P_i = \sum_{j=1}^{i} p_j = p_1 + p_2 + ... + p_i\]
+
+\end{itemize}
+
+\subsubsection*{Medidas de tendência central - Base Teórica:} 
+
+\begin{itemize}
+\item[]
+
+\text{\large Moda (\(M_o\))}
+    \item É o valor que ocorre com maior frequência em um conjunto de dados. Um conjunto de dados pode ter nenhum valor que se destaque sendo assim ele não tem moda (amodal), pode ter uma moda (unimodal), duas modas quando dois valores se destacam (bimodal) ou várias modas quando vários valores se destacam(polimodal).
+
+
+\text{\large Mediana (\(M_d\))}
+    \item É o valor que ocupa a posição central em um conjunto de dados ordenados de forma crescente ou decrescente, para obter a mediana de um conjunto ímpares de dados devemos pegar o total de dados somar um e dividir por dois, para dados pares devemos pegar os dois do meio e fazer a média dos dois, dividindo por dois.
+
+    \item Para conjunto ímpar \[M_d = \frac{N+1}{2}\]
+    \item Para conjunto par \[M_d = \frac{x_{\frac{N}{2}} + x_{(\frac{N}{2} + 1)}}{2}\]
+
+\text{\large Mediana para dados agrupados (\(M_d\))}
+    \item Para dados agrupados onde não sabemos com exatidão os valores de $x_i$, dessa forma devemos utilizar a frequência acumulada $N_i$ para saber em qual intervalo fica a mediana, após isso precisaremos utilizar a seguinte fórmula:
+
+    \[M_d = L_i + \frac{\frac{N}{2} - N_i }{n_i} * h\]
+
+    Onde:
+    \item $L_i$: Limite inferior da classe da mediana.
+    \item $\frac{N}{2} ou \sum fi$: Somatório da frequência absoluta.
+    \item $N_i$: Frequência acumulada da classe anterior à mediana.
+    \item $h$: Amplitude do intervalo da classe da mediana.
+    \item $n_i$: Frequência absoluta da classe.
+
+
+
+\text{\large Média Aritmética(\(\overline{x}\))}
+    \item É a soma de todos os valores do conjunto de dados dividida pelo número total de dados.
+
+    \[\overline{x} = \frac{\sum x_i}{N}\]
+
+\text{\large Média Aritmética Ponderada(\(\overline{x}_w\))}
+    \item É utilizada quando os valores do conjunto de dados não tem a mesma importância ou peso. Em vez de cada valor contribuir igualmente para o cálculo da média, cada um é multiplicado pelo peso $w_i$.
+
+    \[\overline{x}_w = \frac{\sum(x_i*w_i)}{\sum w_i}\]
+
+
+\text{\large Média Ponderada para dados agrupados por intervalo(\(\overline{x}_a\))}
+    \item Para dados agrupados devemos fazer o somatório de $x_m$ (média do intervalo) com a multiplicação da frequência absoluta $n_i$ e dividir pelo total de valores $N$.
+
+    \[\overline{x}_a = \frac{\sum(x_m * n_i)}{N}\]
+
+    \item onde $x_m = \frac{L_{inferior} + L_{superior}}{2}$
+
+
+\end{itemize}
+
+\subsubsection*{Medidas de Dispersão - Base Teórica:} 
+\begin{itemize}
+\item[]
+
+\text{\large Dispersão}
+    \item É a medida que informa o quão espalhados estão os dados do centro, temos quatro principais formas de calcular dispersão:
+
+\text{\large Amplitude(A)}
+    \item Corresponde à diferença entre o maior e o menor valor do conjunto de dados. É muito sensível a valores extremos (outliers).
+
+     \[ A = \text{Valor}_{\text{máximo}} -\text{Valor}_{\text{mínimo}} \]
+    
+\text{\large Variância($\sigma^2$ ou $S^2$ )}
+    \item Em suma é a média dos quadrados das distâncias de cada valor em relação à média, ele fornece uma medida numérica da dispersão, sendo um valor alto indicando que os dados estão muito espalhados em relação à média (pouca homogeneidade), enquanto um valor baixo indica que os dados estão próximos à média (muita homogeneidade). 
+
+    \[\sigma^2 = \frac{\sum (x_i - \overline{x})^2}{N}\]
+
+    \item ou simplesmente o somatório do desvio médio ao quadrado.
+
+    \[\sigma^2 = \frac{\sum (dm_i{^2})}{N}\]
+
+    sendo 
+    \[dm = \frac{\sum (desvio_i)}{N}\] 
+
+    \[desvio_i = \overline{x} - x_i\]
+
+    \item Observação: substituir $N$ por $N-1$ no denominador fornece uma estimativa não enviesada da verdadeira variância da população e transformando em uma fórmula para variância amostral.
+
+    \[S^2 = \frac{\sum (x_i - \overline{x})^2}{N-1}\]
+
+\text{\large Desvio padrão($\sigma$ ou $S$ )}
+    \item É a raiz quadrada da variância e serve para retornar à unidade da medida original. 
+
+    \[\sigma = \sqrt {\sigma^2} = \sqrt{\frac{\sum (x_i - \overline{x})^2}{N}}\]
+
+\text{\large Coeficiente de Variação (CV)}
+    \item É uma medida de dispersão relativa, expressa como uma porcentagem. É a razão entre o desvio padrão e a média. Sua principal utilidade é comparar a variabilidade de dois ou mais conjuntos de dados que possuem médias ou unidades de medida diferentes. Um CV baixo indica baixa variabilidade relativa, enquanto um CV alto indica alta variabilidade relativa.
+
+    \[ CV = \frac{S}{\overline{x}} \times 100\% \]
+
+    Onde:
+    \item $S$: Desvio padrão da amostra.
+    \item $\overline{x}$: Média da amostra.
+
+\text{\large Coeficiente de variação de Pearson ($r_{xy)}$}
+    \item É uma medida estatística que descreve o grau e a direção da associação linear entre duas variáveis quantitativas (X e Y).
+
+    \[r_xy = \frac{N*\sum{x_iy_i} - \sum{x_iy_i}}{\sqrt{n*\sum x_i^2 - \sum (x_i)^2} * \sqrt{n*\sum y_i^2 - \sum (y_i)^2}}\]
+
+\end{itemize}
+
+\subsubsection*{Gráficos - base teórica} 
+
+
+\begin{description}[leftmargin=*]
+
+\item[1.1] Resposta: \\
+
+Temos 80 dados e um somatório deles de 
+
+\item[1.2] Resposta: \\
+
+\item[1.3] Resposta: \\
+
+\item[1.4] Resposta: \\
+
+\end{description}
+
+\section{Questão} \label{sec:q2}
+Uma empresa italiana recebeu 20 currículos de cidadãos italianos e estrangeiros na seleção
+de pessoal qualificado para o cargo de gerente de relações exteriores. A tabela \ref{tab_2} reporta as
+informações consideradas relevantes na seleção: a idade, a nacionalidade, o nível mínimo
+de renda desejada (em milhares de euros), os anos de experiência no trabalho
+
+\begin{table}[H]
+    \centering
+    \label{tab_2}
+    \begin{tabular}{c l l c c}
+        \toprule
+         & \textbf{Idade} & \textbf{Nacionalidade} & \textbf{Renda} & \textbf{Experiência} \\
+        \midrule
+        1 & 28 & Italiana & 2.3 & 2 \\
+        2 & 34 & Inglesa & 1.6 & 8 \\
+        3 & 46 & Belga & 1.2 & 21 \\
+        4 & 26 & Espanhola & 0.9 & 1 \\
+        5 & 37 & Italiana & 2.1 & 15 \\
+        6 & 29 & Espanhola & 1.6 & 3 \\
+        7 & 51 & Francesa & 1.8 & 28 \\
+        8 & 31 & Belga & 1.4 & 5 \\
+        9 & 39 & Italiana & 1.2 & 13 \\
+        10 & 43 & Italiana & 2.8 & 20 \\
+        11 & 58 & Italiana & 3.4 & 32 \\
+        12 & 44 & Inglesa & 2.7 & 23 \\
+        13 & 25 & Francesa & 1.6 & 1 \\
+        14 & 23 & Espanhola & 1.2 & 0 \\
+        15 & 52 & Italiana & 1.1 & 29 \\
+        16 & 42 & Alemã & 2.5 & 18 \\
+        17 & 48 & Francesa & 2.0 & 19 \\
+        18 & 33 & Italiana & 1.7 & 7 \\
+        19 & 38 & Alemã & 2.1 & 12 \\
+        20 & 46 & Italiana & 3.2 & 23 \\
+        \bottomrule
+    \end{tabular}
+        \caption{Informações na seleção da empresa italiana (questão 2).}
+\end{table}
+
+\begin{enumerate}[leftmargin=*]
+\item Calcule a média, mediana e desvio padrão para as variáveis idade, renda desejada e
+anos de experiência. O que você pode inferir a partir desses valores sobre o perfil típico dos candidatos?
+
+
+\item  Agrupe os candidatos por nacionalidade e calcule a renda média desejada e os anos
+médios de experiência para cada grupo. Qual nacionalidade apresenta a maior renda
+média desejada? Qual grupo aparenta ser o mais experiente?
+
+\item Existe correlação entre anos de experiência e renda desejada? Utilize ferramentas visuais apropriadas (por exemplo, gráfico de dispersão) e calcule o coeficiente de correlação
+de Pearson. Interprete o resultado
+
+\item Suponha que a empresa queira priorizar candidatos com pelo menos 10 anos de experiência e renda desejada inferior a 2,0 (mil euros). Quantos candidatos atendem a ambos
+os critérios? Liste suas nacionalidades e idades
+
+\item Construa gráficos que permitam visualizar a distribuição da idade e da renda desejada,
+separados por nacionalidade. Utilize histogramas, box-plots ou gráficos de barras, e
+comente as principais diferenças observadas entre os grupos
+
+\end{enumerate}
+
+\subsection*{Solução da questão} 					
+
+\subsubsection*{Base Teórica Questão 2:} 
+
+
+
+\subsubsection*{Gráficos(base teórica)} 
+
+
+\begin{description}[leftmargin=*]
+
+\item[2.1] Resposta: \\
+
+\item[2.2] Resposta: \\
+
+\item[2.3] Resposta: \\
+
+\item[2.4] Resposta: \\
+
+\item[2.5] Resposta: \\
+
+\end{description}
+
+\section{Questão} \label{sec:q3}
+O conjunto de dados em anexo, {HW1\_bike\_sharing.csv}, refere-se ao processo de compartilhamento de bicicletas em uma cidade dos Estados Unidos. O conjunto contém as colunas descritas na Tabela 3. A variável season inclui as quatro estações do hemisfério norte: primavera, verão, outono e inverno. A variável weathersit representa quatro condições meteorológicas: ‘Céu limpo’, ‘Nublado’, ‘Chuva fraca’, ‘Chuva forte’. A variável temp é a temperatura normalizada em graus Celsius, ou seja, os valores foram divididos por 41 (valor máximo) 
+
+\begin{table}[H]
+    \centering
+    % Define 4 colunas: a primeira centrada (c), as outras três alinhadas à esquerda (l)
+    \begin{tabular}{c l l l}
+        \toprule
+        \textbf{TAG} & \textbf{DESCRIÇÃO} & \textbf{DESCRIPTION} \\
+        \midrule
+        instant & Índice de registro & \textcolor{blue}{Record index} \\
+        dteday & Data da observação & \textcolor{blue}{Date of observation} \\
+        season & Estação do ano & \textcolor{blue}{Season} \\
+        weathersit & Condições meteorológicas & \textcolor{blue}{Weather conditions} \\
+        temp & Temperatura em \textdegree C (normalizada) & \textcolor{blue}{Temperature in \textdegree C (normalised)} \\
+        casual & Número de usuários casuais & \textcolor{blue}{Number of casual users} \\
+        registered & Número de usuários registrados & \textcolor{blue}{Number of registered users} \\
+        \bottomrule
+    \end{tabular}
+    \caption{Variáveis do conjunto HW1\_bike\_sharing (questão \ref{sec:q3}).}
+    \label{tab:variaveis_bike}
+\end{table}
+
+\begin{enumerate}[leftmargin=*]
+\item Carregue o conjunto de dados \texttt{HW1\_bike\_sharing.csv}  no R. Classifique as variáveis quanto ao tipo (categórica ou numérica), identifique o número total de observações e as datas de início e fim da amostra.
+
+\item Calcule medidas de tendência central (média, mediana) e os quartis para cada característica numérica relevante. Apresente os resultados em uma tabela com título
+apropriado. Comente os principais pontos
+
+\item Atribua os níveis correspondentes às variáveis season e weathersit. Construa gráficos de barras para ambas. Qual estação do ano apresenta maior número de usuários? O uso de bicicletas depende da estação? Qual é a condição climática mais favorável para o uso do sistema?
+
+\item Calcule o número total de usuários por dia, somando casual e registered. Converta
+a variável temp para temperatura real (multiplicando por 41). Em seguida, construa os gráficos de séries temporais para temperatura e número total de usuários. Essas séries apresentam tendência semelhante?
+
+\end{enumerate}
+
+\subsection*{Solução da questão} 					
+
+\subsubsection*{Base Teórica Questão 3:} 
+
+
+
+\subsubsection*{Gráficos(base teórica)} 
+
+
+\begin{description}[leftmargin=*]
+
+\item[3.1] Resposta: \\
+
+\item[3.2] Resposta: \\
+
+\item[3.3] Resposta: \\
+
+\item[3.4] Resposta: \\
+
+\end{description}
+
+\newpage
+\begin{appendices}
+
+
+\end{appendices}
+
+\end{document}
