@@ -15,10 +15,10 @@ media <- function(ConjuntoDados){# Média igual ao calculado pela calculadora
 }
 
 
-mediana <- function(ConjuntoOrdenado){
+mediana <- function(ConjuntoOrdenado){# Mediana igual ao calculado pela calculadora
   metade = length(ConjuntoOrdenado) / 2
   
-  if (length(ConjuntoOrdenado) %% 2 == 0){ # Mediana igual ao calculado pela calculadora
+  if (length(ConjuntoOrdenado) %% 2 == 0){ 
     NovoConjunto = ConjuntoOrdenado[metade] + ConjuntoOrdenado[metade + 1]
     resultado = NovoConjunto / 2
   }else{
@@ -29,30 +29,68 @@ mediana <- function(ConjuntoOrdenado){
   return(resultado)
 }
 
-moda <- function(ConjuntoOrdenado){
+moda <- function(ConjuntoOrdenado) {
+  N <- length(ConjuntoOrdenado)
   
+  max_frequencia <- 0      
+  moda_valor <- NULL       
   
-  count = 0;
-  countTemp = 0;
-  
-  for (valor in ConjuntoOrdenado) {
-    if(valor + 1 == valor - 1 ){
-      countTemp = countTemp + 1
+  for (i in 1:(N-1)) {
+    
+    count_atual <- 1
+    
+    j <- i
+    while (j < N && ConjuntoOrdenado[j] == ConjuntoOrdenado[j+1]) {
+      count_atual <- count_atual + 1
+      j <- j + 1
     }
-    if(count < countTemp){
-      
+    
+    if (count_atual > max_frequencia) {
+      max_frequencia <- count_atual
+      moda_valor <- ConjuntoOrdenado[i]
     }
+  }
+  
+  if (max_frequencia <= 1 && N > 0) {
+    tabela <- table(ConjuntoOrdenado)
+    max_tabela <- max(tabela)
+    return(as.numeric(names(tabela)[tabela == max_tabela]))
+  } else if (max_frequencia > 1) {
+    return(moda_valor)
+  } else {
+    return(NULL) 
   }
 }
 
+variancia <- function(ConjuntoDados,media){
+  somatorio <- 0
+  ConjuntoDesvio <- NULL;
+  
+  for (i in 1:length(ConjuntoDados)) {
+    ConjuntoDesvio[i] = (ConjuntoDados[i] - media)^2
+  }
+  for (valor in ConjuntoDesvio) {
+    somatorio = valor + somatorio
+  }
+  resultado = somatorio / (length(ConjuntoDados) - 1);
+  
+  return(resultado);
+}
 
-media = media(gases)
-media
+desvioPadrao <- function(variancia){
+  return(sqrt(variancia));
+}
 
-mediana = mediana(gases_ordenados)
-mediana
 
-mode(gases)
+mediaGases = media(gases)
+
+medianaGases = mediana(gases_ordenados)
+
+modaGases = moda(gases_ordenados)
+
+varianciaGases = variancia(gases,mediaGases)
+
+desvioPadraoGases = desvioPadrao(varianciaGases)
 
 Amplitude = 31.8 - 6.2
 
