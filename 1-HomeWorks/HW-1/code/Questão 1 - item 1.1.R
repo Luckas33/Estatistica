@@ -81,6 +81,9 @@ desvioPadrao <- function(variancia){
   return(sqrt(variancia));
 }
 
+coeficienteVariacao <- function(variancia,media){
+  return((variancia/media) * 100);
+}
 
 mediaGases = media(gases)
 
@@ -93,4 +96,6 @@ varianciaGases = variancia(gases,mediaGases)
 desvioPadraoGases = desvioPadrao(varianciaGases)
 
 Amplitude = 31.8 - 6.2
+
+CoeficenteVGases = coeficienteVariacao(varianciaGases,mediaGases);
 
