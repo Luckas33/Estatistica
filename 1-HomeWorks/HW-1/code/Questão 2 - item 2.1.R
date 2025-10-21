@@ -1,6 +1,6 @@
 # Questão 2 item a)
 
-source("C:\\Users\\Lucas Sobral\\Documents\\Estatistica\\1-HomeWorks\\HW-1\\code\\Questão 1 - item 1.1.R")
+source("Estatistica\\1-HomeWorks\\HW-1\\code\\Medidas de tendencia Central.R")
 
 idade <- c(28,34,46,26,37,29,51,31,39,43,58,44,25,23,52,42,48,33,38,46);
 nacionalidade <- c("Italiana","Inglesa","Belga","Espanhola","Italiana", "Espanhola","Francesa","Belga","Italiana","Italiana","Italiana","Inglesa","Francesa","Espanhola","Italiana","Alemã","Francesa","Italiana","Alemã","Italiana");
@@ -22,22 +22,20 @@ curriculos <- data.frame(
 # Idade
 mediaIdade = media(curriculos$Idade....idade);
 medianaIdade = mediana(curriculos$Idade....idade);
-desvioPIdade = desvioPadrao(curriculos$Idade....idade);
-
-#Nacionalidade
-mediaNacionalidade = media(curriculos$Nacionalidade....nacionalidade);
-medianaNacionalidade = mediana(curriculos$Nacionalidade....nacionalidade);
-desvioPNacionalidade = desvioPadrao(curriculos$Nacionalidade....nacionalidade);
+varianciaIdade = variancia(curriculos$Idade....idadeOrdenada,mediaIdade);
+desvioPIdade = desvioPadrao(varianciaIdade);
 
 #Renda
 mediaRenda = media(curriculos$Renda....renda);
 medianaRenda = mediana(curriculos$Renda....renda);
-desvioPRenda = desvioPadrao(curriculos$Renda....renda);
+varianciaRenda = variancia(curriculos$Renda....rendaOrdenada,mediaRenda);
+desvioPRenda = desvioPadrao(varianciaRenda);
 
 #Experiencia
 mediaExperiencia = media(curriculos$Experiencia....experiencia);
 medianaExperiencia = mediana(curriculos$Experiencia....experiencia);
-desvioPExperiencia = desvioPadrao(curriculos$Experiencia....experiencia);
+varianciaExperiencia = variancia(curriculos$Experiencia....experienciaOrdenada,mediaExperiencia);
+desvioPExperiencia = desvioPadrao(varianciaExperiencia)
 
 
 
