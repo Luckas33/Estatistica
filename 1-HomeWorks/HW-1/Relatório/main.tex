@@ -243,11 +243,12 @@ geral das emissões estaria em conformidade com esse padrão regulatório?
     \end{figure}
     
 \text{\large Boxplot}
-    \item É um gráfico utilizado para representar a distribuição de dados quantitativos, ele é construído com base em cinco valores estatísticos principais.
+    \item É um gráfico utilizado para representar a distribuição de dados quantitativos, ele é construído com base em alguns valores estatísticos principais.
 
 \vspace{5mm} %5mm vertical space
 
     São eles:
+    \item Numero total de amostras (n).
     \item Mínimo.
     \item Primeiro quartil (Q1) (25\% dos dados estão abaixo dele).
         \[Q1 = \frac{1}{4} \times (n + 1) \]
@@ -256,6 +257,10 @@ geral das emissões estaria em conformidade com esse padrão regulatório?
     \item Terceiro quartil (Q3) (75\% dos dados estão abaixo dele).
         \[Q3 = \frac{3}{4} \times (n + 1)\]
     \item Máximo.
+
+As fórmulas do primeiro e do terceiro quartil retornam a posição deles. Se for um inteiro, pegue o valor na posição se não for inteiro pegue os valores acima e abaixo da posição e faça a média deles.
+
+\vspace{5mm} %5mm vertical space
 
     Com base neles calcula-se o IQR e os limites (inferior e superior):
 
@@ -381,14 +386,14 @@ O valor calculado pela função em R foi 30.84144, divergindo com o calculado pe
 
 Diferença percentil:
 
-\[Erro_{percentil} = \frac{|30.84144 - 31.489|}{30.84144} * 100 = 2.099\% \]
+\[Erro_{percentil} = \frac{|30.84144 - 31.489|}{30.84144} * 100 \approx   2.099\% \]
 
 \textbf{Desvio padrão}: Para o desvio padrão aplicas somente a raiz quadrada da variância, utilizando N-1 para evitar viés.
 \[\sigma = \sqrt{31.489} = 5.6115\]
 
 O valor encontrada divergiu do apresentado pela função em R já que a variância também apresenta erro de 2.099\%. O desvio padrão apresentado pelo R foi 5.553507. Temos então que o erro percentil foi:
 
-\[Erro_{percentil} = \frac{|5.553507 - 5.6115|}{5.553507} * 100 = 1.044\%\]
+\[Erro_{percentil} = \frac{|5.553507 - 5.6115|}{5.553507} * 100 \approx   1.044\%\]
 
 \textbf{Coeficiente de variação}: Utilizando a fórmula o valor apresentado pela calculadora foi de 162.142\%, sendo o mesmo calculado pela função em R.
 
@@ -424,26 +429,109 @@ Para melhor clareza na visualização dos dados, ao invés de usar a frequência
 
 \vspace{5mm} %5mm vertical space
 
+Fazendo a contagem de itens em cada classe usando R temos:
+
+\begin{itemize}
+    \item (5, 10] = 5
+    \item (10, 15] = 14
+    \item (15, 20] = 27
+    \item (20, 25] = 23
+    \item (25, 30] = 10
+    \item (30, 35] = 1
+\end{itemize}
+
+Tendo em mente que a largura de todos os intervalos é a mesma e igual a 5 e que temos um total de 80 amostras, encontremos então a densidade usando a formula proposta.
+
+\begin{itemize}
+    \item (5, 10]:
+        \[d = \frac{5}{80 \cdot 5} = 0,0125 \]
+    \item (10, 15]:
+        \[d = \frac{14}{80 \cdot 5} = 0,035 \]
+    \item (15, 20]:
+        \[d = \frac{27}{80 \cdot 5} = 0,0675 \]
+    \item (20, 25]:
+        \[d = \frac{23}{80 \cdot 5} = 0,0575 \]
+    \item (25, 30]:
+        \[d = \frac{10}{80 \cdot 5} = 0,025 \]
+    \item (30, 35]:
+        \[d = \frac{1}{80 \cdot 5} = 0,0025 \]
+\end{itemize}
+
 Com isso eu usei o R para criar o histograma.
 
-    \begin{figure}[!h] 
+    \begin{figure}[H] 
         \centering
         \includegraphics [scale=0.3] {Graficos/histograma-questao1} 
     \end{figure}
 
+Note que os valores apontados no gráfico confirmam nossos cálculos anteriores.
+
+\vspace{5mm} %5mm vertical space
+
+A partir da análise do gráfico, pode-se concluir que a emissão diária de gases poluentes da fábrica costuma se concentrar entre 15 a 25 unidades, apresentando uma leve assimetria à direita e poucos dias com emissões extremas. Essa distribuição indica que, em geral, a fábrica é bem regular na quantidade de emissão de gases, porém, pela presença de alguns valores extremos, é importante verificar o que causou eles.
+
+\textbf{boxplot}: Para criar o gráfico, deve-se levantar alguns dados inicialmente (usaremos a tabela ordenada adquirida no primeiro item).
+
+Com isso eu usei o R para criar o boxplot.
+
+    \begin{figure}[H] 
+        \centering
+        \includegraphics [scale=0.3] {Graficos/boxplot-questao1} 
+    \end{figure}
+
+
+
+\vspace{5mm} %5mm vertical space
+
+O gráfico ilustra que a fábrica emite uma quantidade consistente de poluentes na maioria dos dias, mantendo um padrão que geralmente fica entre 15 e 25 unidades.
+A distribuição concentrada indica um controle razoável das emissões, apesar de haver alguns casos de emissões elevadas que merecem uma investigação (mas não são considerados outliers).
+
+\vspace{5mm} %5mm vertical space
+
+Portanto analisando os dois gráficos nota-se que os dados fornecidos possuem valores extremos, porem nenhum valor atípico (nenhum outlier).
+
 \textbf{\item[1.3] Resposta}: \\
 
-O segundo quartil(Q2) é a mediana já calculada no 1.1 que é 19.15, Já Q1, Q3 e IQR podem ser encontrados pelas respectivas fórmulas:
+O valor mínimo e máximo já foram adquiridos no primeiro item dessa questão, além de também ter sido calculada já a mediana.
 
-\[Q_1 = \frac{1(N+1)}{4} = \frac{81}{4} = 20.25\]
+\begin{itemize}
+    \item Mínimo = 6.2
+    \item Máximo = 31.8
+    \item Mediana = 19.15
+\end{itemize}
 
-\[Q_2 = 19.15\]
+Sabendo que temos um total de 80 amostras definirei os quartis:
 
-\[Q_3 = \frac{3}{4} (N+1) = \frac{3}{4}*81 = 60.75\]
+\begin{itemize}
+    \item Primeiro quartil (Q1) (25\% dos dados estão abaixo dele).
+        \[Q1 = \frac{1}{4} \times (80 + 1) = 20.25 \]
+    Como o valor não é um inteiro pegarei o valor acima (15.5) e o valor logo abaixo (15.2) e farei a media entre eles.
+        \[Q1 = \frac{15.5 + 15.2}{2} = 15.35 \]
+        
+    \item Segundo quartil (Q2) (mediana) = 19.15
+ 
+    \item Terceiro quartil (Q3) (75\% dos dados estão abaixo dele).
+        \[Q3 = \frac{3}{4} \times (80 + 1) = 60.75\]
+    Como o valor não é um inteiro pegarei o valor acima (23.0) e o valor logo abaixo (22.9) e farei a media entre eles.
+        \[Q1 = \frac{23 + 22.9}{2} = 22.95 \]
+\end{itemize}
 
-\[IQR = Q_3 - Q_1 = 60.75 - 20.25 = 40.50\]
+Por fim com os quartis definidos calcula-se o IQR e os limites inferiores e superiores.
+
+\begin{itemize}
+    \item IQR.
+        \[IQR = Q3 - Q1 = 22.95 - 15.35 = 7.6\]
+    \item Limite inferior.
+        \[\text{Limite inferior} = Q1 - 1.5 \times IQR = 15.35 - 1.5  \times 7.6 = 3.95\]
+    \item Limite superior.
+        \[\text{Limite superior} = Q3 + 1.5 \times IQR = 22.95 + 1.5 \times 7.6 = 34.35\]
+\end{itemize}
+
+Note que os valores apontados no gráfico confirmam nossos cálculos de não existem valores atípicos.
 
 \textbf{\item[1.4] Resposta}: \\
+
+
 
 \end{description}
 
@@ -528,6 +616,7 @@ comente as principais diferenças observadas entre os grupos
 
 \item \textbf{Idade}: \\
 Média:
+Somando todos os valores de idade e dividindo pelo total de números obtemos uma média igual ao R.
 \[\overline{x}_{idade} = \frac{773}{20} = 38.65\]
 
 Mediana:
@@ -535,10 +624,12 @@ Ordenando de maneira crescente as idades usando R:
 
 $Idade: 23, 25, 26, 28, 29, 31, 33, 34, 37, 38, 39, 42, 43, 44, 46, 46, 48, 51, 52, 58$
 
+Mediana obtida igual ao R.
 \[Md_{idade} = \frac{X_{10}+X_{11}}{2} = \frac{38+39}{2} =38.5\]
 
 
 Desvio Padrão:
+O desvio padrão calculado após a tabela de desvios e cada um elevado ao quadrado, depois somado e dividido por 19.
 \begin{table}[H]
     \centering
     \begin{tabular}{cccccccccc}
@@ -557,23 +648,93 @@ Desvio Padrão:
 
 \[\sigma = \sqrt{79.867} = 8.936\]
 
+Resultados da variância e do desvio padrão diferem dos calculados pelo R, por conta de erro de cálculo humano.
+
+\[Erro_{desvioPadrão} = \frac{|9.9275 - 8.936|}{9.9275} * 100  \approx  9.99\%\]
+
+
 
 \item \textbf{Renda desejada}:\\
 Média:
+Resultado calculado igual ao R.
+\[\overline{x}_{renda} = \frac{384}{20} = 1.92\]
 
 Mediana:
+Ordenando de maneira crescente as idades usando R:
+
+$Renda: 0.9, 1.1, 1.2, 1.2, 1.2, 1.4, 1.6, 1.6, 1.6, 1.7, 1.8, 2.0, 2.1, 2.1, 2.3, 2.5, 2.7, 2.8, 3.2, 3.4$
+
+Resultado igual ao calculado pelo R.
+\[Md_{renda} = \frac{X_{10}+X_{11}}{2} = \frac{1.7+1.8}{2} = 1.75\]
 
 Desvio Padrão:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cccccccccc}
+        \hline
+        \multicolumn{10}{c}{\textbf{Desvios em Relação à Média ($\overline{x} = 1.75$)}}\\
+        \hline
+        0.38 & -0.32 & -0.72 & -1.02 & 0.18 & -0.32 & -0.12 & -0.52 & -0.72 & -0.88 \\ 
+         1.48 & 0.78 & -0.32 & -0.72 & -0.82 & 0.58 & 0.08 & -0.22 & 0.18 & 1.28 \\
+        \hline
+    \end{tabular}
+    \caption{Desvios das rendas em relação à média $\overline{x}_{\text{renda}}$.}
+    \label{tab:desvios_renda}
+\end{table}
+
+primeira linha: 3.518
+segunda linha: 6.154
+
+\[\sigma^2 = \frac{ 9.672}{20-1} = 0.5090\]
+
+\[\sigma = \sqrt{0.5090} = 0.71344\]
+
+Apresentou uma variância igual ao calculado pelo R, porém o desvio padrão divergiu insignificantemente devido aos algarismos significativos usados pelo R serem maiores do que usados pela equipe.
+
 
 \item \textbf{Experiência}:\\
 Média:
+Valor igual ao calculado pelo R.
+\[\overline{x}_{experiencia} = \frac{280}{20} = 14\]
 
 Mediana:
+Ordenando de maneira crescente as idades usando R: \\
+$Experiêcia: 0,  1,  1,  2,  3,  5,  7,  8, 12, 13, 15, 18, 19, 20, 21, 23, 23, 28, 29, 32$
+
+Valor igual ao calculado pelo R.
+\[Md_{experiência} = \frac{X_{10}+X_{11}}{2} = \frac{13+15}{2} = 14\]
+
 
 Desvio Padrão:
 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{cccccccccc}
+        \hline
+        \multicolumn{10}{c}{\textbf{Desvios em Relação à Média ($\overline{x} = 14$)}}\\
+        \hline
+        -14 & -13 & -13 & -12 & -11 & -9 & -7 & -6 & -2 & -1 \\ 
+         1 & 4 & 5 & 6 & 7 & 9 & 9 & 14 & 15 & 18 \\
+        \hline
+    \end{tabular}
+    \caption{Desvios das experiências em relação à média $\overline{x}_{\text{experiencia}}$.}
+    \label{tab:desvios_experiencia}
+\end{table}
+
+
+Primeira linha: 970
+Segunda linha: 1034
+
+\[\sigma^2 = \frac{2004 }{20-1} = 105.473\]
+
+\[\sigma = \sqrt{105.473} = 10.27\]
+
+
 \item \textbf{Conclusão}:
 
+Tendo em vista que a média (38.65 anos) e mediana (38.5 anos) dos candidatos à vaga está extremamente próxima, além do desvio padrão (8.936) ser um tanto alto, contudo, em termos de idade, não tanto assim. Podemos inferir que a maioria dos candidatos ( apesar de não necessariamente todos ) fazem parte da Geração Y. Adicionalmente, podemos perceber que os salários esperados são muito próximos entre si, tendo também uma média (1.92 mil euros) e mediana (1.75 mil euros) pouco distintas, mas um desvio padrão realmente bem baixo ( de apenas 0.71344 ).\\
+Por fim, os anos de experiência geral dos candidatos já é uma variável bem mais dispersa, com um desvio padrão de 10.27, tanto para cima quanto para baixo do valor de 14 anos.
 
 \textbf{\item[2.2] Resposta}: \\
 
@@ -625,20 +786,35 @@ a variável temp para temperatura real (multiplicando por 41). Em seguida, const
 
 \subsubsection*{Base Teórica Questão 3:} 
 
+\begin{itemize}
+\item[]
+
+\subsubsection*{Tipos de dados - base teórica} 
+
+\item \text{Dados quantitativos:} são quaisquer dados que medem ou estão associados a medições numéricas de alguma quantidade.
+    \begin{itemize}
+        \item \text{Variáveis Quantitativas Discretas:} Assumem valores em um conjunto finito ou infinito contável de números.
+        \item \text{Variáveis Quantitativas Contínuas:} Dados contínuos assumem valores em um intervalo de números. Eles também são conhecidos como dados de escala, dados de intervalo ou dados de medição
+    \end{itemize}
+    \item \text{Dados qualitativos:} são quaisquer tipos de dados que não são numéricos ou não representam quantidades numéricas.
+    \begin{itemize}
+        \item \text{Variáveis Qualitativas Nominais:} Tem níveis que correspondem aos nomes das categorias, e não há nenhuma ordenação implícita
+        \item \text{Variáveis Qualitativas Ordinais:} Tem uma estrutura ordenada para os níveis de fatores subjacentes
+    \end{itemize}
+
+    
+\end{itemize}
 
 
-\subsubsection*{Gráficos(base teórica)} 
+\begin{description}[leftmargin=*] 
 
+\item[3.1] \textbf{ Resposta}: 
 
-\begin{description}[leftmargin=*]
+\textbf{\item[3.2] Resposta}: \\
 
-\item[3.1] Resposta: \\
+\textbf{\item[3.3] Resposta}: \\
 
-\item[3.2] Resposta: \\
-
-\item[3.3] Resposta: \\
-
-\item[3.4] Resposta: \\
+\textbf{\item[3.4] Resposta}: \\
 
 \end{description}
 
