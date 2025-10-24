@@ -508,7 +508,19 @@ Com isso eu usei o R para criar o histograma.
         \includegraphics [scale=0.3] {Imagens/Graficos/histograma-questao1} 
     \end{figure}
 
+\begin{lstlisting}
+    > hist(gases_ordenados, 
++      probability = TRUE,   // Converte frequencia em densidade
++      col = "lightblue",    // Cor das barras
++      border = "black",     // Cor da borda
++      main = "Histograma", 
++      xlab = "Emissoes diarias de gases", 
++      ylab = "Densidade")
+\end{lstlisting}
+
 Note que os valores apontados no gráfico confirmam nossos cálculos anteriores.
+
+
 
 \vspace{5mm} %5mm vertical space
 
@@ -524,6 +536,13 @@ Com isso eu usei o R para criar o boxplot.
     \end{figure}
 
 
+\begin{lstlisting}
+    boxplot(gases_ordenados,
+        main = "Boxplot dos valores de Gases",
+        ylab = "Concentracao de gases",
+        col = "lightgreen",
+        border = "darkgreen")  
+\end{lstlisting}
 
 \vspace{5mm} %5mm vertical space
 
@@ -655,7 +674,7 @@ comente as principais diferenças observadas entre os grupos
 \text{\large Coeficiente de variação de Pearson ($r_{xy)}$}
     \item É uma medida estatística que descreve o grau e a direção da associação linear entre duas variáveis quantitativas (X e Y).
 
-    \[r_xy = \frac{N*\sum{x_iy_i} - \sum{x_iy_i}}{\sqrt{n*\sum x_i^2 - \sum (x_i)^2} * \sqrt{n*\sum y_i^2 - \sum (y_i)^2}}\]
+    \[r_{xy} = \frac{\sum{(x_i - \overline{x})(y_i-\overline{y})}}{\sqrt{\sum (x_i - \overline{x})^2 \sum(y_i-\overline{y})^2}}\]
 
     O resultado estará em um intervalo de [-1,1], 
 
@@ -715,6 +734,14 @@ Média:
 Somando todos os valores de idade e dividindo pelo total de números obtemos uma média igual ao R.
 \[\overline{x}_{idade} = \frac{773}{20} = 38.65\]
 
+\begin{lstlisting}
+> mediaIdade = media(curriculos$Idade....idade);
+> mediaIdade
+[1] 38.65
+> mean(curriculos$Idade....idade)
+[1] 38.65    
+\end{lstlisting}
+
 Mediana:
 Ordenando de maneira crescente as idades usando R:
 
@@ -723,6 +750,13 @@ $Idade: 23, 25, 26, 28, 29, 31, 33, 34, 37, 38, 39, 42, 43, 44, 46, 46, 48, 51, 
 Mediana obtida igual ao R.
 \[Md_{idade} = \frac{X_{10}+X_{11}}{2} = \frac{38+39}{2} =38.5\]
 
+\begin{lstlisting}
+> medianaIdade = mediana(curriculos$Idade....idade);
+> medianaIdade
+[1] 38.5
+> median(curriculos$Idade....idade)
+[1] 38.5
+\end{lstlisting}
 
 Desvio Padrão:
 O desvio padrão calculado após a tabela de desvios e cada um elevado ao quadrado, depois somado e dividido por 19.
@@ -746,6 +780,19 @@ O desvio padrão calculado após a tabela de desvios e cada um elevado ao quadra
 
 Resultados da variância e do desvio padrão diferem dos calculados pelo R, por conta de erro de cálculo humano.
 
+\begin{lstlisting}
+> varianciaIdade = variancia(curriculos$Idade....idadeOrdenada,mediaIdade);
+> varianciaIdade
+[1] 98.55526
+> var(curriculos$Idade....idade)
+[1] 98.55526
+> desvioPIdade = desvioPadrao(varianciaIdade);
+> desvioPIdade
+[1] 9.9275
+> sd(curriculos$Idade....idade)
+[1] 9.9275
+\end{lstlisting}
+
 \[Erro_{desvioPadrão} = \frac{|9.9275 - 8.936|}{9.9275} * 100  \approx  9.99\%\]
 
 
@@ -755,6 +802,14 @@ Média:
 Resultado calculado igual ao R.
 \[\overline{x}_{renda} = \frac{384}{20} = 1.92\]
 
+\begin{lstlisting}
+> mediaRenda = media(curriculos$Renda....renda);
+> mediaRenda
+[1] 1.92
+> mean(curriculos$Renda....renda)
+[1] 1.92
+\end{lstlisting}
+
 Mediana:
 Ordenando de maneira crescente as idades usando R:
 
@@ -762,6 +817,14 @@ $Renda: 0.9, 1.1, 1.2, 1.2, 1.2, 1.4, 1.6, 1.6, 1.6, 1.7, 1.8, 2.0, 2.1, 2.1, 2.
 
 Resultado igual ao calculado pelo R.
 \[Md_{renda} = \frac{X_{10}+X_{11}}{2} = \frac{1.7+1.8}{2} = 1.75\]
+
+\begin{lstlisting}
+> medianaRenda = mediana(curriculos$Renda....renda);
+> medianaRenda
+[1] 1.75
+> median(curriculos$Renda....renda)
+[1] 1.75
+\end{lstlisting}
 
 Desvio Padrão:
 
@@ -788,11 +851,31 @@ segunda linha: 6.154
 
 Apresentou uma variância igual ao calculado pelo R, porém o desvio padrão divergiu insignificantemente devido aos algarismos significativos usados pelo R serem maiores do que usados pela equipe.
 
+\begin{lstlisting}
+> varianciaRenda = variancia(curriculos$Renda....rendaOrdenada,mediaRenda);
+> varianciaRenda
+[1] 0.5090526
+> var(curriculos$Renda....renda)
+[1] 0.5090526
+> desvioPRenda = desvioPadrao(varianciaRenda);
+> desvioPRenda
+[1] 0.7134792
+> sd(curriculos$Renda....renda)
+[1] 0.7134792
+\end{lstlisting}
 
 \item \textbf{Experiência}:\\
 Média:
 Valor igual ao calculado pelo R.
 \[\overline{x}_{experiencia} = \frac{280}{20} = 14\]
+
+\begin{lstlisting}
+> mediaExperiencia = media(curriculos$Experiencia....experiencia);
+> mediaExperiencia
+[1] 14
+> mean(curriculos$Experiencia....experiencia)
+[1] 14
+\end{lstlisting}
 
 Mediana:
 Ordenando de maneira crescente as idades usando R: \\
@@ -801,6 +884,13 @@ $Experiêcia: 0,  1,  1,  2,  3,  5,  7,  8, 12, 13, 15, 18, 19, 20, 21, 23, 23,
 Valor igual ao calculado pelo R.
 \[Md_{experiência} = \frac{X_{10}+X_{11}}{2} = \frac{13+15}{2} = 14\]
 
+\begin{lstlisting}
+> medianaExperiencia = mediana(curriculos$Experiencia....experiencia);
+> medianaExperiencia
+[1] 14
+> median(curriculos$Experiencia....experiencia)
+[1] 14
+\end{lstlisting}
 
 Desvio Padrão:
 
@@ -819,13 +909,26 @@ Desvio Padrão:
 \end{table}
 
 
-Primeira linha: 970
-Segunda linha: 1034
+\item Primeira linha: 970
+\item Segunda linha: 1034
 
 \[\sigma^2 = \frac{2004 }{20-1} = 105.473\]
 
 \[\sigma = \sqrt{105.473} = 10.27\]
 
+Resultado igual ao calculado pelo R.
+\begin{lstlisting}
+> varianciaExperiencia = variancia(curriculos$Experiencia....experienciaOrdenada,mediaExperiencia);
+> varianciaExperiencia
+[1] 105.4737
+> var(curriculos$Experiencia....experiencia)
+[1] 105.4737
+> desvioPExperiencia = desvioPadrao(varianciaExperiencia)
+> desvioPExperiencia
+[1] 10.27004
+> sd(curriculos$Experiencia....experiencia)
+[1] 10.27004
+\end{lstlisting}
 
 \item \textbf{Conclusão}:
 
@@ -833,12 +936,187 @@ Tendo em vista que a média (38.65 anos) e mediana (38.5 anos) dos candidatos à
 Por fim, os anos de experiência geral dos candidatos já é uma variável bem mais dispersa, com um desvio padrão de 10.27, tanto para cima quanto para baixo do valor de 14 anos.
 
 \textbf{\item[2.2] Resposta}: \\
+\item \textbf{Agrupamento}: \\
+Agrupando os currículos com base na nacionalidade temos a seguinte tabela.
+
+\vspace{5mm} %5mm vertical space
+
+\begin{table}[H]
+    \centering
+    \label{tab_agrupada}
+    \begin{tabular}{c l l c c}
+        \toprule
+        & \textbf{Idade} & \textbf{Nacionalidade} & \textbf{Renda} & \textbf{Experiência} \\
+        \midrule
+        3  & 46 & Belga     & 1.2 & 21 \\
+        8  & 31 & Belga     & 1.4 & 5 \\
+        16 & 42 & Alemã     & 2.5 & 18 \\
+        19 & 38 & Alemã     & 2.1 & 12 \\
+        4  & 26 & Espanhola & 0.9 & 1 \\
+        6  & 29 & Espanhola & 1.6 & 3 \\
+        14 & 23 & Espanhola & 1.2 & 0 \\
+        7  & 51 & Francesa  & 1.8 & 28 \\
+        13 & 25 & Francesa  & 1.6 & 1 \\
+        17 & 48 & Francesa  & 2.0 & 19 \\
+        2  & 34 & Inglesa   & 1.6 & 8 \\
+        12 & 44 & Inglesa   & 2.7 & 23 \\
+        1  & 28 & Italiana  & 2.3 & 2 \\
+        5  & 37 & Italiana  & 2.1 & 15 \\
+        9  & 39 & Italiana  & 1.2 & 13 \\
+        10 & 43 & Italiana  & 2.8 & 20 \\
+        11 & 58 & Italiana  & 3.4 & 32 \\
+        15 & 52 & Italiana  & 1.1 & 29 \\
+        18 & 33 & Italiana  & 1.7 & 7 \\
+        20 & 46 & Italiana  & 3.2 & 23 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Dados agrupados por nacionalidade.}
+\end{table}
+
+\item \textbf{Media}: \\
+Pegando os currículos de mesma nacionalidade e calculando a media de renda desejada e de experiencia temos os seguintes resultados.
+
+\vspace{5mm} %5mm vertical space
+
+Renda desejada:
+\begin{itemize}
+    \item \[Belga = \frac{1.2 + 1.4}{2} = 1.3\]
+    \item \[Alema = \frac{2.5 + 2.1}{2} = 2.3\]
+    \item \[Espanhola = \frac{0.9 + 1.6 + 1.2}{3} = 1.23\]
+    \item \[Francesa = \frac{1.8 + 1.6 + 2.0}{3} = 1.8\]
+    \item \[Inglesa = \frac{1.6 + 2.7}{2} = 2.15\]
+    \item \[Italiana = \frac{2.3 + 2.1 + 1.2 + 2.8 + 3.4 + 1.1 + 1.7 + 3.2}{8} = 2.225\]
+\end{itemize}
+
+\vspace{5mm} %5mm vertical space
+
+Experiência:
+\begin{itemize}
+    \item \[Belga = \frac{21 + 5}{2} = 13\]
+    \item \[Alema = \frac{18 + 12}{2} = 15\]
+    \item \[Espanhola = \frac{1 + 3 + 0}{3} = 1.33\]
+    \item \[Francesa = \frac{28 + 1 + 19}{3} = 16\]
+    \item \[Inglesa = \frac{8 + 23}{2} = 15.5\]
+    \item \[Italiana = \frac{2 + 15 + 13 + 20 + 32 + 29 + 7 + 23}{8} = 17.625\]
+\end{itemize}
+
+\vspace{5mm} %5mm vertical space
+
+Observando os cálculos, nota-se que a nacionalidade que apresenta maior renda média desejada é a alemã e a que possui mais experiência média é a italiana.
+
+\vspace{5mm} %5mm vertical space
 
 \textbf{\item[2.3] Resposta}: \\
 
+Plotando gráfico de dispersão utilizando R:
+
+\begin{figure}[H] 
+    \centering 
+    \includegraphics[width=0.8\textwidth]{Imagens/Graficos/Correlação 2-3.png} 
+\end{figure}
+
+\begin{lstlisting}
+    plot(experiencia, renda,
++      main = "Diagrama de Dispersao ",
++      xlab = "Anos de experiencia(X)",
++      ylab = "Renda desejada (Y)",
++      pch = 19, 
++      col = "red")
+\end{lstlisting}
+
+Calculando o coeficiente de correlação
+de Pearson:
+
+Como temos as médias já calculadas da experiência (14) e da renda desejada (1.92) no item 2.1, agora podemos aplicar na fórmula calcular o somatório dos desvios.
+
+\[r_{xy} = \frac{\sum{(x_i - \overline{x})(y_i-\overline{y})}}{\sqrt{\sum (x_i - \overline{x})^2 \sum(y_i-\overline{y})^2}}\]
+
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multicolumn{5}{|c|}{\textbf{Valores de Desvio (Experiência)}} \\
+        \hline
+        -12 & -6 & 7 & -13 & 1 \\
+        -11 & 14 & -9 & -1 & 6 \\
+        18 & 9 & -13 & -14 & 15 \\
+        4 & 5 & -7 & -2 & 9 \\
+        \hline
+    \end{tabular}
+    \caption{Desvios da Experiência}
+    \label{tab:desvios_experiencia_h}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        \multicolumn{5}{|c|}{\textbf{Valores de Desvio (Renda)}} \\
+        \hline
+        0.38 & -0.32 & -0.72 & -1.02 & 0.18 \\
+        -0.32 & -0.12 & -0.52 & -0.72 & 0.88 \\
+        1.48 & 0.78 & -0.32 & -0.72 & -0.82 \\
+        0.58 & 0.08 & -0.22 & 0.18 & 1.28 \\
+        \hline
+    \end{tabular}
+    \caption{Desvios da Renda }
+    \label{tab:desvios_renda_h}
+\end{table}
+
+\vspace{5mm}
+
+A partir dos desvios calculados na calculadora científica, utilizei o R como calculadora para calcular o somatório do numerador, dando resultado de 69.3.
+
+\begin{lstlisting}
+(-12 *0.38) + (-6*-0.32) + (7 * -0.72) + (-13 * -1.02) + (1*0.18) + (-11 * -0.32)+(14 * -0.12) + (-9 * -0.52) + (-1 * -0.72) + (6 * 0.88) + (18 * 1.48)+ (9 * 0.78)+ (-13 * -0.32) + (-14 * -0.72) + (15 * -0.82) + (4 * 0.58)+ (5 * 0.08) + (-7 * -0.22) + (-2 * 0.18) +(9 *1.28)
+
+\end{lstlisting}
+
+Para o denominador usando calculadora:
+
+
+    \[\sum(experiência_i-\overline{experiencia})^2 =2004\]
+    \[\sum(renda_i - \overline{renda})^2= 11.652\]
+
+
+\[r_{experiência, renda} = \frac{69.3}{\sqrt{2004*11.652}}\]
+
+\[r_{experiência, renda} = \frac{69.3}{\sqrt{23350.608}}\]
+
+\[r_{experiência, renda} = \frac{69.3}{152.8090} = 0.453507\]
+
+
+Valor calculado pela função em R:
+\begin{lstlisting}
+> r_coeficiente <- cor(experiencia, renda)
+> r_coeficiente
+[1] 0.4977672
+\end{lstlisting}
+
+\[Erro_{coeficiente} = |\frac{0.4977672 - 0.453507}{0.4977672} | *100 = 8.89\%\]
+
+Analisando o gráfico de dispersão e o coeficiente de correlação calculado pela função em R, podemos perceber que existe uma correlação, porém, muito fraca para fazer uma inferência sobre experiência dos candidatos em relação à renda desejada, alguns candidatos com  15 ou até 30 anos de experiência desejam menos de 1.5 mil euros de renda, ou seja, não podemos afirmar que candidatos mais anos de experiência necessariamente desejam salários mais altos.
 
 
 \textbf{\item[2.4] Resposta}: \\
+Observando a tabela, conseguimos encontrar 4 candidatos que se enquadram nas exigências, segue a tabela abaixo:.
+
+\begin{table}[H]
+    \centering
+    \label{tab_filtrada}
+    \begin{tabular}{c l l c c}
+        \toprule
+        & \textbf{Idade} & \textbf{Nacionalidade} & \textbf{Renda (mil €)} & \textbf{Experiência (anos)} \\
+        \midrule
+        3  & 46 & Belga     & 1.2 & 21 \\
+        7  & 51 & Francesa  & 1.8 & 28 \\
+        9  & 39 & Italiana  & 1.2 & 13 \\
+        15 & 52 & Italiana  & 1.1 & 29 \\
+        \bottomrule
+    \end{tabular}
+    \caption{Candidatos com pelo menos 10 anos de experiência e renda desejada inferior a 2,0 mil euros.}
+\end{table}
 
 \textbf{\item[2.5] Resposta}: \\
 
@@ -906,13 +1184,293 @@ a variável temp para temperatura real (multiplicando por 41). Em seguida, const
 
 \begin{description}[leftmargin=*] 
 
-\item[3.1] \textbf{ Resposta}: 
+\item[3.1] \textbf{ Resposta}: \\
+o conjunto de dados possui sete variáveis, sendo elas:
+\begin{itemize}
+    \item instant (Categórico)
+    \item dteday (Categórico)
+    \item season (Categórico)
+    \item weathersit (Categórico)
+    \item temp (Numérico contínuo)
+    \item casual (Numérico ordinário)
+    \item registered (Numérico ordinário)
+\end{itemize}
+
+Importando os dados para o arquivo R:
+
+\begin{lstlisting}
+> dados <- read.csv("Estatistica\\1-HomeWorks\\HW-1\\code\\HW1_bike_sharing.csv")
+> View(dados)
+\end{lstlisting}
+
+Com os dados devidamente importados, podemos observar através de funções em R ou observando a tabela que o conjunto possui 731 observações, que se iniciam em 2011-01-01 e vão até 2012-12-31 (aaaa/mm/dd).
+
+\begin{lstlisting}
+> n_dados <- nrow(dados)
+> n_dados
+[1] 731
+> data_inicio <- min(dados$dteday)
+> data_inicio
+[1] "2011-01-01"
+> data_fim <- max(dados$dteday)
+> data_fim
+[1] "2012-12-31"
+\end{lstlisting}
 
 \textbf{\item[3.2] Resposta}: \\
+Calcularemos as medidas de tendência central e os quartis para os dados numéricos que são: temp, casual e registered.
+
+\vspace{5mm}
+
+Usando o R para calcular as medidas de tendência central com o seguinte código:
+
+\vspace{5mm}
+
+\item \textbf{temp}
+\begin{lstlisting}
+> media_temp <- mean(dados$temp)
+> media_temp 
+[1] "20.3112175102599"
+> mediana_temp <- median(dados$temp)
+> mediana_temp
+[1] "20.4"
+> Q1_temp <- quantile(dados$temp, 0.25)
+> Q1_temp      
+ 25% 
+13.8
+> Q3_temp <- quantile(dados$temp, 0.75)
+> Q3_temp      
+ 75% 
+26.9
+\end{lstlisting}
+
+\vspace{5mm}
+
+\item \textbf{casual}
+\begin{lstlisting}
+> media_casual <- mean(dados$casual)
+> media_casual
+[1] 848.1765
+> mediana_casual <- median(dados$casual)
+> mediana_casual
+[1] 713
+> Q1_casual <- quantile(dados$casual, 0.25)
+> Q1_casual
+  25% 
+315.5
+> Q3_casual <- quantile(dados$casual, 0.75)
+> Q3_casual
+ 75% 
+1096
+\end{lstlisting}
+
+\vspace{5mm}
+
+\item \textbf{registered}
+\begin{lstlisting}
+> media_registered <- mean(dados$registered)
+> media_registered  
+[1] 3656.172
+> mediana_registered <- median(dados$registered)
+> mediana_registered 
+[1] 3662
+> Q1_registered <- quantile(dados$registered, 0.25)
+> Q1_registered
+ 25% 
+2497
+> Q3_registered <- quantile(dados$registered, 0.75)
+> Q3_registered
+ 75% 
+4776.5
+\end{lstlisting}
+
+\begin{table}[H]
+    \centering
+    \label{tab:resumo_estatistico}
+    \begin{tabular}{l c c c c}
+        \toprule
+        \textbf{Variável} & \textbf{Média} & \textbf{Mediana} & \textbf{Q1 (25\%)} & \textbf{Q3 (75\%)} \\
+        \midrule
+        temp        & 20.31 & 20.4  & 13.8   & 26.9    \\
+        casual      & 848.18 & 713   & 315.5  & 1096    \\
+        registered  & 3656.17 & 3662 & 2497  & 4776.5  \\
+        \bottomrule
+    \end{tabular}
+    \caption{Resumo estatístico das variáveis `temp`, `casual` e `registered`.}
+\end{table}
+
+
 
 \textbf{\item[3.3] Resposta}: \\
 
+Importamos o conjunto de dados e atribuindo os seguintes níveis ao fator season (estação):
+\begin{itemize}
+    \item 1 = primavera
+    \item 2 = verão
+    \item 3 = outono 
+    \item 4 = inverno
+\end{itemize}
+
+\begin{lstlisting}
+dados <- read.csv("Estatistica\\1-HomeWorks\\HW-1\\code\\HW1_bike_sharing.csv")
+
+dados$season <- factor(
+  x = dados$season,
+  levels = c(1, 2, 3, 4),              
+  labels = c("Primavera", "Verão", "Outono", "Inverno")
+)
+
+\end{lstlisting}
+
+
+Atribuindo os seguintes níveis ao fator weathersit (tempo):
+\begin{itemize}
+    \item 1 = Céu limpo
+    \item 2 = Nublado
+    \item 3 = Chuva fraca 
+    \item 4 = Chuva forte
+\end{itemize}
+
+
+\begin{lstlisting}
+dados$weathersit <- factor(
+  x = dados$weathersit,
+  levels = c(1,2,3,4),
+  labels = c("Céu limpo", "Nublado", "Chuva fraca", "Chuva forte")
+)
+
+\end{lstlisting}
+
+Plotando o gráfico das estações:
+
+\begin{figure}[H] 
+    \centering 
+    \includegraphics[width=0.8\textwidth]{Imagens/Graficos/Distribuição estação.png} 
+\end{figure}
+
+Criamos um dataframe de season e usuários totais que é a soma dos usuários casuais e dos registrados, depois fazendo uma agregação de total de usuários com as estações, após isso podemos plotar o gráfico utilizando a função barplot.
+
+\begin{lstlisting}
+season_usuarios <- data.frame(
+  Season = dados$season,
+  Usuarios = dados$casual + dados$registered
+)
+
+sumario_estacoes <- aggregate(
+  Usuarios ~ Season,             
+  data = season_usuarios,
+  FUN = sum
+)
+
+
+barplot(
+  sumario_estacoes$Usuarios,
+  names.arg = sumario_estacoes$Season, 
+  main = "Total de Usuários por Estação",
+  xlab = "Estação",
+  ylab = "Número Total de Usuários",
+  border = "black",
+  col = "lightblue"
+)
+
+\end{lstlisting}
+
+Plotando o gráfico do clima:
+
+\begin{figure}[H] 
+    \centering 
+    \includegraphics[width=0.8\textwidth]{Imagens/Graficos/Distribuição clima.png} 
+\end{figure}
+
+Criamos um dataframe de weathersit e usuários totais que é a soma dos usuários casuais e dos registrados, depois fazendo uma agregação de total de usuários com os climas, após isso podemos plotar o gráfico utilizando a função barplot.
+
+\begin{lstlisting}
+weathersit_usuarios <- data.frame(
+  Weathersit = dados$weathersit,
+  Usuarios = dados$casual + dados$registered
+)
+
+sumario_weathersit <- aggregate(
+  Usuarios ~ Weathersit,             
+  data = weathersit_usuarios,
+  FUN = sum
+)
+
+
+barplot(
+  sumario_weathersit$Usuarios,
+  names.arg = sumario_weathersit$Weathersit, 
+  main = "Total de Usuários por Clima",
+  xlab = "Estação",
+  ylab = "Número Total de Usuários",
+  border = "black",
+  col = "lightblue"
+)
+\end{lstlisting}
+
+Podemos constatar que a estação que possui maior número de usuários é o outono, o uso das bicicletas depende das estações pois durante a primavera a frequência de uso é menos da metade da estação de outono e a condição climática mais favorável é a de céu limpo.
+
 \textbf{\item[3.4] Resposta}: \\
+Usaremos o R para de cara já fazer as alterações que se pede (converter a temperatura e total de usuários):
+
+\begin{lstlisting}
+dados <- dados %>%
+  mutate(temp_C = temp * 41,
+         total_users = casual + registered)
+)
+\end{lstlisting}
+
+Em seguida, com os dados já modificados, criamos o gráfico de séries temporais da temperatura.
+
+\begin{lstlisting}
+plot(dados$dteday, dados$temp_C, type = "l", col = "red",
+     xlab = "Data", ylab = "Temperatura (°C)",
+     main = "Série Temporal da Temperatura")
+\end{lstlisting}
+
+Gráfico de séries temporais da temperatura:
+
+\begin{figure}[H] 
+    \centering 
+    \includegraphics[width=0.4\textwidth]{Imagens/Graficos/serie_temporal_temperatura_3-4} 
+\end{figure}
+
+Logo após, criamos o gráfico de séries temporais dos usuários totais.
+
+\begin{lstlisting}
+plot(dados$dteday, dados$total_users, type = "l", col = "blue",
+     xlab = "Data", ylab = "Total de Usuários",
+     main = "Série Temporal do Número Total de Usuários")
+\end{lstlisting}
+
+Gráfico de séries temporais dos usuários totais.
+
+\begin{figure}[H] 
+    \centering 
+    \includegraphics[width=0.4\textwidth]{Imagens/Graficos/serie_temporal_usuarios_3-4} 
+\end{figure}
+
+Por fim, para facilitar a minha análise, eu criei um código em R para juntar os dois gráficos e deixar mais visível a comparação deles.
+
+\begin{lstlisting}
+plot(dados$dteday, dados$total_users, type = "l", col = "blue",
+     xlab = "Data", ylab = "Total de Usuários",
+     main = "Comparação: Temperatura vs Total de Usuários")
+par(new = TRUE)
+plot(dados$dteday, dados$temp_C, type = "l", col = "red",
+     axes = FALSE, xlab = "", ylab = "")
+axis(side = 4)
+mtext("Temperatura (°C)", side = 4, line = 3)
+legend("topleft", legend = c("Total de Usuários", "Temperatura (°C)"),
+       col = c("blue", "red"), lty = 1)
+\end{lstlisting}
+
+Gráfico para comparação.
+
+\begin{figure}[H] 
+    \centering 
+    \includegraphics[width=0.4\textwidth]{Imagens/Graficos/serie_temporal_comparação_3-4.png} 
+\end{figure}
 
 \end{description}
 
