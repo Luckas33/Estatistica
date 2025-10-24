@@ -21,21 +21,56 @@ curriculos <- data.frame(
 
 # Idade
 mediaIdade = media(curriculos$Idade....idade);
+mediaIdade
+mean(curriculos$Idade....idade)
+
 medianaIdade = mediana(curriculos$Idade....idade);
+medianaIdade
+median(curriculos$Idade....idade)
+
 varianciaIdade = variancia(curriculos$Idade....idadeOrdenada,mediaIdade);
+varianciaIdade
+var(curriculos$Idade....idade)
+
 desvioPIdade = desvioPadrao(varianciaIdade);
+desvioPIdade
+sd(curriculos$Idade....idade)
 
 #Renda
 mediaRenda = media(curriculos$Renda....renda);
+mediaRenda
+mean(curriculos$Renda....renda)
+
 medianaRenda = mediana(curriculos$Renda....renda);
+medianaRenda
+median(curriculos$Renda....renda)
+
 varianciaRenda = variancia(curriculos$Renda....rendaOrdenada,mediaRenda);
+varianciaRenda
+var(curriculos$Renda....renda)
+
 desvioPRenda = desvioPadrao(varianciaRenda);
+desvioPRenda
+sd(curriculos$Renda....renda)
 
 #Experiencia
 mediaExperiencia = media(curriculos$Experiencia....experiencia);
+mediaExperiencia
+mean(curriculos$Experiencia....experiencia)
+
+
 medianaExperiencia = mediana(curriculos$Experiencia....experiencia);
+medianaExperiencia
+median(curriculos$Experiencia....experiencia)
+
 varianciaExperiencia = variancia(curriculos$Experiencia....experienciaOrdenada,mediaExperiencia);
+varianciaExperiencia
+var(curriculos$Experiencia....experiencia)
+
 desvioPExperiencia = desvioPadrao(varianciaExperiencia)
+desvioPExperiencia
+sd(curriculos$Experiencia....experiencia)
+
 
 
 
