@@ -169,7 +169,7 @@ geral das emissões estaria em conformidade com esse padrão regulatório?
 
 \end{itemize}
 
-\subsubsection*{Medidas de Dispersão - Base Teórica:} 
+\subsubsection*{Medidas de dispersão - Base Teórica:} 
 \begin{itemize}
 \item[]
 
@@ -239,7 +239,7 @@ geral das emissões estaria em conformidade com esse padrão regulatório?
     Exemplo (Retirado do slides):
     \begin{figure}[!h] 
         \centering
-        \includegraphics [scale=0.5] {Graficos/histograma_exemplo} 
+        \includegraphics [scale=0.5] {Imagens/Graficos/histograma_exemplo} 
     \end{figure}
     
 \text{\large Boxplot}
@@ -283,7 +283,7 @@ As fórmulas do primeiro e do terceiro quartil retornam a posição deles. Se fo
     Exemplo (Retirado do slides):
     \begin{figure}[!h] 
         \centering
-        \includegraphics [scale=0.8] {Graficos/boxplot-exemplo} 
+        \includegraphics [scale=0.8] {Imagens/Graficos/boxplot-exemplo} 
     \end{figure}
 
 \end{itemize}
@@ -310,6 +310,14 @@ média dos gases poluentes emitidos diariamente:
 
 Sendo o valor encontrado sendo o mesmo calculado pelo R.
 
+\begin{lstlisting}
+    > mediaGases = media(gases) # usando funcao propria
+    > mediaGases
+    [1] 19.02125
+    > print(mean(gases)) # usando funcao padrao do R
+    [1] 19.02125
+    \end{lstlisting}
+
 \textbf{Mediana}:
 Mediana de conjunto par pode ser encontrada ordenando os dados e aplicando a fórmula da mediana:
 
@@ -335,9 +343,22 @@ Mediana de conjunto par pode ser encontrada ordenando os dados e aplicando a fó
 
 Ordenei os dados utilizando R pois eram muitos valores, com base na tabela ordenada pude achar os índices 40 e 41 e aplicar a fórmula da mediana que deu valor de (19.15). Sendo o valor encontrado sendo o mesmo calculado pelo R. 
 \[M_d = \frac{x_{\frac{N}{2}} + x_{(\frac{N}{2} + 1)}}{2} \xrightarrow{} \frac{x_{40} + x_{41}}{2}  = \frac{19.1 + 19.2}{2} = 19.15\]
+
+\begin{lstlisting}
+    > medianaGases = mediana(gases_ordenados) # usando funcao propria
+    > medianaGases
+    [1] 19.15
+    > print(median(gases_ordenados)) # usando funcao padrao do R
+    [1] 19.15
+    \end{lstlisting}
  
 \textbf{Moda}: 19.4 pois é o que mais se destaca com 3 repetições. Sendo o valor encontrado sendo o mesmo calculado pelo R.
 
+\begin{lstlisting}
+    > modaGases = moda(gases_ordenados)
+    > modaGases
+    [1] 19.4
+\end{lstlisting}
 
 \textbf{Amplitude}: É o maior valor subtraído do menor valor do conjunto de dados. Sendo o valor encontrado sendo o mesmo calculado pelo R.
 \[ A = \text{Valor}_{\text{máximo}} -\text{Valor}_{\text{mínimo}} \]
@@ -384,12 +405,24 @@ Após isso aplicamos na fórmula da variância:
 
 O valor calculado pela função em R foi 30.84144, divergindo com o calculado pela calculadora, provavelmente erro de cálculo humano.
 
+\begin{lstlisting}
+    > varianciaGases = variancia(gases,mediaGases)
+    > varianciaGases
+    [1] 30.84144
+\end{lstlisting}
+
 Diferença percentil:
 
 \[Erro_{percentil} = \frac{|30.84144 - 31.489|}{30.84144} * 100 \approx   2.099\% \]
 
 \textbf{Desvio padrão}: Para o desvio padrão aplicas somente a raiz quadrada da variância, utilizando N-1 para evitar viés.
 \[\sigma = \sqrt{31.489} = 5.6115\]
+
+\begin{lstlisting}
+    > desvioPadraoGases = desvioPadrao(varianciaGases)
+    > desvioPadraoGases
+    [1] 5.553507
+\end{lstlisting}
 
 O valor encontrada divergiu do apresentado pela função em R já que a variância também apresenta erro de 2.099\%. O desvio padrão apresentado pelo R foi 5.553507. Temos então que o erro percentil foi:
 
@@ -398,6 +431,17 @@ O valor encontrada divergiu do apresentado pela função em R já que a variânc
 \textbf{Coeficiente de variação}: Utilizando a fórmula o valor apresentado pela calculadora foi de 162.142\%, sendo o mesmo calculado pela função em R.
 
  \[ CV = \frac{30.84144}{19.02125} \times 100\%  = 162.142\%\]
+
+\begin{lstlisting}
+    coeficienteVariacao <- function(variancia,media){
+  return((variancia/media) * 100);
+}
+
+
+    > CoeficienteVGases = coeficienteVariacao(varianciaGases,mediaGases)
+    > CoeficienteVGases
+    [1] 162.142
+\end{lstlisting}
 
 \textbf{\item[1.2] Resposta}:
 
@@ -461,7 +505,7 @@ Com isso eu usei o R para criar o histograma.
 
     \begin{figure}[H] 
         \centering
-        \includegraphics [scale=0.3] {Graficos/histograma-questao1} 
+        \includegraphics [scale=0.3] {Imagens/Graficos/histograma-questao1} 
     \end{figure}
 
 Note que os valores apontados no gráfico confirmam nossos cálculos anteriores.
@@ -476,7 +520,7 @@ Com isso eu usei o R para criar o boxplot.
 
     \begin{figure}[H] 
         \centering
-        \includegraphics [scale=0.3] {Graficos/boxplot-questao1} 
+        \includegraphics [scale=0.3] {Imagens/Graficos/boxplot-questao1} 
     \end{figure}
 
 
@@ -527,11 +571,19 @@ Por fim com os quartis definidos calcula-se o IQR e os limites inferiores e supe
         \[\text{Limite superior} = Q3 + 1.5 \times IQR = 22.95 + 1.5 \times 7.6 = 34.35\]
 \end{itemize}
 
-Note que os valores apontados no gráfico confirmam nossos cálculos de não existem valores atípicos.
+\begin{lstlisting}
+> quantile(gases_ordenados)
+    0%    25%    50%    75%   100% 
+ 6.200 15.425 19.150 22.925 31.800 
+\end{lstlisting}
 
-\textbf{\item[1.4] Resposta}: \\
+Note que os valores calculados manualmente e pelo R confirmam a não existência de valores atípicos.
 
+\textbf{\item[1.4] Resposta}: \\  
 
+O histograma e o boxplot das emissões diárias de gases poluentes indicam que a maior parte dos valores se concentra entre 15 e 25 unidades, faixa em que ocorrem as emissões mais frequentes e estáveis da fábrica. A distribuição é unimodal e levemente assimétrica à direita, o que demonstra que há predominância de dias com emissões moderadas e poucos casos de valores mais altos. Essa concentração central sugere que o processo produtivo apresenta bom controle ambiental, com variações relativamente pequenas ao longo do tempo.
+
+Considerando que o limite máximo aceitável é de 25 unidades, foi observado que 11 dos 80 dias (cerca de 13,75\%) ultrapassaram esse valor. Portanto, embora a maioria das medições (86,25\%) esteja dentro dos padrões estabelecidos, o comportamento das emissões não está totalmente em conformidade com o padrão regulatório. Esses excessos pontuais podem estar relacionados a picos de produção ou falhas no sistema de controle, indicando a necessidade de monitoramento contínuo e ajustes operacionais para garantir a plena adequação ambiental.
 
 \end{description}
 
@@ -595,7 +647,7 @@ comente as principais diferenças observadas entre os grupos
 
 \subsection*{Solução da questão} 					
 
-\subsubsection*{Base Teórica Questão 2:} 
+\subsubsection*{Medidas de dispersão - Base Teórica:} 
 
 \begin{itemize}
 \item[]
@@ -605,9 +657,53 @@ comente as principais diferenças observadas entre os grupos
 
     \[r_xy = \frac{N*\sum{x_iy_i} - \sum{x_iy_i}}{\sqrt{n*\sum x_i^2 - \sum (x_i)^2} * \sqrt{n*\sum y_i^2 - \sum (y_i)^2}}\]
 
+    O resultado estará em um intervalo de [-1,1], 
+
 \end{itemize}
 
 \subsubsection*{Gráficos(base teórica)} 
+
+\begin{itemize}
+\item[]
+
+\text{\large Gráfico de dispersão}
+    \item O Gráfico de Dispersão é uma representação gráfica de duas variáveis quantitativas, $X$ e $Y$, onde cada ponto no gráfico corresponde a um par de valores $(x_i, y_i)$ de uma observação.
+
+    Com ele podemos:
+    \item Verificar a Direção:
+    \begin{itemize}
+        \item Positiva: Os pontos tendem a subir da esquerda para a direita.
+        \item Negativa: Os pontos tendem a descer da esquerda para a direita.
+    \end{itemize}
+    
+    \item Avaliar a Força (Correlação):
+    \begin{itemize}
+        \item Forte: Os pontos estão muito agrupados e próximos a uma linha imaginária (ou à linha de regressão).
+        \item Fraca: Os pontos estão muito espalhados, formando uma nuvem difusa.
+    \end{itemize}
+    
+    \item Checar a Forma:
+    \begin{itemize}
+        \item Linear: Os pontos formam uma linha reta. (O coeficiente de Pearson $r$ só mede este tipo de relação).
+        \item Não Linear (Curvilínea): Os pontos formam uma curva (ex: parábola).
+        \item Nenhuma: Os pontos estão distribuídos aleatoriamente.
+    \end{itemize}    
+    
+    \item Identificar Outliers:
+    \begin{itemize}
+        \item Pontos que se afastam significativamente da tendência geral dos outros pontos. Eles podem distorcer o cálculo da Média, Variância e, principalmente, do Coeficiente de Correlação ($r$).
+    \end{itemize}
+
+    \item Exemplo de gráficos de correlação:
+
+    \begin{figure}[H] 
+    \centering 
+    \includegraphics[width=0.8\textwidth]{Imagens/Graficos/Graficos de correlacao.png} 
+\end{figure}
+
+    
+\end{itemize}
+
 
 
 \begin{description}[leftmargin=*]
@@ -739,6 +835,8 @@ Por fim, os anos de experiência geral dos candidatos já é uma variável bem m
 \textbf{\item[2.2] Resposta}: \\
 
 \textbf{\item[2.3] Resposta}: \\
+
+
 
 \textbf{\item[2.4] Resposta}: \\
 

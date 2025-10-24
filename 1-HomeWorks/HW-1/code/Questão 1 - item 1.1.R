@@ -8,15 +8,23 @@ gases_ordenados = sort(gases)
 
 
 mediaGases = media(gases)
+mediaGases
+print(mean(gases))
 
 medianaGases = mediana(gases_ordenados)
+medianaGases
+print(median(gases_ordenados))
 
 modaGases = moda(gases_ordenados)
+modaGases
 
 varianciaGases = variancia(gases,mediaGases)
+varianciaGases
 
 desvioPadraoGases = desvioPadrao(varianciaGases)
+desvioPadraoGases
 
 Amplitude = 31.8 - 6.2
 
-CoeficenteVGases = coeficienteVariacao(varianciaGases,mediaGases)
+CoeficienteVGases = coeficienteVariacao(varianciaGases,mediaGases)
+CoeficienteVGases
