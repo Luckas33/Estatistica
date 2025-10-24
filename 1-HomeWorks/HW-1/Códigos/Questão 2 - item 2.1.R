@@ -1,6 +1,6 @@
 # Questão 2 item a)
 
-source("Estatistica\\1-HomeWorks\\HW-1\\code\\Medidas de tendencia Central.R")
+source("Estatistica\\1-HomeWorks\\HW-1\\códigos\\Medidas de tendencia Central.R")
 
 idade <- c(28,34,46,26,37,29,51,31,39,43,58,44,25,23,52,42,48,33,38,46);
 nacionalidade <- c("Italiana","Inglesa","Belga","Espanhola","Italiana", "Espanhola","Francesa","Belga","Italiana","Italiana","Italiana","Inglesa","Francesa","Espanhola","Italiana","Alemã","Francesa","Italiana","Alemã","Italiana");
