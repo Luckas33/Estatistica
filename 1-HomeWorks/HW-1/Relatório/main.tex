@@ -1119,6 +1119,73 @@ Observando a tabela, conseguimos encontrar 4 candidatos que se enquadram nas exi
 \end{table}
 
 \textbf{\item[2.5] Resposta}: \\
+Para obter essa representação transformarei os dados de idade e renda em médias para cada nacionalidade e agrupei em gráficos de barras.
+
+\begin{figure}[H] 
+    \centering 
+\includegraphics[width=0.8\textwidth]{Imagens/Graficos/Idade por nacionalidade.png} 
+\end{figure}
+
+\begin{lstlisting}
+idade_media_nacionalidade <- curriculos %>%
+  group_by(Nacionalidade) %>%
+  summarise(Idade_Media = mean(Idade)) %>%
+  ungroup() %>%
+  arrange(desc(Idade_Media))
+
+grafico_idade_media <- ggplot(idade_media_nacionalidade, aes(
+  x = reorder(Nacionalidade, Idade_Media), 
+  y = Idade_Media,
+  fill = Nacionalidade
+)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = round(Idade_Media, 1)), vjust = -0.5) +
+  labs(
+    title = "Idade Média por Nacionalidade",
+    x = "Nacionalidade",
+    y = "Idade Média"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+print(grafico_idade_media)    
+\end{lstlisting}
+
+\begin{figure}[H] 
+    \centering 
+\includegraphics[width=0.8\textwidth]{Imagens/Graficos/renda por nacionalidade.png} 
+\end{figure}
+
+\begin{lstlisting}
+renda_media_nacionalidade <- curriculos %>%
+  group_by(Nacionalidade) %>%
+  summarise(Renda_Media = mean(Renda)) %>% # Calcula a média da Renda
+  ungroup() %>%
+  arrange(desc(Renda_Media)) # Ordena o resultado para o gráfico
+
+
+grafico_renda_media <- ggplot(renda_media_nacionalidade, aes(
+  x = reorder(Nacionalidade, Renda_Media), 
+  y = Renda_Media,
+  fill = Nacionalidade 
+)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = round(Renda_Media, 2)), vjust = -0.5) + 
+  labs(
+    title = "Renda Média por Nacionalidade",
+    x = "Nacionalidade",
+    y = "Renda Média (Unidades Arbitrárias)",
+    caption = paste("Dados de", nrow(curriculos), "indivíduos")
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none", 
+        axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+print(grafico_renda_media)
+    
+\end{lstlisting}
+
+Após analisar os gráficos de barra podemos concluir que as maiores diferenças estão nos extremos do gráfico, tendo a nacionalidade Alemã como a nacionalidade composta em média por candidatos mais jovens do que as demais (24 anos) e a nacionalidade Italiana é composta em média por candidatos mais velhos (48.5 anos) do que as demais, tendo o dobro da média mais jovem. Com relação a renda desejada, a nacionalidade com a média mais jovem (Alemã) é a que em média deseja os menores salários, almejando apenas mil euros e a mais velha (Italiana) é a que deseja os maiores salários, almejando na casa de 2.64 mil euros.
 
 \end{description}
 
