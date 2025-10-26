@@ -1124,6 +1124,8 @@ Observando a tabela, conseguimos encontrar 4 candidatos que se enquadram nas exi
     \caption{Candidatos com pelo menos 10 anos de experiência e renda desejada inferior a 2,0 mil euros.}
 \end{table}
 
+De modo geral, a questão mais relevante a se pontuar é a faixa etária dos participantes, pois nota-se que há predominância de candidatos com idade superior a 35 anos, o que se espera tanto pela experiência exigida como pela maior flexibilidade salarial, uma vez que têm mais maturidade profissional.
+
 \textbf{\item[2.5] Resposta}: \\
 Para obter essa representação transformarei os dados de idade e renda em médias para cada nacionalidade e agrupei em gráficos de barras.
 
@@ -1131,6 +1133,8 @@ Para obter essa representação transformarei os dados de idade e renda em médi
     \centering 
 \includegraphics[width=0.8\textwidth]{Imagens/Graficos/Idade por nacionalidade.png} 
 \end{figure}
+
+
 
 \begin{lstlisting}
 idade_media_nacionalidade <- curriculos %>%
@@ -1234,7 +1238,7 @@ a variável temp para temperatura real (multiplicando por 41). Em seguida, const
 \subsection*{Solução da questão} 					
 
 \subsubsection*{Descrição da atividade}
-Essa ultima atividade visa introduzir o ultimo conteúdo de estatística descritiva restante a ser abordado por este homework, sendo este, os tipos de dados e suas diferentes formas de interpretação.
+Essa ultima atividade visa introduzir os últimos conteúdos de estatística descritiva  a serem abordados por este homework, sendo, os tipos de dados e gráficos de série temporal.
 
 
 \subsubsection*{Base Teórica Questão 3:} 
@@ -1376,7 +1380,7 @@ Usando o R para calcular as medidas de tendência central com o seguinte código
     \caption{Resumo estatístico das variáveis `temp`, `casual` e `registered`.}
 \end{table}
 
-
+Olhando a tabela, é possível notar que a variável "temp" apresenta média e mediana próximas, demonstrando uma distribuição simétrica de cada dos lados, com a maior parte das observações situando-se entre 13,8 °C e 26,9 °C. Quanto ao perfil de usuários, verifica-se uma predominância significativa de usuários "registered" sobre os "casual", indicando que a utilização do sistema é majoritariamente composta por um público fixo. Logo eu concluo que, enquanto as temperaturas apresentam comportamento consistente, há uma nítida distinção nos perfis de utilização, sendo os usuários "registered" os principais responsáveis pela volumetria total de viagens.
 
 \textbf{\item[3.3] Resposta}: \\
 
@@ -1548,6 +1552,8 @@ Gráfico para comparação.
     \centering 
     \includegraphics[width=0.4\textwidth]{Imagens/Graficos/serie_temporal_comparação_3-4.png} 
 \end{figure}
+
+Portanto, as séries temporais, que representam a temperatura real e o número total de usuários por dia, exibem padrões sazonais semelhantes, com incrementos progressivos durante os meses mais quentes e declínios nos períodos frios. Essa sincronia sugere uma influência direta da temperatura no número de usuários. Posso concluir então que as séries compartilham uma tendência comum, indicando que o aumento da temperatura está associado a um maior uso das bicicletas. Um importante adendo é que fiz como a questão pediu e normalizei a temperatura, porém, pelo que chequei, os valores estão muito extremos, o que me faz imaginar que os valores da temperatura já estavam normais.
 
 \end{description}
 
