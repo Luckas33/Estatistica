@@ -1,0 +1,54 @@
+\usepackage[portuguese]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}  
+
+ 
+\usepackage{color}
+\usepackage{listings}
+\usepackage{setspace} 
+
+
+
+\oddsidemargin 0.22in
+\textwidth 5.8in
+
+\usepackage[explicit]{titlesec}
+\titleformat{\section}{\normalfont\Large\scshape}{}{0em}{#1\ \thesection}
+\titleformat{\subsection}{\normalfont\large\scshape}{}{0em}{#1\ \thesection}
+
+\usepackage[title,titletoc]{appendix}
+\AddToHook{env/appendices/begin}{
+\titleformat{\section}{\normalfont\Large\scshape}{}{0em}{#1\ \thesection}
+}
+
+\usepackage[skins]{tcolorbox}
+\definecolor{bblue}{rgb}{0,0.3961,0.7412}
+\usepackage[bookmarksnumbered=true]{hyperref} 
+\hypersetup{
+     colorlinks = true,
+     linkcolor = bblue,
+     anchorcolor = bblue,
+     citecolor = bblue,
+     filecolor = bblue,
+     urlcolor = bblue
+ }
+ 
+\renewcommand{\lstlistingname}{Listado}
+\lstset{
+    backgroundcolor=\color[rgb]{0.86,0.88,0.93},
+    language=R, keywordstyle=\color[rgb]{0,0,1},
+    basicstyle=\footnotesize \ttfamily,breaklines=true,
+    escapeinside={\%*}{*)}
+}
+\usepackage{footmisc} \renewcommand{\labelitemi}{$\circ$}
+\usepackage{enumitem} \setlist[itemize]{leftmargin=*}
+
+\usepackage{scrextend}
+\deffootnote[1em]{1em}{1em}{\textsuperscript{\thefootnotemark}\,}

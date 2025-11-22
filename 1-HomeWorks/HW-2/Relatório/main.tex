@@ -1,0 +1,236 @@
+\documentclass[a4paper,11pt]{article}
+
+
+\usepackage{preambulo} 
+ 
+\renewcommand{\lstlistingname}{Listado}
+\lstset{
+    backgroundcolor=\color[rgb]{0.86,0.88,0.93},
+    language=R, keywordstyle=\color[rgb]{0,0,1},
+    basicstyle=\footnotesize \ttfamily,breaklines=true,
+    escapeinside={\%*}{*)}
+}
+\usepackage{footmisc} \renewcommand{\labelitemi}{$\circ$}
+\usepackage{enumitem} \setlist[itemize]{leftmargin=*}
+
+\usepackage{scrextend}
+\deffootnote[1em]{1em}{1em}{\textsuperscript{\thefootnotemark}\,}
+
+%%%%%%%%%% Document starts here %%%%%%%%%%%
+
+\begin{document}
+%%%%%%%%%% Title %%%%%%%%%%%
+\begin{figure}[!h] \includegraphics [scale=0.3] {Imagens/extras/Course-logo} \end{figure}
+
+\begin{spacing}{1.5}
+{\Large\sc \noindent Homework II} \\
+
+{\large\sc \noindent Nome completo: Lucas de Oliveira Sobral}\\
+%{\large\sc \noindent Nome completo:}\\
+{\large\sc \noindent Numero de matricula: 556944}\\
+%{\large\sc \noindent Numero de matricula: }\\
+{\large\sc \noindent Nome completo:Álvaro José Passos de Freitas Neto}\\
+%{\large\sc \noindent Nome completo:}\\
+{\large\sc \noindent Numero de matricula: 567593}
+%{\large\sc \noindent Numero de matricula: }
+\end{spacing}
+
+\vskip1cm
+
+%%%%%%%%%% Content starts here %%%%%%%%%%%
+\section{Questão}  \label{sec:q1}
+Em um restaurante muito frequentado, aproximadamente 70\% dos clientes pedem uma sobremesa após o prato principal. Seja X a variável aleatória que representa o número de
+clientes que pedem sobremesa em uma amostra aleatória de n = 50 clientes.
+
+
+\begin{enumerate}[leftmargin=*]
+\item Determine a função de distribuição de $X$.
+
+\item Construa os gráficos da função massa de probabilidade (PMF) e da função distribuição
+acumulada (CDF) de $X$.
+
+\item Calcule o valor esperado, a variância e o desvio padrão de $X$.
+
+\item Calcule a probabilidade de:
+
+    \begin{enumerate}
+        \item $P(X \ge 20)$.
+        \item $P(30 < X < 43)$.
+        \item $P(X=31)$.
+    \end{enumerate}
+    
+\item Suponha que o restaurante estoque sobremesas com base na demanda esperada. Como
+o uso da distribuição de X poderia ajudar a reduzir desperdício e evitar falta de
+produtos?
+
+\item Como mudanças em $p$ (por exemplo, sobremesa se torna mais popular, $p = 0.8$) ou em
+$n$ (número de clientes) afetariam a forma e as probabilidades de X?
+
+\end{enumerate} 
+
+
+\subsection*{Solução da questão} 			
+
+\subsubsection*{Descrição da atividade}
+......
+
+\subsubsection*{Distribuição de frequência - Base Teórica:} 
+
+\begin{itemize}
+\item[]
+
+\text{\large Classes ou valores (\(x_i\))}
+    \item São diferentes valores que  a variável assume ou intervalos (classes) em que os dados são agrupados.
+
+\end{itemize}
+
+\subsubsection*{Medidas de tendência central - Base Teórica:} 
+
+\begin{itemize}
+\item[]
+
+\text{\large Moda (\(M_o\))}
+    \item É o valor que ocorre com maior frequência em um conjunto de dados. Um conjunto de dados pode ter nenhum valor que se destaque sendo assim ele não tem moda (amodal), pode ter uma moda (unimodal), duas modas quando dois valores se destacam (bimodal) ou várias modas quando vários valores se destacam(polimodal).
+
+
+\end{itemize}
+
+
+\begin{description}
+
+\item \textbf{[1.1] Resposta}:
+
+
+\end{description}
+
+\section{Questão} \label{sec:q2}
+Um site realiza uma pesquisa online e oferece uma recompensa a um usuário selecionado aleatoriamente que responde a uma série de perguntas. Cada um dos 10 milhões de visitantes diários tem, independentemente, probabilidade $p = 10^7$ de ganhar a recompensa.
+
+
+
+\begin{enumerate}[leftmargin=*]
+\item Encontre uma aproximação simples e adequada para a função de massa de probabilidade (PMF) do número de vencedores em um dia, $X$. Justifique claramente se
+essa aproximação é apropriada para os valores dados de n e $p$.
+
+\item  Calcule o valor esperado, $E[X]$, e a variância $Var(X)$, usando tanto a distribuição exata
+quanto a aproximada. Comente sobre a semelhança entre os resultados.
+
+\item Suponha que você ganhe a recompensa, mas que possa haver outros vencedores. Seja
+$W \thicksim Pois(1)$ o número de vencedores além de você. Se houver vários vencedores, o
+prêmio é sorteado aleatoriamente entre todos eles. Encontre a probabilidade de que
+você realmente receba o prêmio.
+
+\item Gere um grande número de simulações diárias para o número de vencedores. Crie
+uma comparação visual entre os resultados empíricos e a aproximação considerada
+no item ??. Descreva brevemente o que a visualização indica sobre a qualidade da
+aproximação.
+
+\end{enumerate}
+
+\subsection*{Solução da questão} 		
+
+\subsubsection*{Descrição da atividade}
+.....
+
+\subsubsection*{Medidas de dispersão - Base Teórica:} 
+
+\begin{itemize}
+\item[]
+
+\text{\large Coeficiente de variação de Pearson ($r_{xy)}$}
+    \item É uma medida estatística que descreve o grau e a direção da associação linear entre duas variáveis quantitativas (X e Y).
+
+    \[r_{xy} = \frac{\sum{(x_i - \overline{x})(y_i-\overline{y})}}{\sqrt{\sum (x_i - \overline{x})^2 \sum(y_i-\overline{y})^2}}\]
+
+    O resultado estará em um intervalo de [-1,1], 
+
+\end{itemize}
+
+
+
+\begin{description}[leftmargin=*]
+
+\item[2.1] \textbf{Resposta}:
+
+\end{description}
+
+\section{Questão} \label{sec:q3}
+Você é responsável por monitorar a temperatura de uma CPU multicore em uma unidade de processamento embarcada. Sob carga normal, a temperatura da CPU apresenta flutuações devido a mudanças na carga de trabalho, nas condições ambientais e na eficiência do sistema de resfriamento. Testes mostram que a temperatura em regime estacionário da CPU segue uma distribuição normal com temperatura média $\mu = 62$ ºC e desvio padrão $\sigma = 3,5$ ºC. Sua tarefa é simular medições de temperatura da CPU e analisar suas propriedades estatísticas.
+
+\begin{enumerate}[leftmargin=*]
+\item Crie uma função que gere valores com distribuição normal usando a transformação
+de Box-Muller, a partir de entradas aleatórias uniformes. Especificamente:
+    \begin{enumerate}
+        \item Gere duas variáveis aleatórias uniformes independentes: $U_1,U_2 \thicksim Unif(0,1)$
+        \item Calcule dois valores normais padrão usando as fórmulas de Box-Muller:
+        \[Z_1 = \sqrt{-2ln(U_1)}cos(2\pi U_2), Z_2 = \sqrt{-2ln(U_1}\sin(2\pi U_2)\]
+        $Z_1$ e $Z_2$ são variáveis aleatórias independentes com distribuição normal padrão.
+Concatene-as para formar um vetor Z de valores normais padrão.
+        \item Converta cada valor normal padrão para a distribuição de temperatura da CPU:
+        \[T = 62+3.5Z\]
+    \end{enumerate}
+
+\item Use seu gerador de números aleatórios para gerar 1.000 medições de temperatura da
+CPU.
+Gere mais 1.000 valores de temperatura utilizando o gerador de números aleatórios
+normal embutido do R, com a mesma média e desvio-padrão.
+
+\item Para ambos os conjuntos de dados simulados, calcule:
+
+    \begin{enumerate}
+        \item Média amostral.
+        \item Desvio-padrão amostral.
+        \item Temperatura mínima e máxima observada.
+        \item Probabilidade empírica e teórica $P(T>68)$
+        \item Probabilidade empírica e teórica $P(60<T<65)$
+        \item Probabilidade teórica $P(T>75$.
+        Algum dos conjuntos de dados simulados (1.000 amostras) contém valores acima
+de 75◦C? Caso não, explique por que eventos raros requerem tamanhos de amostra grandes para serem observados.
+
+        \end{enumerate}
+
+\item Visualize os resultados criando
+    \begin{enumerate}
+        \item Um histograma das temperaturas simuladas da CPU (pode plotar os dois conjuntos de dados separadamente ou sobrepostos).
+        \item A função densidade de probabilidade (PDF) normal teórica (média 62 ◦C, desvio
+padrão 3,5 ºC) sobreposta ao histograma.
+    \end{enumerate}
+
+\item Discuta seus resultados respondendo às seguintes perguntas: As distribuições empíricas da temperatura da CPU se assemelham à curva normal teórica? Quão próximas estão a média amostral e o desvio-padrão amostral dos valores esperados 62 ◦C e 3, 5
+◦C?
+Há diferenças perceptíveis entre o conjunto de dados gerado com seu RNG manual e
+o produzido pelo RNG embutido do R? Como essa simulação pode ajudar na avaliação de estratégias de resfriamento ou de escalonamento dinâmico de clock? Por que
+geradores de números aleatórios uniformes são a base dos sistemas de RNG?
+
+\end{enumerate}
+
+\subsection*{Solução da questão} 					
+
+\subsubsection*{Descrição da atividade}
+....
+
+
+\subsubsection*{Base Teórica Questão 3:} 
+
+\begin{itemize}
+\item[]
+
+\subsubsection*{Tipos de dados - base teórica} 
+
+    
+\end{itemize}
+
+
+\begin{description}[leftmargin=*] 
+
+\item[3.1] \textbf{ Resposta}: \\
+
+\end{description}
+
+\newpage
+\begin{appendices}
+
+
+\end{appendices}
+
+\end{document}
