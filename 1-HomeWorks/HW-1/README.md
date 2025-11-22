@@ -56,4 +56,8 @@ Mencione as ferramentas que você usou para criar seu projeto:
 ## ✒️ Autores
 
 * **Lucas Sobral** - [Luckas33](https://github.com/Luckas33)
-* **Álvaro José** - [AlvaroJosePassos](https://github.com/AlvaroJosePassos)  
+  - Base teórica: Medidas de tendência central, Medidas de dispersão, gráfico de dispersão/correlação, tipos de dados.
+  - Questões 1.1, 1.3, 2.1, 2.3, 2.5, 3.1 e 3.3
+* **Álvaro José** - [AlvaroJosePassos](https://github.com/AlvaroJosePassos)
+  - Base teórica: Gráficos gerais
+  - Questões 1.2, 1.4, 2.2, 2.4, 3.2 e 3.4  
