@@ -1,26 +1,36 @@
-# 📊 Repositório de Estatística
+# 📊 Repositório da cadeira de Estatística
 
-Bem-vindo ao meu repositório de Estatística!
-Aqui você encontrará anotações, exercícios, exemplos práticos e implementações que auxiliam no estudo e aplicação de conceitos estatísticos.
+![GitHub repo size](https://img.shields.io/github/repo-size/Luckas33/Estatistica?style=flat-square)
+![GitHub language count](https://img.shields.io/github/languages/count/Luckas33/Estatistica?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow?style=flat-square)
+---
 
-🎯 Objetivo
+## 📑 Índice
 
-Este repositório tem como finalidade:
+- [Conteúdos Abordados](#-conteúdos-abordados)
+- [Estrutura do Repositório](#-estrutura-do-repositório)
+  
+---
 
-Organizar o conteúdo de estatística estudado ao longo do tempo.
+## 📚 Conteúdos Abordados
 
-Servir como material de consulta para cálculos, gráficos e conceitos.
+O repositório está dividido em módulos que cobrem desde o básico até tópicos mais avançados:
 
-Compartilhar exemplos em LaTeX, Python (ou outra linguagem que você esteja usando) e representações visuais de dados.
+| Tópico | Descrição Breve |
+| :--- | :---: |
+| **Estatística Descritiva** | Medidas de tendência central (Média, Mediana, Moda) e dispersão. 
+| **Visualização de Dados** | Boxplots, Histogramas, Scatterplots e Mapas de Calor.
+| **Probabilidade** | Axiomas, Teorema de Bayes e Probabilidade Condicional.
+| **Distribuições** | Normal, Binomial, Poisson, Geométrica, etc.
+| **Inferência Estatística** | Testes de Hipóteses, Intervalos de Confiança e P-valor. 
 
-📚 Conteúdos Abordados
+---
 
-Medidas de tendência central (média, mediana, moda).
+## 📂 Estrutura do Repositório
 
-Medidas de dispersão (variância, desvio-padrão, amplitude).
+A organização das pastas segue a seguinte lógica:
 
-Probabilidade e distribuições.
-
-Testes de hipóteses.
-
-Visualização de dados com gráficos.
+```bash
+├── 0-Linguegem R/   # Aprendendo sobre a linguagem R
+├── 1_Home Works/            # Trabalhos sobre os assuntos da cadeira
+└── README.md
