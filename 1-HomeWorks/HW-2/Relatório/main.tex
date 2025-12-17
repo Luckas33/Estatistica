@@ -29,7 +29,7 @@
 %{\large\sc \noindent Nome completo:}\\
 {\large\sc \noindent Numero de matricula: 556944}\\
 %{\large\sc \noindent Numero de matricula: }\\
-{\large\sc \noindent Nome completo:Álvaro José Passos de Freitas Neto}\\
+{\large\sc \noindent Nome completo: Álvaro José Passos de Freitas Neto}\\
 %{\large\sc \noindent Nome completo:}\\
 {\large\sc \noindent Numero de matricula: 567593}
 %{\large\sc \noindent Numero de matricula: }
@@ -74,26 +74,113 @@ $n$ (número de clientes) afetariam a forma e as probabilidades de X?
 \subsubsection*{Descrição da atividade}
 ......
 
-\subsubsection*{Distribuição de frequência - Base Teórica:} 
+\subsubsection*{Variáveis aleatórias:} 
 
 \begin{itemize}
 \item[]
 
-\text{\large Classes ou valores (\(x_i\))}
-    \item São diferentes valores que  a variável assume ou intervalos (classes) em que os dados são agrupados.
+\text{\large O que é uma variável aleatória (\(X\))?}
+    \item É uma função que atribui um valor numérico a cada resultado de um experimento aleatório $X(s)$.
 
+
+\begin{figure}[H] 
+    \centering 
+\includegraphics[width=0.4\textwidth]{Imagens/Graficos/funçãoX.png} 
+\end{figure}
+
+    
+\text{\large Tipos de variáveis aleatórias}
+    \item Variáveis aleatórias discretas: É uma variável aleatória que pode assumir um número contável de valores, seja ele finito ou infinito de valores e explicaremos melhor nessa questão.
+    \item Variáveis aleatórias contínuas: São variáveis que podem assumir qualquer número dentro de um intervalo contínuo e falaremos melhor depois. 
 \end{itemize}
-
-\subsubsection*{Medidas de tendência central - Base Teórica:} 
 
 \begin{itemize}
 \item[]
 
-\text{\large Moda (\(M_o\))}
-    \item É o valor que ocorre com maior frequência em um conjunto de dados. Um conjunto de dados pode ter nenhum valor que se destaque sendo assim ele não tem moda (amodal), pode ter uma moda (unimodal), duas modas quando dois valores se destacam (bimodal) ou várias modas quando vários valores se destacam(polimodal).
+\text{\large Valor médio esperado $E(X)$}
+    \item Uma das maiores diferenças entre as variáveis aleatórias da probabilidade e variáveis da estatística descritiva se dá pela incapacidade de afirmar com 100\% de certeza os valores da amostragem em um experimento, por isso temos uma constante determinística do modelo, chamado de "esperança" \space média de valores. Entre variáveis discretas e contínuas há uma diferença sutil no cálculo da esperança, que será visto mais à frente.
+
+\text{\large Variância de uma variável aleatória $Var$($\sigma^2$ ou $S^2$ )}
+    \item É o valor de o quão afastados os dados estão da média esperada $E(X)$, se a variância tiver um baixo valor então os dados estão concentrados no ponto médio, se estiver com valor alto indica que os dados estão mais espalhados. 
+    \item Para variáveis discretas e contínuas a fórmula formal é muito complicada de calcular por isso usamos uma técnica inconsciente, chamada de LOTUS para simplificar os cálculos, apresentada a seguir:
+
+\text{\large LOTUS Lei do estatístico inconsciente}
+    \item É a regra geral para calcular a esperança média de qualquer função de uma variável aleatória, sem precisar descobrir a distribuição dessa nova função, ela diz que aplicar os valores $x_i$ na nova função $g(x)$ e multiplicar pela probabilidade de $x_i$ .
+
+    \item Fórmula:
+
+    \[E[g(x)] = \sum g(x)*P(X=x_i)\]
+
+\text{\large Distribuição de uma variável aleatória}
+    \item É uma forma de descrição matemática que resulta em uma visualização de como os valores estão se distribuindo em um gráfico que a soma de suas probabilidades resulta em 1 e não podem ter probabilidade negativa. Suas principais funções são:
+    
+    \item Função massa de probabilidade FMP ou $(PMF)$ para discretas
+    \item Função densidade de probabilidade FDP ou $(PDF)$ para contínuas
+    \item Função de distribuição acumulada FDA ou $(CDF)$ para discretas e contínuas
+
+\text{\large Distribuições especiais}
+    \item São modelos matemáticos para situações que acontecem na vida real, algumas delas são:
+    \begin{table}[h]
+        \centering
+        
+        \label{tab:distribuicoes}
+        \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{Tipo} & \textbf{Distribuição} & \textbf{Notação} & \textbf{Parâmetros} \\ \hline
+        \multirow{4}{*}{Discretas} & Bernoulli & $X \sim Bern(p)$ & $p$ (prob. sucesso) \\ \cline{2-4} 
+         & Binomial & $X \sim Bin(n, p)$ & $n$ (tentativas), $p$ \\ \cline{2-4} 
+         & Geométrica & $X \sim Geom(p)$ & $p$ (prob. sucesso) \\ \cline{2-4} 
+         & Poisson & $X \sim Pois(\lambda)$ & $\lambda$ (taxa média) \\ \hline
+        \multirow{3}{*}{Contínuas} & Uniforme & $X \sim U(a, b)$ & $a$ (min), $b$ (max) \\ \cline{2-4} 
+         & Normal & $X \sim N(\mu, \sigma^2)$ & $\mu$ (média), $\sigma^2$ (variância) \\ \cline{2-4} 
+         & Exponencial & $X \sim Exp(\lambda)$ & $\lambda$ (taxa) \\ \hline
+        \end{tabular}
+        \caption{Principais Distribuições Especiais}
+\end{table}
 
 
 \end{itemize}
+
+\subsubsection*{Variáveis aleatórias discretas:} 
+
+\begin{itemize}
+\item[]
+
+\text{\large O que são?}
+    \item É a variável aleatória que pode assumir um número contável de valores, seja ele finito ou infinito.
+
+
+\text{\large Função massa de probabilidade FMP ou (\(PMF\))}
+    \item É a função que nos dá a probabilidade exata de a variável assumir um valor específico, exemplo de PMF com $Rx=({0,1,2})$ e $Px=({1/4,1/2,1/4})$.
+
+\begin{figure}[H] 
+    \centering 
+\includegraphics[width=0.8\textwidth]{Imagens/Graficos/exemploPMF.png} 
+\end{figure}
+
+
+
+\text{\large Função de distribuição acumulada discreta FDA ou (\(CDF\))}
+    \item dsfadasdasdsad
+
+
+\text{\large Valor médio esperado $E(X)$ de uma variável discreta}
+    \item Para variáveis discretas o cálculo é feito pela média ponderada das amostradas $x_i$ por suas probabilidades 
+    $P_X(x_i)$ ou $P(X=x_i)$.
+
+    \item Fórmula:
+
+    \[E(X) = \sum_i x_iP(X=x_i)\]
+
+\text{\large Variância de uma variável aleatória discreta $Var(X)$}
+    \item A variância de uma variável aleatória discreta possui a seguinte fórmula formal:
+        $$ Var(X) = E[(X - \mu)^2] = \sum_x (x - \mu)^2 \cdot P(X=x) $$
+    \item Mas utilizando a técnica de LOTUS podemos obter:
+        \[Var(X) = E(X^2) - [E(X)]^2\]
+        \[Var(X) = [\sum_i (x_i)^2 \cdot P(X=x_i)] - [E(x)]^2\]
+\end{itemize}
+
+
 
 
 \begin{description}
