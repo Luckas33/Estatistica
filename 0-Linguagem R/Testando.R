@@ -1,3 +1,6 @@
+# Apagando variáveis
+rm(list=ls())
+
 # Variáveis
 nome <- "Lucas"
 idade <- 21

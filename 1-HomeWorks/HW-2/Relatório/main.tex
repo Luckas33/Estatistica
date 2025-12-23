@@ -161,7 +161,16 @@ $n$ (número de clientes) afetariam a forma e as probabilidades de X?
 
 
 \text{\large Função de distribuição acumulada discreta FDA ou (\(CDF\))}
-    \item dsfadasdasdsad
+    \item Se trata da função que soma todas as probabilidades de 0 até 1, muito parecida com a frequência Acumulada (\(N_i\)), ela serve principalmente para termos o valor da probabilidade em um intervalo de valores ou a probabilidade total até o valor $X_k$, por exemplo: $F_X(x) = P(X \leq x)$.
+
+    \item Gráfico é em forma de degraus pois ela permanece constante (plana) até atingir um valor possível da variável $X_k$, onde ela dá um salto.
+
+    \item CDF do exemplo anterior:
+
+    \begin{figure}[H] 
+    \centering 
+\includegraphics[width=0.7\textwidth]{Imagens/Graficos/exemploCDF.png} 
+\end{figure}
 
 
 \text{\large Valor médio esperado $E(X)$ de uma variável discreta}
@@ -181,17 +190,220 @@ $n$ (número de clientes) afetariam a forma e as probabilidades de X?
 \end{itemize}
 
 
+\subsubsection*{Distribuições especiais das variáveis aleatórias discretas:} 
 
+\begin{itemize}
+\item[]
+
+\text{\large Distribuição de Bernoulli $[X \sim Bern(p)]$:}
+    \item Modela um único experimento com dois resultados possíveis, sucesso (1) ou fracasso (0).
+    \item PMF:
+    \[
+    P(X = x) = 
+    \begin{cases} 
+      p & \text{se } x = 1 \text{ (sucesso)} \\
+      1-p & \text{se } x = 0 \text{ (fracasso)} \\
+      0 & \text{caso contrário}
+    \end{cases}
+    \]
+    \item Esperança: \\
+    É exatamente a média ponderada do único valor de sucesso $E(X) = 1 \cdot p = p$ 
+    \[E(X) = p\]
+    \item Variância: \\
+    Varia no máximo 0.5 se as chances de fracasso e sucesso forem iguais e mínimo se a probabilidade estiver perto de 0 ou 1.
+    \[Var(X) = p(1-p)\]
+    \item Gráfico para exemplo Bern(0.6):
+\begin{figure}[H] 
+    \centering 
+\includegraphics[width=0.8\textwidth]{Imagens/Graficos/exemploBernoulli.png} 
+\end{figure}
+
+    
+\text{\large Distribuição Binomial $[X \sim \text{Bin}(n,p)]$}
+    \item É o modelo que repete o teste de Bernoulli $n$ vezes, para obter a chance de se obter exatamente $k$ sucessos.
+    \item PMF:
+    \[P(X=k) = \binom{n}{k} \cdot p^k \cdot (1-p)^{n-k}\]
+    para $k \in \{0,1,2...n \}$
+    
+
+\item {Entendendo a PMF:}
+    \begin{itemize}
+        \item $\binom{n}{k}$ ou $\frac{n!}{(n-k)! \cdot k!}$: Fator combinatório. Conta de quantas formas podemos organizar os $k$ sucessos nas $n$ posições (ex: para $n=3, k=2$, temos SSF, SFS, FSS).
+        \item $p^k$: Probabilidade de ocorrerem exatamente $k$ sucessos.
+        \item $(1-p)^{n-k}$: Probabilidade dos $n-k$ fracassos restantes ocorrerem.
+    \end{itemize}
+
+    \item Esperança: \\
+    É dado pelo produto do número de amostras pela probabilidade de sucesso destas. 
+    \[E(X) = n \cdot p\]
+    \item Variância: \\
+    É o produto de amostras, sucessos e fracassos, sendo este a dispersão dos dados.
+    \[Var(X) = n \cdot p \cdot (1-p)\]
+    \item Desvio-padrão: \\
+    Raiz quadrada da variância.
+    \[\sigma = \sqrt{n \cdot p \cdot (1-p)}\]
+
+    
+    \item Gráfico para 10 amostras com 50\% de sucesso:
+
+\begin{figure}[H] 
+    \centering 
+\includegraphics[width=0.8\textwidth]{Imagens/Graficos/exemploBinomial.png} 
+\end{figure}
+
+\end{itemize}
+
+
+\subsubsection*{Respostas dos itens da questão 1:} 
 
 \begin{description}
 
-\item \textbf{[1.1] Resposta}:
+\item [1.1] \textbf{ Resposta}: \\
+A função $X$ tem 2 resultados possíveis, pedir ou não sobremesa, classificando como distribuição binomial, pois além de ter 2 resultados possíveis ele faz $n > 1$ tentativas, denotando:
+    \[X \sim Bin(50,0.7)\]
+
+\item [1.2] \textbf{ Resposta}: \\
+Para construir esses gráficos, utilizaremos as funções nativas do R. Note que para a PMF usamos em variáveis discretas o spike plot e para a CDF o gráfico de degraus. 
+
+Segue o código básico usado na questão:
+\begin{lstlisting}
+    # Definindo os parametros
+    n <- 50
+    p <- 0.7
+    k <- 0:n
+    
+    # Calculando as distribuicoes
+    pmf <- dbinom(k, size = n, prob = p)
+    cdf <- pbinom(k, size = n, prob = p)
+\end{lstlisting}
+
+\vspace{0.5cm}
+
+O código para gerar a PMF e o gráfico gerado:
+
+\begin{lstlisting}
+    # Grafico da Funcao Massa de Probabilidade (PMF)
+    plot(k, pmf, type = "h", lwd = 2, col = "blue",
+     main = "PMF de X",
+     xlab = "Numero de Clientes (k)",
+     ylab = "P(X = k)",
+     las = 1)
+    points(k, pmf, pch = 16, col = "blue", cex = 0.7)
+    grid()
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Imagens//Graficos/PMF 1.2.png}
+\end{figure}
+
+\vspace{5mm}
+
+O código para gerar a CDF e o gráfico gerado:
+\begin{lstlisting}
+# Grafico da Funcao Distribuicao Acumulada (CDF)
+plot(k, cdf, type = "s", lwd = 2, col = "red",
+     main = "CDF de X",
+     xlab = "Numero de Clientes (k)",
+     ylab = "F(k) = P(X <= k)",
+     las = 1)
+grid()
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Imagens//Graficos/CDF 1.2.png}
+\end{figure}
+
+\item [1.3] \textbf{ Resposta}: \\
+
+Valor Esperado:
+\[E(X) = n \cdot p = 50 \cdot 0.7 = 35\]
+
+Variância:
+\[Var(X) = n \cdot p \cdot (1-p) = 50 \cdot 0.7 \cdot (1-0.7) = 10.5\]
+
+Desvio padrão:
+
+\[\sigma = \sqrt{n \cdot p \cdot (1-p)} = \sqrt{10.5} \approx 3.24\]
+
+\item [1.4] \textbf{ Resposta}: \\
+
+A função de massa de probabilidade (PMF) que descreve esse modelo é definida pela expressão:
+
+\begin{equation}
+    P(X = k) = \binom{n}{k} \cdot p^k \cdot (1-p)^{n-k}
+\end{equation}
+
+De acordo com nossa questão temos os seguintes valores:
+
+\begin{itemize}
+    \item $n = 50$;
+    \item $p = 0.7$;
+    \item $1-p = 0.3$
+\end{itemize}
+
+Usaremos essa formula para calcular as probabilidades dos itens
+
+\vspace{5mm}
+
+a) $P(X \ge 20)$:
+
+Note que, para calcular essa probabilidade, precisamos calcular a soma das probabilidades individuais entre 20 e 50. Portanto teremos o k variando de 20 a 50 logo nossa formula fica:
+
+\begin{equation}
+    P(X \geq 20) = \sum_{k=20}^{50} \binom{50}{k} \cdot (0,7)^k \cdot (0,3)^{50-k}
+\end{equation}
+
+Uma vez que minha calculadora não aguentou fazer o somatório, eu recorri a usar a calculadora online do site desmos.com para resolver a fórmula, descobrindo que:
+
+\begin{equation}
+    P(X \geq 20) = 0.999997 \approx 1
+\end{equation}
+
+\vspace{5mm}
+
+b) $P(30 < X < 43)$:
+
+Do mesmo modo, para calcular essa probabilidade, precisamos calcular o somatório das probabilidades individuais entre 30 e 43, logo, com isso definido, nosso k varia entre 31 e 42, portanto nossa fórmula fica:
+
+\begin{equation}
+    P(30 < X < 43) = \sum_{k=31}^{42} \binom{50}{k} \cdot (0,7)^k \cdot (0,3)^{50-k}
+\end{equation}
+
+Usando novamente a calculadora online do site desmos.com para resolver a fórmula, descobri que:
+
+\begin{equation}
+    P(30 < X < 43) = 0.9079
+\end{equation}
+ 
+\vspace{5mm}
+
+c) $P(X=31)$:
+
+Por fim, para calcular essa probabilidade, precisamos calcular a probabilidade para quando $k = 31$, portanto nossa fórmula fica:
+
+\begin{equation}
+    P(X = 31) = \binom{50}{31} \cdot 0,7^{31} \cdot 0,3^{19}
+\end{equation}
+
+Usando novamente a calculadora online do site desmos.com para resolver a fórmula, descobri que:
+
+\begin{equation}
+    P(X=31) = 0.0558
+\end{equation}
+
+\item [1.5] \textbf{ Resposta}: \\
+Analisando o valor médio de 35 e desvio padrão 3.24, podemos inferir que o estoque de sobremesas deveria ficar sempre com no máximo a média mais 2 vezes o desvio padrão, sendo 41,48 ou seja 42 sobremesas, garantindo atingir a maioria dos casos pois considerando que o restaurante é muito frequentado dificilmente teria um desperdício alto, usamos o desvio padrão pois a variável sobremesa não está na mesma medida que a variância, ou seja, ela não é quadrática. 
+
+\item [1.6] \textbf{ Resposta}: \\
+
 
 
 \end{description}
 
 \section{Questão} \label{sec:q2}
-Um site realiza uma pesquisa online e oferece uma recompensa a um usuário selecionado aleatoriamente que responde a uma série de perguntas. Cada um dos 10 milhões de visitantes diários tem, independentemente, probabilidade $p = 10^7$ de ganhar a recompensa.
+Um site realiza uma pesquisa online e oferece uma recompensa a um usuário selecionado aleatoriamente que responde a uma série de perguntas. Cada um dos 10 milhões de visitantes diários tem, independentemente, probabilidade $p = 10^{-7}$ de ganhar a recompensa.
 
 
 
@@ -209,7 +421,7 @@ você realmente receba o prêmio.
 
 \item Gere um grande número de simulações diárias para o número de vencedores. Crie
 uma comparação visual entre os resultados empíricos e a aproximação considerada
-no item ??. Descreva brevemente o que a visualização indica sobre a qualidade da
+no item 2.1. Descreva brevemente o que a visualização indica sobre a qualidade da
 aproximação.
 
 \end{enumerate}
@@ -219,25 +431,73 @@ aproximação.
 \subsubsection*{Descrição da atividade}
 .....
 
-\subsubsection*{Medidas de dispersão - Base Teórica:} 
+\subsubsection*{Mais distribuições especiais discretas } 
 
 \begin{itemize}
 \item[]
 
-\text{\large Coeficiente de variação de Pearson ($r_{xy)}$}
-    \item É uma medida estatística que descreve o grau e a direção da associação linear entre duas variáveis quantitativas (X e Y).
+\text{\large Distribuição de Poisson $[X \sim Pois(\lambda)]$}
+    \item É o número de eventos que ocorrem em um intervalo fixo de tempo ou espaço, dado que esses eventos ocorrem com uma taxa média constante e independentemente do tempo desde o último evento.
 
-    \[r_{xy} = \frac{\sum{(x_i - \overline{x})(y_i-\overline{y})}}{\sqrt{\sum (x_i - \overline{x})^2 \sum(y_i-\overline{y})^2}}\]
+    \item PMF:
 
-    O resultado estará em um intervalo de [-1,1], 
+    \[P(X=k) = \frac{e^{-\lambda} \cdot \lambda^k}{k!}\]
+    Para $k \in {0,1,2,3...}$ \\
+    $\lambda (lambda)$ = taxa média de ocorrência no intervalo.
+    
+    \item Esperança = Variância = $\lambda$ São proporcionais
+    
+    \item Gráfico:
+    \begin{figure}[H] 
+    \centering 
+\includegraphics[width=0.8\textwidth]{Imagens/Graficos/ExemploPoisson.png} 
+\end{figure}
 
+    
+    
 \end{itemize}
 
 
+\subsubsection*{Respostas dos itens da questão 2:} 
 
 \begin{description}[leftmargin=*]
 
-\item[2.1] \textbf{Resposta}:
+\item[2.1] \textbf{ Resposta}: \\
+Podemos usar a distribuição Binomial como uma aproximação simplista do problema, pois descobriremos a quantidade de vencedores com mesma probabilidade em um único cenário $X$ simulando os dias, aplicando:
+
+PMF da $Bin(10^7,10^{-7})$:
+
+    \[P(X=k) = \binom{n}{k} \cdot p^k \cdot (1-p)^{n-k}\]
+    para $k \in \{0,1,2...n \}$
+
+    \[P(X=k) = \binom{10^7}{k} \cdot (10^{-7})^k \cdot (1-10^{-7})^{10^7-k}\]
+
+Expandindo a fórmula:
+    \[P(X=k) = \frac{10^7!}{(10^7-k)!} \cdot (10^{-7})^k \cdot (1-10^{-7})^{10^7-k}\]
+
+
+Percebe-se que o grande número de elementos e com probabilidade muito baixa para cada um deles torna a distribuição Binomial impraticável e com a informação que a esperança $E(X) = 10^7 \cdot 10^{-7} = 1$ podemos usá-la como taxa de frequência $\lambda$ a ser usada mais adequadamente na distribuição de Poisson.
+
+\[P(X=k) = \frac{e^{-\lambda} \cdot \lambda^k}{k!}\]
+    Para $k \in {0,1,2,3...}$ \\
+
+
+\[P(X=k) = \frac{e^{-1} \cdot 1^k}{k!}\]
+
+Simplificando:
+
+\[P(X=k) = \frac{e^{-1} }{k!}\]
+
+Agora temos uma aproximação mais adequada e simples, que calcula o número de vencedores sem valores impraticáveis.
+
+
+\item[2.2] \textbf{ Resposta}: \\
+
+\item[2.3] \textbf{ Resposta}: \\
+
+
+
+\item[2.4] \textbf{ Resposta}: \\
 
 \end{description}
 
@@ -307,10 +567,20 @@ geradores de números aleatórios uniformes são a base dos sistemas de RNG?
     
 \end{itemize}
 
+\subsubsection*{Respostas dos itens da questão 3:} 
 
 \begin{description}[leftmargin=*] 
 
 \item[3.1] \textbf{ Resposta}: \\
+
+\item[3.2] \textbf{ Resposta}: \\
+
+\item[3.3] \textbf{ Resposta}: \\
+
+\item[3.4] \textbf{ Resposta}: \\
+
+\item[3.5] \textbf{ Resposta}: \\
+
 
 \end{description}
 
