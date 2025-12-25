@@ -212,7 +212,7 @@ $n$ (número de clientes) afetariam a forma e as probabilidades de X?
     \item Variância: \\
     Varia no máximo 0.5 se as chances de fracasso e sucesso forem iguais e mínimo se a probabilidade estiver perto de 0 ou 1.
     \[Var(X) = p(1-p)\]
-    \item Gráfico para exemplo Bern(0.6):
+    \item Gráfico PMF para exemplo Bern(0.6):
 \begin{figure}[H] 
     \centering 
 \includegraphics[width=0.8\textwidth]{Imagens/Graficos/exemploBernoulli.png} 
@@ -244,7 +244,7 @@ $n$ (número de clientes) afetariam a forma e as probabilidades de X?
     \[\sigma = \sqrt{n \cdot p \cdot (1-p)}\]
 
     
-    \item Gráfico para 10 amostras com 50\% de sucesso:
+    \item Gráfico PMF para 10 amostras com 50\% de sucesso:
 
 \begin{figure}[H] 
     \centering 
@@ -338,9 +338,8 @@ A função de massa de probabilidade (PMF) que descreve esse modelo é definida 
 De acordo com nossa questão temos os seguintes valores:
 
 \begin{itemize}
-    \item $n = 50$;
-    \item $p = 0.7$;
-    \item $1-p = 0.3$
+    \item $n = 50$
+    \item $p = 0.7$
 \end{itemize}
 
 Usaremos essa formula para calcular as probabilidades dos itens
@@ -398,7 +397,9 @@ Analisando o valor médio de 35 e desvio padrão 3.24, podemos inferir que o est
 
 \item [1.6] \textbf{ Resposta}: \\
 
+A alteração da probabilidade de sucesso (p) impacta diretamente na posição central e na simetria da distribuição. Por exemplo, se a sobremesa se tornasse mais popular, passando de $p=0.7$ para $p=0.8$,  o valor esperado de clientes que solicitam o item aumentaria proporcionalmente, deslocando o pico da curva para a direita. A distribuição aumentaria a probabilidade de ocorrência de valores altos, tornando quase nula a chance de observar poucos pedidos. Matematicamente, isso alteraria a média, o que, nesse caso, elevaria a média de 35 para 40 clientes.
 
+Já a variação no número de clientes (n) alteraria a escala e a precisão da distribuição. Ao aumentar o tamanho da amostra, a distribuição binomial tende a se comportar de forma mais suave, aproximando-se de uma Distribuição Normal, de acordo com o Teorema Central do Limite. Embora o desvio padrão absoluto aumente, a variabilidade em relação ao total de clientes diminui, o que significa que os resultados observados tendem a se agrupar de forma mais previsível.
 
 \end{description}
 
@@ -448,9 +449,9 @@ aproximação.
     \item Esperança = Variância = $\lambda$ São proporcionais
     
     \item Gráfico:
-    \begin{figure}[H] 
+\begin{figure}[H] 
     \centering 
-\includegraphics[width=0.8\textwidth]{Imagens/Graficos/ExemploPoisson.png} 
+    \includegraphics[width=0.8\textwidth]{Imagens/Graficos/ExemploPoisson.png} 
 \end{figure}
 
     
@@ -463,7 +464,7 @@ aproximação.
 \begin{description}[leftmargin=*]
 
 \item[2.1] \textbf{ Resposta}: \\
-Podemos usar a distribuição Binomial como uma aproximação simplista do problema, pois descobriremos a quantidade de vencedores com mesma probabilidade em um único cenário $X$ simulando os dias, aplicando:
+Podemos usar a distribuição Binomial como uma aproximação aproximada do problema, pois descobriremos a quantidade de vencedores com mesma probabilidade em um único cenário $X$ simulando 1 dia, aplicando:
 
 PMF da $Bin(10^7,10^{-7})$:
 
@@ -490,10 +491,76 @@ Simplificando:
 
 Agora temos uma aproximação mais adequada e simples, que calcula o número de vencedores sem valores impraticáveis.
 
-
 \item[2.2] \textbf{ Resposta}: \\
+Primeiro faremos a distribuição exata, que no caso é a binomial, para isso usaremos algumas formulas.
+
+Para calcular o valor esperado faremos:
+
+\begin{equation}
+    E[X] = n \cdot p
+\end{equation}
+
+E para calcular a variância faremos:
+
+\begin{equation}
+    Var(X) = n \cdot p \cdot (1 - p)
+\end{equation}
+
+Sabendo que no contexto dessa questão as variáveis são:
+
+\begin{itemize}
+    \item $n = 10^7$: Número total de visitantes diários;
+    \item $p = 10^{-7}$: Probabilidade individual de um usuário ser premiado;
+\end{itemize}
+
+\vspace{5mm}
+
+Portanto teremos:
+
+\begin{equation}
+    E[X] = 10^7 \cdot 10^{-7} = 1
+\end{equation}
+
+\begin{equation}
+    Var(X) = 10^7 \cdot 10^{-7} \cdot (1 - 10^{-7}) = 0.9999999
+\end{equation}
+
+Agora faremos os cálculos para a distribuição aproximada que é a de Poisson, usando as seguintes formulas.
+
+Para calcular o valor esperado faremos:
+
+\begin{equation}
+    E[X]= \lambda
+\end{equation}
+
+E para calcular a variância faremos:
+
+\begin{equation}
+    Var(X)= \lambda
+\end{equation}
+
+Note que a única variável que precisamos é o $\lambda$. Para calculá-lo, usaremos a seguinte fórmula e faremos as substituições igual ao item anterior.
+
+\begin{equation}
+    \lambda = n \cdot p = 10^7 \cdot 10^{-7} = 1
+\end{equation}
+
+Dessa forma ficamos com os seguintes valores:
+
+\begin{equation}
+    E[X] = 1
+\end{equation}
+
+\begin{equation}
+    Var(X) = 1
+\end{equation}
+
+Ao comparar os resultados obtidos, observa-se que o valor esperado ($E[X]$) é idêntico em ambos os modelos, resultando em exatamente 1. No que diz respeito à variância ($Var(X)$), o cálculo exato pela distribuição Binomial fornece 0.9999999, enquanto a aproximação de Poisson fornece exatamente 1. A diferença entre os dois valores é muito pequena. Esta semelhança ocorre porque a distribuição de Poisson é o limite da distribuição Binomial quando $n \to \infty$ e $p \to 0$, mantendo o produto $n \cdot p$ constante. Como o fator de correção da variância binomial $(1-p)$ é extremamente próximo de 1, a dispersão dos dados nos dois modelos torna-se praticamente equivalente. 
 
 \item[2.3] \textbf{ Resposta}: \\
+Primeiro devemos calcular quantos vencedores teremos dada a taxa média de ocorrências, após isso utilizaremos a binomial para descobrir a probabilidade k = 1 vencedor. 
+
+\[P(X = 1) = \]
 
 
 
@@ -556,15 +623,223 @@ geradores de números aleatórios uniformes são a base dos sistemas de RNG?
 \subsubsection*{Descrição da atividade}
 ....
 
-
-\subsubsection*{Base Teórica Questão 3:} 
+\subsubsection*{Variáveis aleatórias contínuas:} 
 
 \begin{itemize}
 \item[]
+    \text{\large O que é?}
+        \item Nas variáveis aleatórias contínuas são medidos valores imensuráveis que podem assumir qualquer número dentro de um intervalo contínuo, por exemplo: tempo, altura, voltagem, temperatura.
 
-\subsubsection*{Tipos de dados - base teórica} 
+    \text{\large Valor médio esperado nas variáveis contínuas $E(X)$}
+        \item Diferente das discretas que faz a média ponderada entre as probabilidades e valores possíveis, nas contínuas como temos infinitos valores teremos que integrar a função $f(x)$ em um intervalo desejado.
+
+        \[E(X) = \int_{-\infty}^{\infty} xf(x)dx \]
+
+        Mas geralmente para uma função qualquer temos a noção da LOTUS, afirmando que, para calcular o valor esperado de uma transformação $g(X)$ de uma variável aleatória $X$, não é necessário conhecer a distribuição de $g(X)$. Basta usar a PDF original de $X$:
+
+        \[E(X) = \int_{-\infty}^{\infty} g(x)f(x)dx \]
+        
+        
+    \text{\large Função densidade de probabilidade FDP ou (PDF)}
+        \item A função densidade de probabilidade descreve como a probabilidade está distribuída ao longo do intervalo contínuo de valores da variável aleatória.Diferentemente da função massa de probabilidade (PMF), usada em variáveis discretas, a PDF não fornece diretamente probabilidades pontuais, pois a probabilidade de termos o valor igual às suas infinitas casas decimais é $P(X = x_0) = 0$, por conta desse fato a probabilidade é obtida pela área sob a curva da PDF entre dois valores:
+
+        \[P(a \le X \le b) = \int_{a}^{b} f(x)\, dx.\]
+
+        
+    \text{\large {Propriedades da Função Densidade de Probabilidade (PDF)}}
+        A função densidade de probabilidade $f(x)$ deve satisfazer duas propriedades fundamentais:
+            \item A probabilidade não pode ser negativa: $f(x) \geq 0$ para todo x.
+            \item A área total é 1, a integral de $-\infty$ a $+\infty$ deve ser igual a 1 para que a soma das probabilidades seja 100\%.
+
+    \text{\large {Exemplo de gráfico de PDF }}
+        \item Com média 4 e desvio padrão 3.
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width=0.7\textwidth]{Imagens/Graficos/exemploPDF.png} 
+    \end{figure}
+    
+    \text{\large Função de distribuição acumulada contínua FDA ou (CDF)}
+        \item Muito parecido com a CDF das variáveis aleatórias discretas as variáveis aleatórias contínuas terão o mesmo conceito, mas que em vez de um somatório das probabilidades de cada valor, aqui teremos uma integral de $-\infty$ até um valor $x$, utilizado normalmente para descobrir a probabilidade até um certo ponto $ \leq X$.
+        \[F(x) = P(X \le x) = \int_{-\infty}^{x} f(t)\, dt.\]
+        
+        Outra diferença é no formato do gráfico, que não será mais em formato de escada e sim de curva, segue exemplo de CDF com média 0 e desvio padrão 1. 
+
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width=0.7\textwidth]{Imagens/Graficos/exemploCDFcontinua.png} 
+    \end{figure}
+
+   \text{\large Propriedades da Função de distribuição acumulada contínua FDA ou (CDF)}     
+   \begin{itemize}
+    \item \textbf{Limite inferior igual a zero:}
+    \[
+    \lim_{x \to -\infty} F(x) = 0.
+    \]
+    Antes de qualquer região de densidade, a probabilidade acumulada é nula.
+
+    \item \textbf{Limite superior igual a um:}
+    \[
+    \lim_{x \to +\infty} F(x) = 1.
+    \]
+    Após considerar toda a densidade, toda a probabilidade já foi acumulada.
+
+    \item \textbf{Derivada da CDF é a PDF (quando derivável):}
+    \[
+    f(x) = \frac{d}{dx}F(x).
+    \]
+    Portanto, a PDF é a “taxa de crescimento” da CDF.
+
+    \item \textbf{Valores entre 0 e 1:}
+    \[
+    0 \le F(x) \le 1.
+    \]
+    Porque probabilidades sempre pertencem ao intervalo unitário.
+\end{itemize}
+        
+
+        
+\end{itemize}
+
+
+\subsubsection*{Distribuições contínuas importantes:} 
+
+\begin{itemize}
+\item[]
+\text{\large {Distribuição Uniforme [$X \sim U(a,b)$]}}
+    \item Todos os valores do intervalo possuem igualmente a mesma probabilidade, possuindo um valor inicial $a$ e um valor final $b$.
+    \item PDF: \\
+        \[f(X) = \frac{1}{b-a}\]
+    \item Esperança: \\
+        \[E(X) = \frac{a+b}{2}\]
+    \item Variância: \\
+        \[Var(X) = \frac{(b-a)^2}{12}\]
+
+    \item Gráfico da PDF:
+    Exemplo com $a = 0$ e $b = 1$
+        \begin{figure}[H] 
+        \centering 
+        \includegraphics[width=0.7\textwidth]{Imagens/Graficos/exemploUnif.png} 
+    \end{figure}
+
+
+\text{\large {Distribuição Normal [$X \sim N(\mu,\sigma^2)$]}}
+    \item A distribuição Normal ou Gaussiana é a distribuição que modela variáveis que surgem pela soma de muitos efeitos pequenos, normalmente vistas no dia a dia, exemplo: altura humana, notas de um teste... 
+    \item PDF: \\
+    
+    \[f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \cdot e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]
+
+    Outra forma:
+
+    \[f(x) = \frac{1}{\sigma\sqrt{2\pi}} \cdot e^{-\frac{(x-\mu)^2}{2\sigma^2}}\]
+    
+    \item Legenda:\\
+        $\mu$: média \\
+        $\sigma$ desvio padrão\\
+        $\sigma^2$ variância\\
+    
+    \item Esperança: \\
+        \[E(X) = \mu\]
+    \item Variância: \\
+        \[Var(X) = \sigma^2\]
+
+    \text{\large {Características da Normal}}
+        \item É simétrica, ou seja, a média, moda e mediana são iguais e ficam no centro. 
+        \item Regra do 69,95,99,7 para $X \sim N(\mu,\sigma)$, que diz:  \\
+    68\% dos valores estão em $\mu \pm \sigma$ \\
+    95\% dos valores estão em  $\mu \pm 2\sigma$ \\
+    99,7\% dos valores estão em  $\mu \pm 3\sigma$ \\
+
+    \text{\large {Distribuição Normal Padrão [$X \sim N(0,1)$]}} \\
+     É a Normal em que a média é 0 e o desvio padrão é 1.
+
+     \item Gráfico da PDF de uma Normal Padrão.
+
+    \begin{figure}[H] 
+        \centering 
+        \includegraphics[width=0.7\textwidth]{Imagens/Graficos/exemploNormalP.png} 
+    \end{figure}
+    
+\end{itemize}
+
+\subsubsection*{Padronização e Cálculo de Probabilidades:} 
+
+\begin{itemize}
+\item[]
+\text{\large {Como calcular a probabilidade de uma função contínua difícil?}}
+    \item Para calcular a probabilidade de uma função contínua difícil, precisaremos que ela seja próxima da Normal, com isso seguimos o procedimento de normalizar os dados para uma distribuição de média 0 e desvio padrão 1, após isso utilizamos a tabela de integrais da função de distribuição Normal Padrão, os próximos tópicos detalharão melhor.
+
+\text{\large {Padronização Z-score:}}
+    \item O método de padronização dos dados de uma função qualquer para após isso utilizar a tabela de integrais se dá pela fórmula:
+
+    \[Z = \frac{x-\mu}{\sigma}\]
+
+\text{\large {Tabela de integrais para distribuição Normal Padrão:}}
+    \item Após padronizar os dados podemos aplicar qualquer ponto $x$ no Z-score e obter seu valor de $Z$ através da tabela.
 
     
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|cccccc}
+        \hline
+        $z$ & 0.00 & 0.01 & 0.02 & 0.03 & 0.04 & 0.05 \\
+        \hline
+        0.0 & 0.5000 & 0.5040 & 0.5080 & 0.5120 & 0.5160 & 0.5199 \\
+        0.1 & 0.5398 & 0.5438 & 0.5478 & 0.5517 & 0.5557 & 0.5596 \\
+        0.2 & 0.5793 & 0.5832 & 0.5871 & 0.5910 & 0.5948 & 0.5987 \\
+        0.3 & 0.6179 & 0.6217 & 0.6255 & 0.6293 & 0.6331 & 0.6368 \\
+        0.4 & 0.6554 & 0.6591 & 0.6628 & 0.6664 & 0.6700 & 0.6736 \\
+        0.5 & 0.6915 & 0.6950 & 0.6985 & 0.7019 & 0.7054 & 0.7088 \\
+        0.6 & 0.7257 & 0.7291 & 0.7324 & 0.7357 & 0.7389 & 0.7422 \\
+        0.7 & 0.7580 & 0.7611 & 0.7642 & 0.7673 & 0.7704 & 0.7734 \\
+        0.8 & 0.7881 & 0.7910 & 0.7939 & 0.7967 & 0.7995 & 0.8023 \\
+        0.9 & 0.8159 & 0.8186 & 0.8212 & 0.8238 & 0.8264 & 0.8289 \\
+        1.0 & 0.8413 & 0.8438 & 0.8461 & 0.8485 & 0.8508 & 0.8531 \\
+        1.1 & 0.8643 & 0.8665 & 0.8686 & 0.8708 & 0.8729 & 0.8749 \\
+        1.2 & 0.8849 & 0.8869 & 0.8888 & 0.8907 & 0.8925 & 0.8944 \\
+        1.3 & 0.9032 & 0.9049 & 0.9066 & 0.9082 & 0.9099 & 0.9115 \\
+        1.4 & 0.9192 & 0.9207 & 0.9222 & 0.9236 & 0.9251 & 0.9265 \\
+        1.5 & 0.9332 & 0.9345 & 0.9357 & 0.9370 & 0.9382 & 0.9394 \\
+        1.6 & 0.9452 & 0.9463 & 0.9474 & 0.9484 & 0.9495 & 0.9505 \\
+        1.7 & 0.9554 & 0.9564 & 0.9573 & 0.9582 & 0.9591 & 0.9599 \\
+        1.8 & 0.9641 & 0.9649 & 0.9656 & 0.9664 & 0.9671 & 0.9678 \\
+        1.9 & 0.9713 & 0.9719 & 0.9726 & 0.9732 & 0.9738 & 0.9744 \\
+        2.0 & 0.9772 & 0.9778 & 0.9783 & 0.9788 & 0.9793 & 0.9798 \\
+        2.1 & 0.9821 & 0.9826 & 0.9830 & 0.9834 & 0.9838 & 0.9842 \\
+        2.2 & 0.9861 & 0.9864 & 0.9868 & 0.9871 & 0.9875 & 0.9878 \\
+        2.3 & 0.9893 & 0.9896 & 0.9898 & 0.9901 & 0.9904 & 0.9906 \\
+        2.4 & 0.9918 & 0.9920 & 0.9922 & 0.9925 & 0.9927 & 0.9929 \\
+        2.5 & 0.9938 & 0.9940 & 0.9941 & 0.9943 & 0.9945 & 0.9946 \\
+        2.6 & 0.9953 & 0.9955 & 0.9956 & 0.9957 & 0.9959 & 0.9960 \\
+        2.7 & 0.9965 & 0.9966 & 0.9967 & 0.9968 & 0.9969 & 0.9970 \\
+        2.8 & 0.9974 & 0.9975 & 0.9976 & 0.9977 & 0.9977 & 0.9978 \\
+        2.9 & 0.9981 & 0.9982 & 0.9982 & 0.9983 & 0.9984 & 0.9984 \\
+        3.0 & 0.9987 & 0.9987 & 0.9988 & 0.9988 & 0.9989 & 0.9989 \\
+        \hline
+        \end{tabular}
+        \caption{Trecho da tabela acumulada da Normal Padrão $\Phi(z)$.}
+    \end{table}
+
+\end{itemize}
+
+\subsubsection*{Geração de Variáveis Contínuas:} 
+
+\begin{itemize}
+\item[]
+\text{\large {Transformação Box–Muller}}
+    \item A Transformação de Box--Muller é um método utilizado para gerar variáveis aleatórias com distribuição Normal Padrão a partir de duas variáveis aleatórias independentes com distribuição Uniforme no intervalo $(0,1)$:
+    \[U_1, U_2 \sim \text{Uniforme}(0,1).\]
+
+A ideia fundamental é transformar duas variáveis uniformes em duas variáveis normais independentes. Isso é feito utilizando a seguinte transformação:
+
+\[Z_1 = \sqrt{-2\ln(U_1)} \, \cos(2\pi U_2)\]
+
+\[Z_2 = \sqrt{-2\ln(U_1)} \, \sin(2\pi U_2)\]
+
+As variáveis resultantes $Z_1$ e $Z_2$ são independentes e seguem distribuição Normal Padrão:
+
+\[Z_1, Z_2 \sim \mathcal{N}(0,1)\]
+
+
 \end{itemize}
 
 \subsubsection*{Respostas dos itens da questão 3:} 
