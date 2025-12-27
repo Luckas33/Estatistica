@@ -489,7 +489,7 @@ Simplificando:
 
 \[P(X=k) = \frac{e^{-1} }{k!}\]
 
-Agora temos uma aproximação mais adequada e simples, que calcula o número de vencedores sem valores impraticáveis.
+Agora temos uma aproximação mais adequada e simples, que calcula o número de vencedores sem valores impraticáveis.   
 
 \item[2.2] \textbf{ Resposta}: \\
 Primeiro faremos a distribuição exata, que no caso é a binomial, para isso usaremos algumas formulas.
@@ -558,13 +558,82 @@ Dessa forma ficamos com os seguintes valores:
 Ao comparar os resultados obtidos, observa-se que o valor esperado ($E[X]$) é idêntico em ambos os modelos, resultando em exatamente 1. No que diz respeito à variância ($Var(X)$), o cálculo exato pela distribuição Binomial fornece 0.9999999, enquanto a aproximação de Poisson fornece exatamente 1. A diferença entre os dois valores é muito pequena. Esta semelhança ocorre porque a distribuição de Poisson é o limite da distribuição Binomial quando $n \to \infty$ e $p \to 0$, mantendo o produto $n \cdot p$ constante. Como o fator de correção da variância binomial $(1-p)$ é extremamente próximo de 1, a dispersão dos dados nos dois modelos torna-se praticamente equivalente. 
 
 \item[2.3] \textbf{ Resposta}: \\
-Primeiro devemos calcular quantos vencedores teremos dada a taxa média de ocorrências, após isso utilizaremos a binomial para descobrir a probabilidade k = 1 vencedor. 
+Para calcular a probabilidade de eu ser o ganhador dentre diversos outros ganhadores, sendo estes $W \sim Pois(1)$, realizaremos o cálculo da esperança média desse evento acontecer, que se dá pelo somatório da média ponderada dos valores por suas probabilidades, de acordo com o conceito de variáveis aleatórias discretas.
 
-\[P(X = 1) = \]
+\[P(X=1_{(vencedor)}) =E[\frac{1}{1_{(ganhadorgarantido)}+w_{(outros ganhadores)}}]\]
+
+\[P(X=1) =\sum_0^\infty\frac{1}{1+w} \cdot P(W=w)\]
 
 
+Dado $W \sim Pois(1)$, então $P(W = w) = \frac{e^{-1}}{w!}$
+
+\[P(X=1) =\sum_0^\infty \frac{1}{(1+w)} \cdot \frac{e^{-1}}{w!}\]
+
+Tirando constante $e^{-1}$ do somatório:
+
+\[P(X=1) = e^{-1}\sum_0^\infty  \frac{1}{(1+w)\cdot w!}\]
+
+Podemos reescrever $(1+w)\cdot w!$ como $(1+w)!$ dado a definição de fatorial.
+
+\[P(X=1) = e^{-1}\sum_0^\infty  \frac{1}{(1+w)!}\]
+
+Com isso podemos reduzir o denominador $(1+w)$chamando-o pelo índice $k$, fazendo aparecer a série de Taylor, após isso trocamos os índices do somatório para reordenar os valores conhecidos.
+
+\[P(X=1) = e^{-1}\sum_1^\infty  \frac{1}{k!}\]
+
+O somatório de $ \frac{1}{k!} $ indo de $0...\infty$ nos dá o valor de euler, então de $1...\infty$ nos dá $e - 1$.
+
+\[P(X=1) = e^{-1} \cdot (e-1)\]
+
+Utilizando calculadora científica, temos:
+
+\[P(X=1) = 0.632120558\]
+
+Ou seja, a probabilidade de eu ser o ganhador final é de aproximadamente $63.212\%$
 
 \item[2.4] \textbf{ Resposta}: \\
+
+Para avaliar a precisão da aproximação de Poisson em relação ao modelo binomial exato, foi realizada uma simulação utilizando o R. A simulação reproduziu o cenário do site 10.000 vezes e, em cada repetição, ele processou 10 milhões de tentativas ($n=10^7$) com uma probabilidade de sucesso de $10^{-7}$ (p), contabilizando o total de vencedores diários. Este procedimento gera um conjunto de dados que reflete o comportamento real esperado para a variável aleatória X.
+
+Segue o código usado:
+
+\begin{lstlisting}
+# Definindo as variaveis
+n <- 10^7
+p <- 10^-7
+lambda <- n * p
+n_simulacoes <- 10000
+
+# Gerando a simulacao
+dados_simulados <- rbinom(n_simulacoes, size = n, prob = p)
+
+contagem <- table(dados_simulados)
+freq_relativa <- as.numeric(contagem) / n_simulacoes
+valores_k <- as.numeric(names(contagem))
+
+# Criando o grafico
+barplot(freq_relativa,
+        names.arg = valores_k,
+        col = "blue",
+        main = "Simulacao Binomial vs. Teoria de Poisson",
+        xlab = "Numero de Vencedores (X)",
+        ylab = "Frequencia Relativa",
+        ylim = c(0, 0.45))
+
+# Adicionando os pontos da Distribuicao de Poisson Teorica para comparar
+pontos_poisson <- dpois(0:max(valores_k), lambda)
+points(0:max(valores_k) + 0.7, pontos_poisson, col = "red", pch = 16, cex = 1.5)
+lines(0:max(valores_k) + 0.7, pontos_poisson, col = "red", lwd = 2)
+
+legend("topright", legend = c("Simulacao (Binomial)", "Teoria (Poisson)"), fill = c("blue", NA), col = c(NA, "red"), pch = c(NA, 16), bty = "n")
+\end{lstlisting}
+
+Na minha simulação o gráfico gerado foi:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens//Graficos/Comparacao 2.4.png}
+\end{figure}
 
 \end{description}
 
@@ -627,7 +696,7 @@ geradores de números aleatórios uniformes são a base dos sistemas de RNG?
 
 \begin{itemize}
 \item[]
-    \text{\large O que é?}
+    \text{\large O que são?}
         \item Nas variáveis aleatórias contínuas são medidos valores imensuráveis que podem assumir qualquer número dentro de um intervalo contínuo, por exemplo: tempo, altura, voltagem, temperatura.
 
     \text{\large Valor médio esperado nas variáveis contínuas $E(X)$}
