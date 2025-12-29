@@ -1,6 +1,6 @@
 # Questão 3.2
 rm(list = ls())
-source("Estatistica\\1-HomeWorks\\HW-2\\códigos\\Questão 3 - item 3.1.R")
+source("Questão 3 - item 3.1.R")
 
 #Gerando 1000 valores da temperatura da CPU utilizando função feita no item anterior.
 simTemperaturaCPU_1 <- GeradorT(500);

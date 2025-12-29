@@ -1,6 +1,6 @@
 # Questões 3.3
 
-#source("Estatistica\\1-HomeWorks\\HW-2\\códigos\\Questão 3 - item 3.2.R")
+source("Questão 3 - item 3.2.R")
 
 #(a) Média amostral.
 
@@ -32,6 +32,25 @@ probTeoSimTemperaturaCPU_2 <- 1 - pnorm(68, mean = 62, sd = 3.5)
 
 
 #(e) Probabilidade empírica e teórica P (60 < T < 65)
+
+  #Empírica:
+
+probEmpSimTemperaturaCPU_1 <- sum(60 < simTemperaturaCPU_1 & simTemperaturaCPU_1 < 65) / length(simTemperaturaCPU_1)
+probEmpSimTemperaturaCPU_2 <- sum(60 < simTemperaturaCPU_2 & simTemperaturaCPU_2 < 65) / length(simTemperaturaCPU_2)
+
+probTeoSimTemperaturaCPU_1 <- pnorm(65, mean = 62, sd = 3.5) -pnorm(60, mean = 62, sd = 3.5)
+probTeoSimTemperaturaCPU_2 <- pnorm(65, mean = 62, sd = 3.5) -pnorm(60, mean = 62, sd = 3.5)
+
+
+
 #(f) Probabilidade teórica P (T > 75. Algum dos conjuntos de dados simulados (1.000
 #amostras) contém valores acima de 75◦C? Caso não, explique por que eventos raros
 #requerem tamanhos de amostra grandes para serem observados.
+
+  #Teorica:
+  probTeoSimTemperaturaCPU <- 1 - pnorm(75, mean = 62, sd = 3.5)
+  any(simTemperaturaCPU_1 > 75)
+  sum(simTemperaturaCPU_1 > 75)
+
+  any(simTemperaturaCPU_2 > 75)
+  sum(simTemperaturaCPU_2 > 75)

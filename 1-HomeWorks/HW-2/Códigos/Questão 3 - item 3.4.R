@@ -1,6 +1,6 @@
 # Questão 3.4
 
-#source("Estatistica\\1-HomeWorks\\HW-2\\códigos\\Questão 3 - item 3.2.R")
+source("Questão 3 - item 3.2.R")
 
 #a) Histrograma das temperaturas simuladas
 
@@ -22,4 +22,19 @@ hist(simTemperaturaCPU_2,
      add = TRUE  
 )
 
+# (b) A função densidade de probabilidade (PDF) normal teórica (média 62 ◦C, desvio
+# padrão 3,5 ºC) sobreposta ao histograma
 
+# Histograma com densidade
+hist(simTemperaturaCPU_1,
+     probability = TRUE,   # transforma em densidade
+     col = "gray",
+     border = "white",
+     main = "Histograma da Temperatura da CPU com PDF Normal Teórica",
+     xlab = "Temperatura (°C)")
+
+# Curva da PDF normal teórica
+curve(dnorm(x, mean = 62, sd = 3.5),
+      col = "red",
+      lwd = 2,
+      add = TRUE)
