@@ -646,7 +646,7 @@ de Box-Muller, a partir de entradas aleatórias uniformes. Especificamente:
     \begin{enumerate}
         \item Gere duas variáveis aleatórias uniformes independentes: $U_1,U_2 \thicksim Unif(0,1)$
         \item Calcule dois valores normais padrão usando as fórmulas de Box-Muller:
-        \[Z_1 = \sqrt{-2ln(U_1)}cos(2\pi U_2), Z_2 = \sqrt{-2ln(U_1}\sin(2\pi U_2)\]
+        \[Z_1 = \sqrt{-2ln(U_1)}cos(2\pi U_2), Z_2 = \sqrt{-2ln(U_1)}\sin(2\pi U_2)\]
         $Z_1$ e $Z_2$ são variáveis aleatórias independentes com distribuição normal padrão.
 Concatene-as para formar um vetor Z de valores normais padrão.
         \item Converta cada valor normal padrão para a distribuição de temperatura da CPU:
@@ -654,8 +654,7 @@ Concatene-as para formar um vetor Z de valores normais padrão.
     \end{enumerate}
 
 \item Use seu gerador de números aleatórios para gerar 1.000 medições de temperatura da
-CPU.
-Gere mais 1.000 valores de temperatura utilizando o gerador de números aleatórios
+CPU. Gere mais 1.000 valores de temperatura utilizando o gerador de números aleatórios
 normal embutido do R, com a mesma média e desvio-padrão.
 
 \item Para ambos os conjuntos de dados simulados, calcule:
@@ -916,14 +915,195 @@ As variáveis resultantes $Z_1$ e $Z_2$ são independentes e seguem distribuiç�
 \begin{description}[leftmargin=*] 
 
 \item[3.1] \textbf{ Resposta}: \\
+Criamos a função $boxMuller$ que transforma 2 variáveis aleatórias uniformes em 2 variáveis com distribuições normais padrão, após isso temos a função $disT$ que aplica a distribuição da temperatura na CPU para uma variável $Z$ normalizada, e por fim temos a função que une as duas anteriores e gera $2k$ de variáveis aleatórias já que as funções anteriores tem 2 entradas e 2 saídas.
 
+\begin{lstlisting}
+# Questao 3.1
+rm(list = ls())
+
+boxMuller <- function(Unif1, Unif2){
+  Z1 <- sqrt(-2*log(Unif1)) * cos(2*pi*Unif2);
+  Z2 <- sqrt(-2*log(Unif1)) * sin(2*pi*Unif2);
+
+  vetorZ <- c(Z1,Z2);
+  
+  return(vetorZ);
+}
+
+disT <- function(Z){
+  return(62+(3.5*Z))
+}
+
+GeradorT <- function(k){
+  vetor_total <- c()
+  
+  for (i in 1:k) {
+    Unif1 <- runif(1,0,1); 
+    Unif2 <-runif(1,0,1); 
+    
+    vetorZ <- boxMuller(Unif1,Unif2);
+    vetorT <- disT(vetorZ);
+    
+    vetor_total <- c(vetor_total, vetorT)
+  }
+  return(vetor_total);
+}
+
+
+\end{lstlisting}
 \item[3.2] \textbf{ Resposta}: \\
+Estamos gerando 1000 valores da temperatura da CPU utilizando função feita no item anterior ($GeradorT$) e armazenando no vetor $simTemperaturaCPU_1$, após isso geramos 1000 valores da temperatura da CPU utilizando função do R com média $\mu = 62 ºC$ e desvio padrão $\sigma = 3.5 ºC$ e armazenando no vetor $simTemperaturaCPU_2$.
+
+
+\begin{lstlisting}[language=R]
+# Questao 3.2
+rm(list = ls())
+
+simTemperaturaCPU_1 <- GeradorT(500);
+
+simTemperaturaCPU_2 <- rnorm(1000,62,3.5);
+
+\end{lstlisting}
+
 
 \item[3.3] \textbf{ Resposta}: \\
+Para a simulação utilizando a nossa função $boxMuller$ será referenciado pelo nome $SimTemperaturaCPU\_ 1$ e para a simulação feita pela função do R utilizaremos  a seguinte referência: $SimTemperaturaCPU\_ 2$.
+
+
+\item Item a) Utilizamos funções do próprio R, $mean$ para calcular a média amostral.
+
+    \begin{lstlisting}
+        mediaSimTemperaturaCPU_1 <- mean(simTemperaturaCPU_1)
+        mediaSimTemperaturaCPU_2 <- mean(simTemperaturaCPU_2)
+    \end{lstlisting}
+
+Resultados obtidos:
+    \begin{lstlisting}
+    > mediaSimTemperaturaCPU_1
+    [1] 61.94655
+    > mediaSimTemperaturaCPU_2
+    [1] 61.98488
+    \end{lstlisting}
+    
+\item Item b) Utilizamos funções do próprio R, $sd$ para calcular o desvio padrão.
+    \begin{lstlisting}
+desvioPadraoSimTemperaturaCPU_1 <- sd(simTemperaturaCPU_1)
+desvioPadraoSimTemperaturaCPU_2<- sd(simTemperaturaCPU_2)
+    \end{lstlisting}
+
+Resultados obtidos:
+    \begin{lstlisting}
+> desvioPadraoSimTemperaturaCPU_1
+[1] 3.620178
+> desvioPadraoSimTemperaturaCPU_2
+[1] 3.541967
+    \end{lstlisting}
+    
+\item Item c) Utilizamos funções do próprio R, $min$ e $max$ para calcular o máximo e mínimo amostral.
+    \begin{lstlisting}
+temperaturaMinSimTemperaturaCPU_1 <- min(simTemperaturaCPU_1)
+temperaturaMinSimTemperaturaCPU_2 <- min(simTemperaturaCPU_2)
+
+temperaturaMaxSimTemperaturaCPU_1 <- max(simTemperaturaCPU_1)
+temperaturaMaxSimTemperaturaCPU_2 <- max(simTemperaturaCPU_2)
+    \end{lstlisting}
+
+Resultados obtidos:
+    \begin{lstlisting}
+> temperaturaMinSimTemperaturaCPU_1
+[1] 50.85293
+> temperaturaMinSimTemperaturaCPU_2
+[1] 48.33085
+> temperaturaMaxSimTemperaturaCPU_1
+[1] 73.13087
+> temperaturaMaxSimTemperaturaCPU_2
+[1] 73.73896
+    \end{lstlisting}
+    
+\item Item d) Utilizamos o R para calcular a probabilidade empírica $P(T>68)$, se dá pelo somatório das temperaturas simuladas que sejam maiores do que $68$ dividida pelo total de amostras $(1000)$.
+    \begin{lstlisting}
+    probEmpSimTemperaturaCPU_1 <- sum(simTemperaturaCPU_1 > 68) / length(simTemperaturaCPU_1)
+probEmpSimTemperaturaCPU_2 <- sum(simTemperaturaCPU_2 > 68) / length(simTemperaturaCPU_2)
+    \end{lstlisting}
+
+Resultados obtidos da probabilidade empírica de $P(T>68)$:
+    \begin{lstlisting}
+> probEmpSimTemperaturaCPU_1
+[1] 0.039
+> probEmpSimTemperaturaCPU_2
+[1] 0.047
+    \end{lstlisting}
+
+\item Item e) Utilizamos funções do próprio R, $mean$ para calcular a média amostral.
+    \begin{lstlisting}
+
+    \end{lstlisting}
+
+Resultados obtidos
+    \begin{lstlisting}
+
+    \end{lstlisting}
+
+\item Item f) Utilizamos funções do próprio R, $mean$ para calcular a média amostral.
+    \begin{lstlisting}
+
+    \end{lstlisting}
+
+Resultados obtidos
+    \begin{lstlisting}
+
+    \end{lstlisting}
+
 
 \item[3.4] \textbf{ Resposta}: \\
+\item Item a)
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Imagens/Graficos/simulaçãoTemp1.png }
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Imagens/Graficos/simulaçãoTemp2.png }
+\end{figure}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{Imagens/Graficos/SimulaçãoConjunta.png}
+\end{figure}
+
+Código para criar os gráficos:
+
+\begin{lstlisting}
+hist(simTemperaturaCPU_1,
+     main = "Histograma das Temperaturas simuladas das CPUs",
+     xlab = "Temperatura em graus",
+     ylab = "Frequência",
+     col = "red",
+     border = "white"
+     )
+
+
+hist(simTemperaturaCPU_2,
+     main = "Histograma da Temperatura simulada da CPU 2",
+     xlab = "Temperatura em graus",
+     ylab = "Frequência",
+     col = "blue",
+     border = "white",
+     add = TRUE  
+)
+
+    \end{lstlisting}
+
+
+\item Item b)
 \item[3.5] \textbf{ Resposta}: \\
+
+
+
+
 
 
 \end{description}

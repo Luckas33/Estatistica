@@ -7,4 +7,4 @@ simTemperaturaCPU_1 <- GeradorT(500);
 
 
 #Gerando 1000 valores da temperatura da CPU utilizando função do R com média μ = 62 ºC e desvio padrão σ = 3, 5 ºC. 
-simTemperaturaCPU_2 <- 
+simTemperaturaCPU_2 <- rnorm(1000,62,3.5)
