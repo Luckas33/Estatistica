@@ -54,3 +54,4 @@ probTeoSimTemperaturaCPU_2 <- pnorm(65, mean = 62, sd = 3.5) -pnorm(60, mean = 6
 
   any(simTemperaturaCPU_2 > 75)
   sum(simTemperaturaCPU_2 > 75)
+  

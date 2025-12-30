@@ -72,7 +72,7 @@ $n$ (número de clientes) afetariam a forma e as probabilidades de X?
 \subsection*{Solução da questão} 			
 
 \subsubsection*{Descrição da atividade}
-......
+A atividade tem por objetivo abordar o conteúdo de variáveis aleatórias discretas, se destrinchando principalmente na distribuição Binomial, cálculo da PMF e CDF e calcular medidas importantes como valor esperado, variância e desvio padrão. O conteúdo também envolve interpretação de probabilidades em cenários reais e análise de como parâmetros como $p$ (probabilidade de sucesso) e $n$ (tamanho da amostra) influenciam a forma da distribuição, tornando possível tomar decisões mais informadas em contextos de demanda e planejamento.
 
 \subsubsection*{Variáveis aleatórias:} 
 
@@ -430,7 +430,7 @@ aproximação.
 \subsection*{Solução da questão} 		
 
 \subsubsection*{Descrição da atividade}
-.....
+Esta atividade tem por objetivo explorar variáveis aleatórias discretas em cenários de probabilidade muito pequena e número de tentativas extremamente grande, permitindo discutir quando a distribuição Binomial pode ser adequadamente aproximada pela distribuição Poisson. O conteúdo envolve justificar matematicamente essa aproximação, comparar valores esperados e variâncias entre o modelo exato e o aproximado e interpretar a distribuição em situações reais, como sorteios online. Além disso, inclui o uso de simulações para avaliar empiricamente a qualidade da aproximação e compreender como eventos raros se comportam em larga escala, reforçando a importância de modelos probabilísticos na tomada de decisões e na análise de sistemas de grande volume.
 
 \subsubsection*{Mais distribuições especiais discretas } 
 
@@ -686,12 +686,11 @@ geradores de números aleatórios uniformes são a base dos sistemas de RNG?
 
 \end{enumerate}
 
-\subsection*{Solução da questão} 					
+\subsection {Solução da questão } 					
 
-\subsubsection*{Descrição da atividade}
-....
-
-\subsubsection*{Variáveis aleatórias contínuas:} 
+\subsubsection{Descrição da atividade}
+A atividade aborda o estudo de variáveis aleatórias contínuas por meio da simulação de uma temperatura de CPU que segue distribuição Normal, utilizando tanto um gerador manual baseado na transformação de Box–Muller quanto o gerador normal embutido no R. O conteúdo envolve compreender como transformar números uniformes em valores normalmente distribuídos, analisar estatisticamente médias, desvios-padrão e probabilidades empíricas e teóricas, além de investigar eventos raros e sua relação com tamanhos amostrais. A atividade também introduz a comparação entre dados simulados e a densidade teórica, explorando conceitos de aderência à distribuição Normal, avaliação de sistemas físicos (como resfriamento da CPU) e o papel fundamental dos números uniformes na construção de geradores de variáveis aleatórias.
+\subsubsection{Variáveis aleatórias contínuas:} 
 
 \begin{itemize}
 \item[]
@@ -769,7 +768,7 @@ geradores de números aleatórios uniformes são a base dos sistemas de RNG?
 \end{itemize}
 
 
-\subsubsection*{Distribuições contínuas importantes:} 
+\subsubsection{Distribuições contínuas importantes:} 
 
 \begin{itemize}
 \item[]
@@ -829,7 +828,7 @@ geradores de números aleatórios uniformes são a base dos sistemas de RNG?
     
 \end{itemize}
 
-\subsubsection*{Padronização e Cálculo de Probabilidades:} 
+\subsubsection{Padronização e Cálculo de Probabilidades:} 
 
 \begin{itemize}
 \item[]
@@ -839,57 +838,59 @@ geradores de números aleatórios uniformes são a base dos sistemas de RNG?
 \text{\large {Padronização Z-score:}}
     \item O método de padronização dos dados de uma função qualquer para após isso utilizar a tabela de integrais se dá pela fórmula:
 
-    \[Z = \frac{x-\mu}{\sigma}\]
+    \[ \label{Z-score}Z = \frac{x-\mu}{\sigma}\]
 
 \text{\large {Tabela de integrais para distribuição Normal Padrão:}}
     \item Após padronizar os dados podemos aplicar qualquer ponto $x$ no Z-score e obter seu valor de $Z$ através da tabela.
 
     
     \begin{table}[H]
-        \centering
-        \begin{tabular}{c|cccccc}
-        \hline
-        $z$ & 0.00 & 0.01 & 0.02 & 0.03 & 0.04 & 0.05 \\
-        \hline
-        0.0 & 0.5000 & 0.5040 & 0.5080 & 0.5120 & 0.5160 & 0.5199 \\
-        0.1 & 0.5398 & 0.5438 & 0.5478 & 0.5517 & 0.5557 & 0.5596 \\
-        0.2 & 0.5793 & 0.5832 & 0.5871 & 0.5910 & 0.5948 & 0.5987 \\
-        0.3 & 0.6179 & 0.6217 & 0.6255 & 0.6293 & 0.6331 & 0.6368 \\
-        0.4 & 0.6554 & 0.6591 & 0.6628 & 0.6664 & 0.6700 & 0.6736 \\
-        0.5 & 0.6915 & 0.6950 & 0.6985 & 0.7019 & 0.7054 & 0.7088 \\
-        0.6 & 0.7257 & 0.7291 & 0.7324 & 0.7357 & 0.7389 & 0.7422 \\
-        0.7 & 0.7580 & 0.7611 & 0.7642 & 0.7673 & 0.7704 & 0.7734 \\
-        0.8 & 0.7881 & 0.7910 & 0.7939 & 0.7967 & 0.7995 & 0.8023 \\
-        0.9 & 0.8159 & 0.8186 & 0.8212 & 0.8238 & 0.8264 & 0.8289 \\
-        1.0 & 0.8413 & 0.8438 & 0.8461 & 0.8485 & 0.8508 & 0.8531 \\
-        1.1 & 0.8643 & 0.8665 & 0.8686 & 0.8708 & 0.8729 & 0.8749 \\
-        1.2 & 0.8849 & 0.8869 & 0.8888 & 0.8907 & 0.8925 & 0.8944 \\
-        1.3 & 0.9032 & 0.9049 & 0.9066 & 0.9082 & 0.9099 & 0.9115 \\
-        1.4 & 0.9192 & 0.9207 & 0.9222 & 0.9236 & 0.9251 & 0.9265 \\
-        1.5 & 0.9332 & 0.9345 & 0.9357 & 0.9370 & 0.9382 & 0.9394 \\
-        1.6 & 0.9452 & 0.9463 & 0.9474 & 0.9484 & 0.9495 & 0.9505 \\
-        1.7 & 0.9554 & 0.9564 & 0.9573 & 0.9582 & 0.9591 & 0.9599 \\
-        1.8 & 0.9641 & 0.9649 & 0.9656 & 0.9664 & 0.9671 & 0.9678 \\
-        1.9 & 0.9713 & 0.9719 & 0.9726 & 0.9732 & 0.9738 & 0.9744 \\
-        2.0 & 0.9772 & 0.9778 & 0.9783 & 0.9788 & 0.9793 & 0.9798 \\
-        2.1 & 0.9821 & 0.9826 & 0.9830 & 0.9834 & 0.9838 & 0.9842 \\
-        2.2 & 0.9861 & 0.9864 & 0.9868 & 0.9871 & 0.9875 & 0.9878 \\
-        2.3 & 0.9893 & 0.9896 & 0.9898 & 0.9901 & 0.9904 & 0.9906 \\
-        2.4 & 0.9918 & 0.9920 & 0.9922 & 0.9925 & 0.9927 & 0.9929 \\
-        2.5 & 0.9938 & 0.9940 & 0.9941 & 0.9943 & 0.9945 & 0.9946 \\
-        2.6 & 0.9953 & 0.9955 & 0.9956 & 0.9957 & 0.9959 & 0.9960 \\
-        2.7 & 0.9965 & 0.9966 & 0.9967 & 0.9968 & 0.9969 & 0.9970 \\
-        2.8 & 0.9974 & 0.9975 & 0.9976 & 0.9977 & 0.9977 & 0.9978 \\
-        2.9 & 0.9981 & 0.9982 & 0.9982 & 0.9983 & 0.9984 & 0.9984 \\
-        3.0 & 0.9987 & 0.9987 & 0.9988 & 0.9988 & 0.9989 & 0.9989 \\
-        \hline
-        \end{tabular}
-        \caption{Trecho da tabela acumulada da Normal Padrão $\Phi(z)$.}
-    \end{table}
+    \centering
+    \label{tab:normal}
+    \begin{tabular}{c|cccccccc}
+    \hline
+    $z$ & 0.00 & 0.01 & 0.02 & 0.03 & 0.04 & 0.05 & 0.06 & 0.07 \\
+    \hline
+    0.0 & 0.5000 & 0.5040 & 0.5080 & 0.5120 & 0.5160 & 0.5199 & 0.5239 & 0.5279 \\
+    0.1 & 0.5398 & 0.5438 & 0.5478 & 0.5517 & 0.5557 & 0.5596 & 0.5636 & 0.5675 \\
+    0.2 & 0.5793 & 0.5832 & 0.5871 & 0.5910 & 0.5948 & 0.5987 & 0.6026 & 0.6064 \\
+    0.3 & 0.6179 & 0.6217 & 0.6255 & 0.6293 & 0.6331 & 0.6368 & 0.6406 & 0.6443 \\
+    0.4 & 0.6554 & 0.6591 & 0.6628 & 0.6664 & 0.6700 & 0.6736 & 0.6772 & 0.6808 \\
+    0.5 & 0.6915 & 0.6950 & 0.6985 & 0.7019 & 0.7054 & 0.7088 & 0.7123 & 0.7157 \\
+    0.6 & 0.7257 & 0.7291 & 0.7324 & 0.7357 & 0.7389 & 0.7422 & 0.7454 & 0.7486 \\
+    0.7 & 0.7580 & 0.7611 & 0.7642 & 0.7673 & 0.7704 & 0.7734 & 0.7764 & 0.7794 \\
+    0.8 & 0.7881 & 0.7910 & 0.7939 & 0.7967 & 0.7995 & 0.8023 & 0.8051 & 0.8078 \\
+    0.9 & 0.8159 & 0.8186 & 0.8212 & 0.8238 & 0.8264 & 0.8289 & 0.8315 & 0.8340 \\[4pt]
+    1.0 & 0.8413 & 0.8438 & 0.8461 & 0.8485 & 0.8508 & 0.8531 & 0.8554 & 0.8577 \\
+    1.1 & 0.8643 & 0.8665 & 0.8686 & 0.8708 & 0.8729 & 0.8749 & 0.8770 & 0.8790 \\
+    1.2 & 0.8849 & 0.8869 & 0.8888 & 0.8907 & 0.8925 & 0.8944 & 0.8962 & 0.8980 \\
+    1.3 & 0.9032 & 0.9049 & 0.9066 & 0.9082 & 0.9099 & 0.9115 & 0.9131 & 0.9147 \\
+    1.4 & 0.9192 & 0.9207 & 0.9222 & 0.9236 & 0.9251 & 0.9265 & 0.9279 & 0.9292 \\
+    1.5 & 0.9332 & 0.9345 & 0.9357 & 0.9370 & 0.9382 & 0.9394 & 0.9406 & 0.9418 \\
+    1.6 & 0.9452 & 0.9463 & 0.9474 & 0.9484 & 0.9495 & 0.9505 & 0.9515 & 0.9525 \\
+    1.7 & 0.9554 & 0.9564 & 0.9573 & 0.9582 & 0.9591 & 0.9599 & 0.9608 & 0.9616 \\
+    1.8 & 0.9641 & 0.9649 & 0.9656 & 0.9664 & 0.9671 & 0.9678 & 0.9686 & 0.9693 \\
+    1.9 & 0.9713 & 0.9719 & 0.9726 & 0.9732 & 0.9738 & 0.9744 & 0.9750 & 0.9756 \\[4pt]
+    2.0 & 0.9772 & 0.9778 & 0.9783 & 0.9788 & 0.9793 & 0.9798 & 0.9803 & 0.9808 \\
+    2.1 & 0.9821 & 0.9826 & 0.9830 & 0.9834 & 0.9838 & 0.9842 & 0.9846 & 0.9850 \\
+    2.2 & 0.9861 & 0.9864 & 0.9868 & 0.9871 & 0.9875 & 0.9878 & 0.9881 & 0.9884 \\
+    2.3 & 0.9893 & 0.9896 & 0.9898 & 0.9901 & 0.9904 & 0.9906 & 0.9909 & 0.9911 \\
+    2.4 & 0.9918 & 0.9920 & 0.9922 & 0.9925 & 0.9927 & 0.9929 & 0.9931 & 0.9932 \\
+    2.5 & 0.9938 & 0.9940 & 0.9941 & 0.9943 & 0.9945 & 0.9946 & 0.9948 & 0.9949 \\
+    2.6 & 0.9953 & 0.9955 & 0.9956 & 0.9957 & 0.9959 & 0.9960 & 0.9961 & 0.9962 \\
+    2.7 & 0.9965 & 0.9966 & 0.9967 & 0.9968 & 0.9969 & 0.9970 & 0.9971 & 0.9972 \\
+    2.8 & 0.9974 & 0.9975 & 0.9976 & 0.9977 & 0.9977 & 0.9978 & 0.9979 & 0.9979 \\
+    2.9 & 0.9981 & 0.9982 & 0.9982 & 0.9983 & 0.9984 & 0.9984 & 0.9985 & 0.9985 \\
+    3.0 & 0.9987 & 0.9987 & 0.9988 & 0.9988 & 0.9989 & 0.9989 & 0.9990 & 0.9990 \\
+    \hline
+    \end{tabular}
+    \caption{Tabela acumulada da Normal Padrão $\Phi(z)$ estendida até $z=3.0$ e coluna 0.07.}
+\end{table}
+
 
 \end{itemize}
 
-\subsubsection*{Geração de Variáveis Contínuas:} 
+\subsubsection{Geração de Variáveis Contínuas:} 
 
 \begin{itemize}
 \item[]
@@ -1022,41 +1023,167 @@ Resultados obtidos:
     
 \item Item d) Utilizamos o R para calcular a probabilidade empírica $P(T>68)$, se dá pelo somatório das temperaturas simuladas que sejam maiores do que $68$ dividida pelo total de amostras $(1000)$.
     \begin{lstlisting}
-    probEmpSimTemperaturaCPU_1 <- sum(simTemperaturaCPU_1 > 68) / length(simTemperaturaCPU_1)
+  #Empirica:
+
+probEmpSimTemperaturaCPU_1 <- sum(simTemperaturaCPU_1 > 68) / length(simTemperaturaCPU_1)
 probEmpSimTemperaturaCPU_2 <- sum(simTemperaturaCPU_2 > 68) / length(simTemperaturaCPU_2)
+
     \end{lstlisting}
 
 Resultados obtidos da probabilidade empírica de $P(T>68)$:
     \begin{lstlisting}
 > probEmpSimTemperaturaCPU_1
-[1] 0.039
+[1] 0.04
 > probEmpSimTemperaturaCPU_2
-[1] 0.047
+[1] 0.053
     \end{lstlisting}
 
-\item Item e) Utilizamos funções do próprio R, $mean$ para calcular a média amostral.
+Diferentemente da empírica na teórica não dependemos de dados coletados, somente da função de distribuição da temperatura, com ela podemos aplicar a padronização Z-score e utilizar a tabela das integrais para descobrir qual a probabilidade de $T>68$.
+
+Função Z-score \ref{Z-score} aplicado à função T:
+\[Z=\frac{68-62}{3.5}\]
+
+Para P(T>68):
+\[P(Z>\frac{68-62}{3.5} = P(Z> 1.7143)\]
+
+Diminuindo 1 da área acumulada até valor 68, para sabermos a probabilidade da área que é maior que o valor 68.
+
+\[1 - \Phi(1.71)\]
+
+Olhando na tabela \ref{tab:normal}:
+\[1 - 0.9564 = 0.0436 \]
+
+Ou seja, a probabilidade teórica de $T>68$ é de $4.36\%$.
+Agora calculamos o mesmo valor usando o R:
+
+\begin{lstlisting}
+    
+  #Teorica:
+probTeoSimTemperaturaCPU_1 <- 1 - pnorm(68, mean = 62, sd = 3.5)
+probTeoSimTemperaturaCPU_2 <- 1 - pnorm(68, mean = 62, sd = 3.5)
+\end{lstlisting}
+
+Resultados obtidos da probabilidade teórica de $P(T>68)$:
     \begin{lstlisting}
-
+> probTeoSimTemperaturaCPU_1
+[1] 0.04323813
+> probTeoSimTemperaturaCPU_2
+[1] 0.04323813
     \end{lstlisting}
 
-Resultados obtidos
+Podemos calcular o erro obtido:
+
+\[Erro=|\frac{0.04323813-0.0436}{0.04323813}| \cdot 100= 0.837\%\]
+
+\item Item e) Utilizamos o R para calcular a probabilidade empírica $P(60<T<65)$, se dá pelo somatório das temperaturas simuladas que estejam entre 60 e 65 dividida pelo total
+de amostras (1000).
+
     \begin{lstlisting}
+  #Empirica:
+probEmpSimTemperaturaCPU_1 <- sum(60 < simTemperaturaCPU_1 & simTemperaturaCPU_1 < 65) / length(simTemperaturaCPU_1)
+probEmpSimTemperaturaCPU_2 <- sum(60 < simTemperaturaCPU_2 & simTemperaturaCPU_2 < 65) / length(simTemperaturaCPU_2)
 
+  #Teorica:
+probTeoSimTemperaturaCPU_1 <- pnorm(65, mean = 62, sd = 3.5) -pnorm(60, mean = 62, sd = 3.5)
+probTeoSimTemperaturaCPU_2 <- pnorm(65, mean = 62, sd = 3.5) -pnorm(60, mean = 62, sd = 3.5)
     \end{lstlisting}
 
-\item Item f) Utilizamos funções do próprio R, $mean$ para calcular a média amostral.
+Resultados obtidos da probabilidade empírica de $P(60<T<65)$:
     \begin{lstlisting}
-
+> probEmpSimTemperaturaCPU_1
+[1] 0.511
+> probEmpSimTemperaturaCPU_2
+[1] 0.495
     \end{lstlisting}
 
-Resultados obtidos
+Agora Para a probabilidade teórica podemos obter utilizando a mesma estratégia de utilizar a padronização Z-score, mas desta vez subtraímos o maior limite de $Z_2 = 65$ pelo menor limite de $Z_1 = 60$.
+
+Calculando $Z_1$ pela fórmula \ref{Z-score}.
+\[Z_1 = \frac{60 - 62}{3.5}\]
+
+\[Z_1 = -0.5714\]
+
+Calculando $Z_2$ pela fórmula \ref{Z-score}.
+\[Z_2 = \frac{65-62}{3.5}\]
+
+\[Z_2 = 0.8571\]
+
+
+Agora podemos calcular $P(60<T<65)$ subtraindo $\Phi (Z_2)$ e $\Phi (Z_1)$:
+
+\[P(60<T<65) =  \Phi (0.8571) - \Phi (-0.5714) \]
+
+como $Z_1$ está negativo usamos uma solução de transforma-lo em positivo, subtraímos o positivo dele por 1.
+
+\[P(60<T<65) =   \Phi (0.8571) - (1 - \Phi(0.5714))\]
+
+Abrindo os parênteses:
+
+\[P(60<T<65) =  \Phi (0.8571) - 1 + \Phi(0.5714) \]
+
+Reordenando e mudando deixando com 2 algarismos significativos:
+
+\[P(60<T<65) =  \Phi (0.85) + \Phi(0.57) - 1  \]
+
+Aplicando os valores da tabela \ref{tab:normal}
+
+\[P(60<T<65) =  0.8023 + 0.7157 - 1  \]
+
+Resultado final:
+\[P(60<T<65) = 0.518\]
+
+Pelos cálculos teóricos a probabilidade de $(60 < T < 65)$ é de aproximadamente $51.8\%$.
+
+
+Resultados obtidos da probabilidade teórica de $P(60<T<65)$ utilizando R:
     \begin{lstlisting}
-
+probTeoSimTemperaturaCPU_1 <- pnorm(65, mean = 62, sd = 3.5) -pnorm(60, mean = 62, sd = 3.5)
+probTeoSimTemperaturaCPU_2 <- pnorm(65, mean = 62, sd = 3.5) -pnorm(60, mean = 62, sd = 3.5)
     \end{lstlisting}
+    
+Resultados obtidos:
+    \begin{lstlisting}
+> probTeoSimTemperaturaCPU_1
+[1] 0.5204624
+> probTeoSimTemperaturaCPU_2
+[1] 0.5204624
+    \end{lstlisting}
+
+Fazendo o cálculo do erro:
+
+\[Erro = |\frac{0.5204624 - 0.518}{0.5204624}|\cdot100 = 0.47\%\]
+
+\item Item f) Utilizamos o R para calcular a probabilidade empírica $P(T>75)$, se dá pelo somatório das temperaturas simuladas que sejam maiores do que 75 dividida pelo total
+de amostras (1000).
+    \begin{lstlisting}
+      probTeo_T_maior_75 <- 1 - pnorm(75, mean = 62, sd = 3.5)
+    \end{lstlisting}
+
+Resultado
+    \begin{lstlisting}
+> probTeoSimTemperaturaCPU
+[1] 0.0001018892
+    \end{lstlisting}
+
+Verificando se existe alguma acima de 75
+
+    \begin{lstlisting}
+>   any(simTemperaturaCPU_1 > 75)
+[1] FALSE
+>   sum(simTemperaturaCPU_1 > 75)
+[1] 0
+>   any(simTemperaturaCPU_2 > 75)
+[1] FALSE
+>   sum(simTemperaturaCPU_2 > 75)
+[1] 0
+    \end{lstlisting}
+
+Note que existe sim a chance de existir alguma acima de 75 mas probabilidade é muito pequena o volume de amostras teria que ser enorme.
 
 
 \item[3.4] \textbf{ Resposta}: \\
-\item Item a)
+\item Item a) Utilizamos a linguagem R para a criação dos histogramas.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\linewidth]{Imagens/Graficos/simulaçãoTemp1.png }
@@ -1099,9 +1226,39 @@ hist(simTemperaturaCPU_2,
 
 
 \item Item b)
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Imagens/Graficos/Compara 4.2.png}
+\end{figure}
+
+Código para criar o gráfico:
+
+\begin{lstlisting}
+# Histograma com densidade
+hist(simTemperaturaCPU_1,
+     probability = TRUE,   # transforma em densidade
+     col = "gray",
+     border = "white",
+     main = "Histograma da Temperatura da CPU com PDF Normal Teorica",
+     xlab = "Temperatura (C)")
+
+# Curva da PDF normal teorica
+curve(dnorm(x, mean = 62, sd = 3.5),
+      col = "red",
+      lwd = 2,
+      add = TRUE)
+    \end{lstlisting}
+
 \item[3.5] \textbf{ Resposta}: \\
 
+As distribuições empíricas das temperaturas da CPU apresentam boa concordância com a curva normal teórica, exibindo formato aproximadamente simétrico e unimodal. As diferenças observadas, principalmente nas caudas, são compatíveis com a variabilidade esperada em amostras finitas.
 
+A média amostral e o desvio-padrão amostral obtidos nas simulações mostram-se próximos dos valores teóricos de 62 °C e 3,5 °C, com pequenas discrepâncias atribuídas ao caráter aleatório do processo de geração. Tais diferenças tendem a diminuir com o aumento do tamanho amostral.
+
+Não foram observadas diferenças relevantes entre os dados gerados pelo RNG manual e pelo gerador embutido do R, sendo ambos compatíveis com a distribuição normal teórica. Entretanto, o RNG do R apresenta maior robustez estatística.
+
+A simulação auxilia na avaliação de estratégias de resfriamento e de escalonamento dinâmico de clock ao permitir a análise probabilística de temperaturas elevadas sob diferentes condições operacionais. Geradores uniformes são a base dos sistemas de RNG, pois possibilitam a geração de distribuições mais complexas por meio de transformações matemáticas adequadas.
 
 
 
