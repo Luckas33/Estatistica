@@ -40,13 +40,13 @@ install.packages(c("dplyr", "readr"))
 
 ```bash
 git clone https://github.com/Luckas33/Estatistica.git
-cd Estatistica/1-HomeWorks/HW-1
+cd Estatistica/1-HomeWorks/HW-2
 ```
 
 **Passo 2: Abra o projeto no RStudio**
 
 - Inicie o RStudio
-- File > Open Project > Selecione a pasta HW-1
+- File > Open Project > Selecione a pasta HW-2
 
 ## 🛠️ Construído com
 
