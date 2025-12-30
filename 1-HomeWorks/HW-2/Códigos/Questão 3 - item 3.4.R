@@ -28,13 +28,19 @@ hist(simTemperaturaCPU_2,
 # Histograma com densidade
 hist(simTemperaturaCPU_1,
      probability = TRUE,   # transforma em densidade
-     col = "gray",
+     col = "red",
      border = "white",
      main = "Histograma da Temperatura da CPU com PDF Normal Teórica",
      xlab = "Temperatura (°C)")
 
+hist(simTemperaturaCPU_2,
+     probability = TRUE,   # transforma em densidade
+     col = "blue",
+     border = "white",
+     add = TRUE)
+
 # Curva da PDF normal teórica
 curve(dnorm(x, mean = 62, sd = 3.5),
-      col = "red",
+      col = "black",
       lwd = 2,
       add = TRUE)
