@@ -1,0 +1,209 @@
+\documentclass[a4paper,11pt]{article}
+
+
+\usepackage{preambulo} 
+ 
+\renewcommand{\lstlistingname}{Listado}
+\lstset{
+    backgroundcolor=\color[rgb]{0.86,0.88,0.93},
+    language=R, keywordstyle=\color[rgb]{0,0,1},
+    basicstyle=\footnotesize \ttfamily,breaklines=true,
+    escapeinside={\%*}{*)}
+}
+\usepackage{footmisc} \renewcommand{\labelitemi}{$\circ$}
+\usepackage{enumitem} \setlist[itemize]{leftmargin=*}
+
+\usepackage{scrextend}
+\deffootnote[1em]{1em}{1em}{\textsuperscript{\thefootnotemark}\,}
+
+%%%%%%%%%% Document starts here %%%%%%%%%%%
+
+\begin{document}
+%%%%%%%%%% Title %%%%%%%%%%%
+\begin{figure}[!h] \includegraphics [scale=0.3] {Imagens/extras/Course-logo} \end{figure}
+
+\begin{spacing}{1.5}
+{\Large\sc \noindent Homework III} \\
+
+{\large\sc \noindent Nome completo: Lucas de Oliveira Sobral}\\
+%{\large\sc \noindent Nome completo:}\\
+{\large\sc \noindent Numero de matricula: 556944}\\
+%{\large\sc \noindent Numero de matricula: }\\
+{\large\sc \noindent Nome completo: Álvaro José Passos de Freitas Neto}\\
+%{\large\sc \noindent Nome completo:}\\
+{\large\sc \noindent Numero de matricula: 567593}
+%{\large\sc \noindent Numero de matricula: }
+\end{spacing}
+
+\vskip1cm
+
+%%%%%%%%%% Content starts here %%%%%%%%%%%
+\section{Questão}  \label{sec:q1}
+Assume-se que o tempo de vida $X$ (medido em anos) de um computador segue uma distribuição exponencial com parâmetro desconhecido $\lambda > 0$. Uma amostra aleatória dos tempos de vida dos computadores é apresentada na Tabela \ref{tab:tabela1}. Os dados são fictícios e são utilizados apenas para fins ilustrativos.
+
+
+\begin{table}[h!]
+\centering
+\label{tab:tabela1}
+    \begin{tabular}{cccccccccc}
+    0.99 & 2.31 & 10.85 & 6.15 & 10.81 & 3.72 & 5.75 & 4.15 & 9.27 & 7.84 \\
+    2.31 & 10.85 & 6.15 & 1.81 & 3.72 & 5.75 & 10.40 & 10.04 & 4.15 & 9.27 \\
+    \end{tabular}
+\caption{Dados utilizados na questão \ref{sec:q1}: Tempo de vida (em anos) dos computadores.}
+\end{table}
+
+
+
+\begin{enumerate}[leftmargin=*]
+\item Escreva a função densidade de probabilidade da distribuição exponencial com parâmetro $\lambda$.
+
+\item Dada uma amostra aleatória $X1, X2, . . . , Xn$:
+\begin{enumerate}
+    \item Escreva a função de verossimilhança $L(\lambda)$.
+    \item Derive a correspondente função log-verossimilhança $\ell(\lambda)$.
+    \item Determine o estimador de máxima verossimilhança (MLE, do inglês) $\hat{\lambda}$ de $\lambda$.
+\end{enumerate}
+
+
+
+\item Utilizando os dados fornecidos na Tabela \ref{sec:q1}, calcule o valor numérico do MLE $\hat{\lambda}$.
+
+\item Construa o gráfico da função log-verossimilhança $\ell(\lambda)$ com base nos dados observados,
+considerando um intervalo adequado de valores para $\lambda$. Indique claramente no gráfico
+o valor do estimador de máxima verossimilhança $\hat{\lambda}$. 
+    
+\item Utilizando o parâmetro estimado $\hat{\lambda}$:
+    \begin{enumerate}
+        \item Calcule o tempo médio de vida estimado de um computador.
+        \item Calcule a probabilidade de que um computador funcione por mais de 5 anos.
+    \end{enumerate}
+
+\item A distribuição exponencial possui a $\textit{propriedade da falta de memória}$, o que significa que a probabilidade de falha no futuro não depende do tempo que o computador já esteve em funcionamento.
+    \begin{enumerate}
+        \item Explique essa propriedade com suas próprias palavras.
+        \item Discuta brevemente se essa suposição parece razoável para modelar o tempo de vida de computadores.
+    \end{enumerate}
+
+\end{enumerate} 
+
+
+\subsection*{Solução da questão} 			
+
+\subsubsection*{Descrição da atividade}
+.....
+
+\subsubsection*{.......:} 
+
+\begin{itemize}
+\item[]
+
+\text{\large O que é uma variável aleatória (\(X\))?}
+    \item É uma função que atribui um valor numérico a cada resultado de um experimento aleatório $X(s)$.
+
+\begin{comment}
+\begin{figure}[H] 
+    \centering 
+\includegraphics[width=0.4\textwidth]{Imagens/Graficos/funçãoX.png} 
+\end{figure}
+
+\end{comment}
+    
+\end{itemize}
+
+\subsubsection*{Respostas dos itens da questão 1:} 
+
+\begin{description}
+
+\item [1.1] \textbf{ Resposta}: \\
+.....
+
+\item [1.2] \textbf{ Resposta}: \\
+....
+
+\item [1.3] \textbf{ Resposta}: \\
+....
+
+\item [1.4] \textbf{ Resposta}: \\
+....
+
+\item [1.5] \textbf{ Resposta}: \\
+....
+
+\item [1.6] \textbf{ Resposta}: \\
+....
+
+\end{description}
+
+\section{Questão} \label{sec:q2}
+O conjunto de dados de penguins, na biblioteca palmerpenguins3 do R, contém medidaspara as três espécies de pinguins (figura \ref{img:pinguins}): ilha no arquipélago Palmer na Antártica,tamanho (comprimento da nadadeira, massa corporal, dimensões do bico) e sexo. Importeo conjunto de dados4 e familiarize com ele.
+
+\begin{figure}[H] 
+    \centering 
+\includegraphics[width=0.9\textwidth]{Imagens/Graficos/pinguins.png} 
+\caption{ Espécies e características dos pinguins na questão \ref{sec:q2}}
+    \label{img:pinguins}
+\end{figure}
+
+
+\begin{enumerate}[leftmargin=*]
+\item Considere a massa corporal \texttt{body\_mass}
+ em gramas como variável independente, x, e o comprimento do bico \texttt{bill\_length}em milímetros como variável dependente y. Construa um gráfico de dispersão entre x e y. Com base no gráfico, comente se uma
+relação linear entre as variáveis parece plausível.
+
+\item \label{it:item 2} Defina os parâmetros da reta de regressão com o método dos mínimos quadrados e verifique os resultados obtidos com o comando $lm()$ no R. Adicione a reta de regressão no gráfico de dispersão.
+
+\item Calcule os resíduos da regressão e apresente uma representação gráfica dos mesmos. Em seguida, calcule a raiz do erro quadrático médio (RMSE, do inglês) e o coeficiente de determinação $R^2$. Comente sobre os resultados obtidos.
+
+\item O conjunto de dados não apresenta outliers evidentes. Modifique esse conjunto introduzindo artificialmente uma observação extrema, seja por meio de um aumento ou
+de uma redução substancial no valor da massa corporal ou do comprimento do bico
+de um dos pinguins. Em seguida, ajuste um modelo de regressão linear utilizando
+o conjunto de dados modificado. Compare os coeficientes estimados da regressão, as
+retas ajustadas e os valores do $RMSE$ e do $R^2$
+com aqueles obtidos no item \ref{it:item 2}. Por
+fim, discuta a influência da observação artificialmente introduzida sobre os resultados
+da regressão
+
+\end{enumerate}
+
+\subsection*{Solução da questão} 		
+
+\subsubsection*{Descrição da atividade}
+......
+
+\subsubsection*{Mais distribuições especiais discretas } 
+
+\begin{itemize}
+\item[]
+
+\text{\large ......}
+    \item .......
+
+    
+\end{itemize}
+
+
+\subsubsection*{Respostas dos itens da questão 2:} 
+
+\begin{description}[leftmargin=*]
+
+\item [2.1] \textbf{ Resposta}: \\
+.....
+
+\item [2.2] \textbf{ Resposta}: \\
+....
+
+\item [2.3] \textbf{ Resposta}: \\
+....
+
+\item [2.4] \textbf{ Resposta}: \\
+....
+
+\end{description}
+
+\newpage
+\begin{appendices}
+
+
+\end{appendices}
+
+\end{document}
