@@ -87,50 +87,385 @@ o valor do estimador de máxima verossimilhança $\hat{\lambda}$.
 \end{enumerate} 
 
 
-\subsection*{Solução da questão} 			
+\subsection*{\Large{Solução da questão}} 			
 
 \subsubsection*{Descrição da atividade}
-.....
+A atividade aborda variáveis aleatórias contínuas, especificamente a distribuição Exponencial, para modelar o tempo de vida de computadores baseando-se em dados amostrais. O foco reside na aplicação do Estimador de Máxima Verossimilhança (MLE) para determinar a taxa de falha ($\lambda$) e na análise de medidas como tempo médio e probabilidade de sobrevivência. O estudo também discute a propriedade de falta de memória, conectando a teoria de inferência estatística à análise prática de confiabilidade de sistemas.
 
-\subsubsection*{.......:} 
+\subsubsection*{\Large{Inferência estatística}} 
 
 \begin{itemize}
 \item[]
 
-\text{\large O que é uma variável aleatória (\(X\))?}
-    \item É uma função que atribui um valor numérico a cada resultado de um experimento aleatório $X(s)$.
+\text{\Large O que é Inferência estatística?}
+    \item É o estudo da estatística que se baseia em dados de uma amostra populacional e fórmulas matemáticas, para conseguirmos afirmar ou não uma hipótese, propriedade ou um intervalo de confiança sobre uma população.
+    \item Ela se divide em três tópicos principais: 
+    \begin{enumerate} 
+    \item Estimativa Pontual: Estimar o valor exato de um parâmetro desconhecido (como a média da população). 
+    \item Intervalos de Confiança: Construir intervalos onde é provável que o parâmetro real esteja contido. \item Teste de Hipóteses: Confirmar ou rejeitar uma afirmação sobre a população com base na evidência empírica. 
+    \end{enumerate}
 
-\begin{comment}
-\begin{figure}[H] 
-    \centering 
-\includegraphics[width=0.4\textwidth]{Imagens/Graficos/funçãoX.png} 
-\end{figure}
+\text{\Large Estimativa e Estimador}
+    \item Antes de entrarmos nos principais tópicos da inferência estatística precisamos entender o que é uma estimativa e um estimador
+    \item {\large Estimativa}: É um valor numérico único obtido de uma amostra específica. Por exemplo, a média aritmética calculada para uma amostra de notas de alunos
+    \item {\large Estimador}: É a regra ou ferramenta estatística (uma função matemática) usada para obter a estimativa.
 
-\end{comment}
+\text{\Large Propriedades dos Estimadores}
+    \begin{itemize}
+    \item Para confiar em um estimador, precisamos avaliar suas propriedades. As duas principais são:
+    
+    \item \textbf{Viés (Bias)}: Mede a tendência do estimador, é a diferença entre a média do estimador ($E[\hat{\theta}]$) e o valor verdadeiro ($\theta$). Dizemos que um estimador é \textit{não viesado} (unbiased) se, em média, ele acerta o valor real do parâmetro.
+    
+    $$ B(\hat{\theta}) = E[\hat{\theta}] - \theta $$
+
+    \begin{itemize}
+        \item $E[X]$ (Esperança): É o \textbf{Valor Esperado}. Representa a média teórica do estimador se repetíssemos a amostragem infinitas vezes.
+        \item $\theta$ (Theta): É o \textbf{Parâmetro Real} da população (o valor desconhecido que queremos descobrir, como a média $\mu$).
+        \item $\hat{\theta}$ (Theta-chapéu): É o \textbf{Estimador}, a fórmula que usamos para tentar acertar o alvo.
+    \end{itemize}
+    
+    \item \textbf{Erro Quadrático Médio (MSE)}: Combina a variância e o viés para medir a qualidade geral do estimador. Quanto menor o MSE, melhor, pois terá uma baixa variância e um baixo viés.
+    
+    $$ MSE(\hat{\theta}) = Var(\hat{\theta}) + (B(\hat{\theta}))^2 $$
+    \end{itemize}
+
+    \begin{itemize}
+        \item $Var(\hat{\theta})$ (Esperança): Representa a precisão ou estabilidade do estimador, ou seja, é o quanto as estimativas variam umas das outras se repetirmos o experimento várias vezes.Uma variância alta significa que, a cada amostra coletada, você obtém resultados muito diferentes, o que torna o estimador instável
+        \item $(B(\hat{\theta}))^2$ (Viés ao Quadrado): Representa a Exatidão ou o erro sistemático. Ele é elevado ao quadrado para que desvios negativos e positivos não se anulem e para ficar na mesma escala da variância, um viés alto significa que o método está "viciado", errando o alvo sistematicamente para um lado.
+    \end{itemize}
+
+\text{\Large Estimador de Máxima Verossimilhança (MLE)}
+    \begin{itemize}
+    \item É um método poderoso para encontrar o estimador mais provável para um determinado conjunto de dados.
+    \item A ideia é encontrar o valor do parâmetro $\theta$ que maximiza a probabilidade (verossimilhança) de termos observado a amostra que coletamos.
+    \item Matematicamente, buscamos maximizar a função de verossimilhança $L(\theta)$.
+    \end{itemize}
+
+\text{\Large Construindo o MLE: Passo a Passo}
+    \begin{itemize}
+    \item Para encontrar o Estimador de Máxima Verossimilhança na prática, seguimos um roteiro matemático para transformar a teoria em uma equação solúvel:
+    
+    \item \textbf{1. Função de Verossimilhança ($L(\theta)$)}: 
+        \begin{itemize}
+        \item Assumindo que os dados da amostra são independentes e identicamente distribuídos (i.i.d.), a probabilidade conjunta é o produto das densidades individuais.
+        $$ L(\theta) = \prod_{i=1}^{n} f(x_i; \theta) $$
+        \end{itemize}
+
+    \item \textbf{2. Log-Verossimilhança ($l(\theta)$)}: 
+        \begin{itemize}
+        \item Maximizar um produto é matematicamente difícil (a derivada fica complexa). Por isso, aplicamos o logaritmo natural ($\ln$). Como o log é uma função crescente, o valor que maximiza o log também maximiza a função original, mas transformando produtos em somas.
+        $$ l(\theta) = \ln(L(\theta)) = \sum_{i=1}^{n} \ln(f(x_i; \theta)) $$
+        \end{itemize}
+
+    \item \textbf{3. Maximização (Derivada)}: 
+        \begin{itemize}
+        \item Para achar o ponto de máximo, derivamos a função em relação ao parâmetro $\theta$ e igualamos a zero (ponto crítico).
+        $$ \frac{d}{d\theta} l(\theta) = 0 $$
+        \item A solução dessa equação nos dá o estimador $\hat{\theta}_{MLE}$.
+        \end{itemize}
+    \end{itemize}
+
+
+    \text{\Large Teoremas Limite}
+    \begin{itemize}
+    \item Como garantimos que nossa estimativa melhora à medida que coletamos mais dados? Os teoremas limite nos dão essa segurança teórica.
+    
+    \item \textbf{Lei dos Grandes Números (LLN)}:
+        \begin{itemize}
+        \item Afirma que, à medida que o tamanho da amostra ($n$) aumenta (tende ao infinito), a média amostral ($\overline{X}_n$) converge para a média verdadeira da população ($\mu$).
+        \item Isso justifica o uso da média amostral como estimador da média populacional.
+        \end{itemize}
+
+    \item \textbf{Teorema Central do Limite (CLT)}:
+        \begin{itemize}
+        \item É um dos teoremas mais importantes da estatística. Ele afirma que, para amostras grandes ($n$ grande), a distribuição da média amostral se aproxima de uma \textbf{Distribuição Normal}, independentemente da distribuição original dos dados.
+        \item Isso é fundamental para construir Intervalos de Confiança e realizar Testes de Hipóteses, pois nos permite usar as propriedades conhecidas da curva Normal.
+        $$ \frac{\overline{X}_n - \mu}{\sigma / \sqrt{n}} \approx N(0, 1) $$
+        \end{itemize}
+    \end{itemize}
+
+
+\end{itemize}
+
+\subsubsection*{\Large{Distribuição Exponencial}} 
+
+\begin{itemize}
+\item[]
+    \begin{itemize}
+    \item É uma distribuição contínua utilizada principalmente para modelar o \textbf{tempo} até a ocorrência de um evento de interesse (ex: tempo de vida de um componente, tempo de espera numa fila).
+    \item \textbf{Parâmetro}: $\lambda$ (Lambda) $> 0$. Representa a \textbf{taxa} de ocorrência do evento (frequência).
+    \item \textbf{Propriedade Importante}: É a única distribuição contínua com "perda de memória". Isso significa que a probabilidade de falha no futuro não depende de quanto tempo o componente já durou.
+    \end{itemize}
+
+\text{\large Fórmulas Fundamentais}
+    \begin{itemize}
+    \item \textbf{Função Densidade de Probabilidade (PDF)}:
+    Descreve a probabilidade relativa (altura da curva) em cada ponto do tempo.
+    $$ f(x; \lambda) = \begin{cases} \lambda e^{-\lambda x} & \text{se } x \ge 0 \\ 0 & \text{se } x < 0 \end{cases} $$
+    
+    \item \textbf{Função de Distribuição Acumulada (CDF)}:
+    Calcula a probabilidade do evento ocorrer \textbf{antes ou em} um tempo $x$.
+    $$ F(x) = P(X \le x) = 1 - e^{-\lambda x} $$
+    
+    \item \textbf{Esperança (Média) e Variância}:
+    Note que a média é o inverso da taxa.
+    $$ E[X] = \frac{1}{\lambda} \quad \text{e} \quad Var(X) = \frac{1}{\lambda^2} $$
+    \end{itemize}
+
     
 \end{itemize}
+
+
 
 \subsubsection*{Respostas dos itens da questão 1:} 
 
 \begin{description}
 
 \item [1.1] \textbf{ Resposta}: \\
-.....
+A função densidade de probabilidade (PDF) da distribuição exponencial pode ser deduzida a partir do Processo de Poisson.
+
+Seja $N$ o número de falhas ocorridas em um intervalo de tempo $x$. Sabendo que $N$ segue uma distribuição de Poisson com média $\lambda x$ (onde $\lambda$ é a taxa de falha por unidade de tempo), a probabilidade de ocorrerem $k$ falhas é:
+
+\[ P(N=k) = \frac{e^{-\lambda x} \cdot (\lambda x)^k}{k!} \]
+
+Consideramos a variável aleatória $X$ como o tempo até a primeira falha.
+\begin{enumerate}
+    \item \textbf{Probabilidade de nenhuma falha:} Dizer que o tempo até a falha é maior que $x$ ($X > x$) é equivalente a dizer que ocorreram zero falhas ($k=0$) no intervalo $x$:
+    \[ P(X > x) = P(N=0) = \frac{e^{-\lambda x} \cdot (\lambda x)^0}{0!} = e^{-\lambda x} \]
+    
+    \item \textbf{Função Acumulada (CDF):} A probabilidade da falha ocorrer \textit{antes ou em} $x$ é o complemento da equação acima:
+    \[ F(x) = P(X \le x) = 1 - P(X > x) = 1 - e^{-\lambda x} \]
+    
+    \item \textbf{Função Densidade (PDF):} Para encontrar a densidade $f(x)$, derivamos a CDF em relação a $x$:
+    \[ f(x) = \frac{d}{dx} F(x) = \frac{d}{dx} (1 - e^{-\lambda x}) \]
+    \[ f(x) = 0 - (-\lambda)e^{-\lambda x} \]
+    \[ \mathbf{f(x) = \lambda e^{-\lambda x}} \quad \text{para } x \ge 0 \]
+\end{enumerate}
+
+    Ou seja, a partir da distribuição discreta de Poisson, chegamos à função densidade de probabilidade (PDF) da exponencial:
+
+    \[ f(x) = \lambda e^{-\lambda x} \quad \text{para } x \ge 0 \]
+
+
 
 \item [1.2] \textbf{ Resposta}: \\
-....
+\textbf{a)}
+Considerando que as observações $X_1, X_2, \dots, X_n$ são independentes e identicamente distribuídas (i.i.d.) seguindo uma distribuição Exponencial com parâmetro $\lambda > 0$, a função de densidade de probabilidade (FDP) de cada observação é dada por:
+
+\[ f(x_i; \lambda) = \lambda e^{-\lambda x_i}, \quad x_i \ge 0 \]
+
+A função de verossimilhança $L(\lambda)$ é construída a partir do produtório das densidades individuais:
+
+\begin{equation}
+    L(\lambda) = \prod_{i=1}^{n} f(x_i; \lambda)
+\end{equation}
+
+Substituindo a FDP na expressão:
+
+\begin{equation}
+    L(\lambda) = \prod_{i=1}^{n} (\lambda e^{-\lambda x_i})
+\end{equation}
+
+Utilizando as propriedades de produtório, onde o produto de $\lambda$ por $n$ vezes resulta em $\lambda^n$ e o produto das exponenciais resulta na exponencial da soma dos expoentes:
+
+\begin{equation}
+    L(\lambda) = \lambda^n e^{-\lambda \sum_{i=1}^{n} x_i}
+\end{equation}
+
+Portanto, a função de verossimilhança simplificada é:
+\[ L(\lambda) = \lambda^n e^{-\lambda \sum_{i=1}^{n} x_i} \]
+
+\vspace{5mm}
+
+\textbf{b)} A função log-verossimilhança, denotada por $\ell(\lambda)$ ou $\ln L(\lambda)$, é obtida aplicando o logaritmo natural à função de verossimilhança encontrada anteriormente:
+
+\begin{equation}
+    \ell(\lambda) = \ln [ L(\lambda) ] = \ln [ \lambda^n e^{-\lambda \sum_{i=1}^{n} x_i} ]
+\end{equation}
+
+Utilizando as propriedades de logaritmo, especificamente $\ln(a \cdot b) = \ln(a) + \ln(b)$ e $\ln(a^b) = b \ln(a)$:
+
+\begin{equation}
+    \ell(\lambda) = \ln(\lambda^n) + \ln( e^{-\lambda \sum_{i=1}^{n} x_i})
+\end{equation}
+
+Como o logaritmo natural e a função exponencial são operações inversas ($\ln(e^u) = u$), a expressão simplifica para:
+
+\begin{equation}
+    \ell(\lambda) = n \ln(\lambda) - \lambda \sum_{i=1}^{n} x_i
+\end{equation}
+
+Esta é a função log-verossimilhança, que é linear em relação ao somatório das observações e facilita a obtenção do Estimador de Máxima Verossimilhança (EMV).
+
+\vspace{5mm}
+
+\textbf{c)} Para encontrar o estimador de máxima verossimilhança (EMV), devemos maximizar a função log-verossimilhança $\ell(\lambda)$ em relação a $\lambda$. Para isso, calculamos a primeira derivada e a igualamos a zero:
+
+\begin{equation}
+    \frac{d}{d\lambda} \ell(\lambda) = 0
+\end{equation}
+
+Utilizando a função encontrada no item anterior, $\ell(\lambda) = n \ln(\lambda) - \lambda \sum_{i=1}^{n} x_i$, temos:
+
+\begin{equation}
+    \frac{d}{d\lambda} [ n \ln(\lambda) - \lambda \sum_{i=1}^{n} x_i] = 0
+\end{equation}
+
+Calculando a derivada termo a termo:
+
+\begin{equation}
+    \frac{n}{\lambda} - \sum_{i=1}^{n} x_i = 0
+\end{equation}
+
+Isolando $\lambda$ para encontrar o estimador $\hat{\lambda}$:
+
+\begin{equation}
+    \frac{n}{\lambda} = \sum_{i=1}^{n} x_i \implies \hat{\lambda} = \frac{n}{\sum_{i=1}^{n} x_i}
+\end{equation}
+
+Sabendo que a média amostral é definida por $\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$, podemos expressar o estimador como:
+
+\begin{equation}
+    \hat{\lambda} = \frac{1}{\bar{x}}
+\end{equation}
+
+Para garantir que este ponto é um máximo, verificamos a segunda derivada:
+
+\begin{equation}
+    \frac{d^2}{d\lambda^2} \ell(\lambda) = -\frac{n}{\lambda^2} < 0
+\end{equation}
+
+Como a segunda derivada é negativa, $\hat{\lambda}$ é, de fato, o estimador de máxima verossimilhança.
 
 \item [1.3] \textbf{ Resposta}: \\
-....
+Para calcular o valor numérico do Estimador de Máxima Verossimilhança ($\hat{\lambda}$), utilizamos a fórmula deduzida no item anterior:
+
+\[\hat{\lambda} = \frac{1}{\bar{x}} \]
+
+\[\hat{\lambda} = \frac{1}{ \frac{\sum_{i=1}^{n} x_i}{n} } \]
+
+Multiplica o de cima pelo inverso do primeiro
+
+\[\hat{\lambda} = 1 \cdot \frac{n}{  \sum_{i=1}^{n} x_i} \]
+
+\[ \hat{\lambda} = \frac{n}{\sum_{i=1}^{n} x_i} \]
+
+\textbf{Passo 1: Identificar o tamanho da amostra ($n$)} \\
+Contando os dados apresentados na Tabela 1, temos um total de:
+\[ n = 20 \text{ computadores} \]
+
+\textbf{Passo 2: Calcular a soma dos tempos de vida ($\sum x_i$)} \\
+Somamos todos os valores apresentados na tabela:
+
+\begin{align*}
+\sum_{i=1}^{20} x_i &= 0.99 + 2.31 + 10.85 + 6.15 + 10.81 + 3.72 + 5.75 + 4.15 + 9.27 + 7.84 \\
+&\quad + 2.31 + 10.85 + 6.15 + 1.81 + 3.72 + 5.75 + 10.40 + 10.04 + 4.15 + 9.27 \\
+&= 126.29
+\end{align*}
+
+\textbf{Passo 3: Calcular o estimador $\hat{\lambda}$} \\
+Substituindo os valores na fórmula:
+
+\[ \hat{\lambda} = \frac{20}{126.29} \]
+
+\[ \hat{\lambda} \approx 0.158365... \]
+
+Arredondando para 4 casas decimais:
+
+\[ \mathbf{\hat{\lambda} \approx 0.1584} \]
 
 \item [1.4] \textbf{ Resposta}: \\
-....
+\textbf{Gráfico da função log-verossimilhança $\ell(\lambda)$:}
+
+Com base nos dados da Tabela 1, temos $n = 20$ e $\sum x_i = 126.29$. A função a ser plotada é $\ell(\lambda) = 20 \ln(\lambda) - 126.29\lambda$. O estimador de máxima verossimilhança é $\hat{\lambda} \approx 0,1584$.
+
+\begin{lstlisting}
+# Dados da Tabela 1
+dados <- c(0.99, 2.31, 10.85, 6.15, 10.81, 3.72, 5.75, 4.15, 9.27, 7.84, 2.31, 10.85, 6.15, 1.81, 3.72, 5.75, 10.40, 10.04, 4.15, 9.27)
+
+n <- length(dados)
+soma_n <- sum(dados)
+
+# Calculo do Estimador de Maxima Verossimilhanca (MLE)
+lambda_hat <- n / soma_n
+
+# Definicao da funcao log-verossimilhanca
+log_verossimilhanca <- function(l) {
+  return(n * log(l) - l * soma_n)
+}
+
+# Criacao do grafico
+curve(log_verossimilhanca, from = 0.01, to = 0.5, 
+      xlab = expression(lambda), ylab = expression(l(lambda)),
+      main = "Funcao Log-Verossimilhanca", col = "blue", lwd = 2)
+
+# Adicionando o ponto do MLE no grafico
+points(lambda_hat, log_verossimilhanca(lambda_hat), col = "red", pch = 19)
+abline(v = lambda_hat, col = "red", lty = 2)
+
+# Legenda com o valor calculado
+text(lambda_hat + 0.08, log_verossimilhanca(lambda_hat), 
+     labels = paste("MLE =", round(lambda_hat, 4)), col = "red")
+\end{lstlisting}
+
+Variaveis calculadas pelo R
+
+\begin{lstlisting}
+> n
+[1] 20
+> soma_n
+[1] 126.29
+> lambda_hat
+[1] 0.1583657
+\end{lstlisting}
+
+Gráfico gerado:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Imagens/Graficos/Funcao Log-Verossimilhanca.png}
+\end{figure}
+
+O gráfico da função log-verossimilhança apresenta uma curva unimodal com concavidade voltada para baixo, confirmando a existência de um ponto de máximo global único. O pico da curva em $\hat{\lambda} \approx 0,1584$ indica o valor do parâmetro que maximiza a probabilidade de ocorrência dos dados observados, representando a taxa de falha mais provável para o modelo exponencial estudado. Valores distantes deste ponto resultam em uma redução significativa da verossimilhança, o que demonstra a convergência do estimador para os dados da amostra.
 
 \item [1.5] \textbf{ Resposta}: \\
-....
+\textbf{a)}
+Sabemos que a esperança (média) de uma variável aleatória com distribuição Exponencial é o inverso do parâmetro $\lambda$. Portanto, o tempo médio de vida estimado é dado por:
+
+\[ E[X] = \frac{1}{\hat{\lambda}} \]
+
+Como calculamos anteriormente que $\hat{\lambda} \approx 0.1584$ (ou mais precisamente $\hat{\lambda} = \frac{1}{\bar{x}}$), temos:
+
+\[ \text{Tempo Médio} = \frac{1}{0.1584} \approx 6.31 \text{ anos} \]
+
+Alternativamente, pela propriedade do Estimador de Máxima Verossimilhança, o tempo médio estimado é exatamente a média aritmética dos dados observados:
+
+\[ \bar{x} = \frac{126.29}{20} = 6.3145 \text{ anos} \]
+
+\textbf{b)}
+Sabemos que a Função de Distribuição Acumulada (CDF) é $P(X \le x) = 1 - e^{-\lambda x}$. Portanto, a probabilidade complementar (sobrevivência) é dada por:
+
+\[ P(X > x) = 1 - P(X \le x) = e^{-\lambda x} \]
+
+Utilizando o parâmetro estimado $\hat{\lambda} \approx 0.1584$ e $x = 5$ anos:
+
+\[ P(X > 5) = e^{-0.1584 \cdot 5} \]
+
+Calculando o expoente:
+\[ -0.1584 \cdot 5 = -0.792 \]
+
+Logo:
+\[ P(X > 5) = e^{-0.792} \approx 0.4529 \]
+
+Existe uma probabilidade de aproximadamente \textbf{45,29\%} de que um computador selecionado aleatoriamente continue funcionando após 5 anos de uso.
 
 \item [1.6] \textbf{ Resposta}: \\
-....
+\textbf{a)} A propriedade da falta de memória (ou \textit{memoryless property}) afirma que a idade de um componente não influencia a sua probabilidade de falhar no futuro. No contexto dos computadores analisados, isso significa que a probabilidade de um computador durar mais 5 anos é a mesma, independentemente de ele ser novo ou de já estar em uso há 10 anos. 
+
+Em termos práticos, sob o modelo exponencial, o computador não sofre um "desgaste" acumulado que aumente sua chance de quebrar; ele falha devido a eventos aleatórios externos que ocorrem com uma taxa constante $\lambda$. Matematicamente, essa propriedade é expressa por $P(X > s + t \mid X > s) = P(X > t)$, indicando que, dado que o computador sobreviveu ao tempo $s$, a probabilidade de sobreviver por um tempo adicional $t$ depende apenas da duração do intervalo $t$, e não do tempo já decorrido $s$.
+
+\vspace{5mm}
+
+\textbf{b)} A suposição de que o tempo de vida de computadores segue uma distribuição exponencial (e, portanto, possui falta de memória) é, em geral, \textbf{pouco razoável} para modelos de longa duração. Na prática, componentes eletrônicos e mecânicos sofrem fadiga e desgaste físico ao longo do tempo. Espera-se que um computador com 10 anos de uso tenha uma probabilidade maior de falhar no dia seguinte do que um computador novo, devido à degradação de capacitores, oxidação e acúmulo de poeira.
 
 \end{description}
 
@@ -165,7 +500,7 @@ da regressão
 
 \end{enumerate}
 
-\subsection*{Solução da questão} 		
+\subsection*{\Large{Solução da questão}} 	
 
 \subsubsection*{Descrição da atividade}
 ......
@@ -190,7 +525,72 @@ da regressão
 .....
 
 \item [2.2] \textbf{ Resposta}: \\
-....
+
+Definição dos parâmetros da reta de regressão e verificação:
+
+O objetivo é estimar os parâmetros da reta de regressão linear simples, definida por $Y_i = \beta_0 + \beta_1 X_i + \varepsilon_i$, onde $Y$ representa a massa corporal (\textit{body mass}) e $X$ o comprimento da nadadeira (\textit{flipper length}).
+
+Pelo Método dos Mínimos Quadrados Ordinários (MQO), os estimadores são calculados por:
+\begin{equation}
+    \hat{\beta}_1 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^{n} (x_i - \bar{x})^2} \quad \text{e} \quad \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}
+\end{equation}
+
+A implementação abaixo utiliza o conjunto de dados \texttt{penguins} (após a remoção de valores ausentes) para comparar o cálculo manual com a função \texttt{lm()} do R.
+
+\begin{lstlisting}
+# Instalacao e Carregamento dos dados
+if(!require(palmerpenguins)) install.packages("palmerpenguins")
+library(palmerpenguins)
+
+# Limpeza: removendo valores faltantes (NAs)
+penguins_data <- na.omit(penguins)
+
+# Definicao das variaveis
+# X = Comprimento da nadadeira (independente)
+# Y = Massa corporal (dependente)
+x <- as.numeric(penguins_data$flipper_length_mm)
+y <- as.numeric(penguins_data$body_mass_g)
+
+# Calculo Manual dos Parametros (Minimos Quadrados)
+n <- length(x)
+beta1_manual <- (n * sum(x*y) - sum(x) * sum(y)) / (n*sum(x^2) - (sum(x))^2)
+beta0_manual <- mean(y) - beta1_manual * mean(x)
+
+# Verificacao com o comando lm()
+modelo <- lm(body_mass_g ~ flipper_length_mm, data = penguins_data)
+
+# --- RESULTADOS NO CONSOLE ---
+cat("--- RESULTADOS DOS MINIMOS QUADRADOS ---\n")
+cat("Manual: Intercepto (Beta0) =", beta0_manual, "\n")
+cat("Manual: Inclinacao (Beta1) =", beta1_manual, "\n\n")
+
+cat("--- RESULTADOS COMANDO lm() ---\n")
+print(coef(modelo))
+cat("----------------------------------------\n")
+
+# Grafico de Dispersao e Reta de Regressao
+plot(x, y, 
+     main = "Regressao: Massa Corporal vs Comprimento da Nadadeira",
+     xlab = "Comprimento da Nadadeira (mm)", 
+     ylab = "Massa Corporal (g)",
+     pch = 19, 
+     col = adjustcolor("steelblue", alpha.f = 0.5))
+
+# Adicionando a reta de regressao calculada
+abline(modelo, col = "red", lwd = 3)
+
+# Adicionando legenda ao grafico
+legend("topleft", legend = "Reta de Regressao", col = "red", lwd = 3)
+\end{lstlisting}
+
+Gráfico gerado:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Regressão.png}
+\end{figure}
+
+Os coeficientes calculados manualmente coincidiram precisamente com os resultados do comando \texttt{lm()}, sendo $\hat{\beta}_1 \approx 50.15$ e $\hat{\beta}_0 \approx -5872.093$. O valor positivo da inclinação ($\hat{\beta}_1$) confirma a forte associação linear entre as variáveis, indicando que pinguins com nadadeiras maiores tendem a apresentar maior massa corporal. A reta de regressão sobreposta aos dados observados demonstra um ajuste adequado do modelo linear à nuvem de pontos.
 
 \item [2.3] \textbf{ Resposta}: \\
 ....
