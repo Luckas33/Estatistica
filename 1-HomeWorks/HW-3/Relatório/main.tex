@@ -503,18 +503,98 @@ da regressão
 \subsection*{\Large{Solução da questão}} 	
 
 \subsubsection*{Descrição da atividade}
-......
+A Questão 2 propõe a aplicação de técnicas de Regressão Linear Simples utilizando o conjunto de dados \textit{Palmer Penguins}. O objetivo central é modelar a relação entre a massa corporal (variável explicativa) e o comprimento do bico (variável resposta), estimando os parâmetros da reta através do Método dos Mínimos Quadrados (MQO). A atividade abrange desde a inspeção visual da correlação até a validação do modelo via análise de resíduos e métricas de desempenho ($RMSE$ e $R^2$). Por fim, realiza-se um estudo de sensibilidade introduzindo um \textit{outlier} artificial para demonstrar o impacto de observações extremas na inferência estatística.
 
-\subsubsection*{Mais distribuições especiais discretas } 
+\subsubsection*{\Large{Correlação linear}} 
 
 \begin{itemize}
 \item[]
 
-\text{\large ......}
-    \item .......
+\text{\Large O que é Correlação Linear ($r$)?}
+    \item A correlação linear (geralmente medida pelo coeficiente de Pearson, $r$) avalia a força e a direção da relação linear entre duas variáveis quantitativas ($X$ e $Y$).
+    \item \textbf{Intervalo}: O valor de $r$ varia de $-1$ a $+1$.
+    \begin{itemize}
+        \item $r = +1$: Correlação linear positiva perfeita (se $X$ sobe, $Y$ sobe na mesma proporção).
+        \item $r = -1$: Correlação linear negativa perfeita (se $X$ sobe, $Y$ desce).
+        \item $r = 0$: Ausência de correlação linear.
+    \end{itemize}
+    \item É importante notar que \textit{correlação não implica causalidade}. O fato de a massa e o bico estarem correlacionados não significa necessariamente que um causa o crescimento do outro diretamente sem outros fatores biológicos envolvidos.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{Imagens/Graficos/TiposCorrelacao.png}
+\end{figure}
+
+\text{\Large Parâmetros da Reta de Regressão}
+    \item Quando modelamos essa relação matematicamente através de uma função linear ($Y = \beta_0 + \beta_1 X$), definimos dois coeficientes fundamentais:
+
+    \item \textbf{1. Coeficiente Angular ($\beta_1$ ou Inclinação)}:
+    \begin{itemize}
+        \item Representa a \textbf{taxa de variação} da variável dependente em relação à independente.
+        \item Indica o quanto $Y$ (tamanho do bico) aumenta (ou diminui) para cada unidade extra de $X$ (grama de peso).
+        \item Se $\beta_1 > 0$, a reta é crescente; se $\beta_1 < 0$, a reta é decrescente.
+    \end{itemize}
+
+    \item \textbf{2. Coeficiente Linear ($\beta_0$ ou Intercepto)}:
+    \begin{itemize}
+        \item Geometricamente, é o ponto onde a reta cruza o eixo vertical ($Y$).
+        \item Representa o valor esperado de $Y$ quando $X = 0$.
+        \item \textit{Nota de interpretação}: Em muitos contextos reais, o intercepto pode não ter sentido físico (ex: não existe pinguim com 0g de massa), servindo apenas como um "ajuste de altura" para a reta no gráfico.
+    \end{itemize}
     
 \end{itemize}
+
+\subsubsection*{\Large{Regressão linear}} 
+
+\begin{itemize}
+\item[]
+
+\text{\Large O que é Regressão Linear?}
+    \item A análise de regressão é uma técnica estatística utilizada para investigar e modelar a relação entre variáveis. Na Regressão Linear Simples, estudamos a relação entre apenas duas variáveis:
+    \begin{enumerate}
+    \item \textbf{Variável Dependente ($Y$)}: Também chamada de variável resposta. É aquela que queremos prever ou explicar (neste caso, o tamanho do bico).
+    \item \textbf{Variável Independente ($X$)}: Também chamada de variável explicativa ou preditora. É aquela usada para explicar a variação em $Y$ (neste caso, a massa corporal).
+    \end{enumerate}
+    
+    \item O modelo teórico é dado pela equação da reta:
+    $$ Y_i = \beta_0 + \beta_1 X_i + \epsilon_i $$
+    Onde:
+    \begin{itemize}
+        \item $\beta_0$: Intercepto (valor de $Y$ quando $X=0$).
+        \item $\beta_1$: Coeficiente angular ou inclinação (quanto $Y$ varia quando $X$ aumenta em 1 unidade).
+        \item $\epsilon_i$: Erro aleatório (resíduo), representando a variação não explicada pelo modelo.
+    \end{itemize}
+
+\text{\Large Método dos Mínimos Quadrados Ordinários (MQO)}
+    \item Para encontrar a "melhor reta" que se ajusta aos dados, precisamos estimar os parâmetros $\beta_0$ e $\beta_1$. O método mais comum é o dos Mínimos Quadrados.
+    \item O objetivo do MQO é encontrar os valores de $\hat{\beta}_0$ e $\hat{\beta}_1$ que minimizam a Soma dos Quadrados dos Erros (SSE):
+    $$ SSE = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2 = \sum_{i=1}^{n} (y_i - (\hat{\beta}_0 + \hat{\beta}_1 x_i))^2 $$
+    \item A ideia é que a reta ideal é aquela que passa "o mais perto possível" de todos os pontos simultaneamente, penalizando grandes desvios.
+
+\text{\Large Avaliação do Modelo}
+    \item Após ajustar a reta, precisamos verificar se o modelo é bom. Utilizamos principalmente:
+    
+    \item \textbf{Análise de Resíduos}:
+    Os resíduos ($e_i = y_i - \hat{y}_i$) são as diferenças entre o valor real observado e o valor predito pela reta. Uma boa regressão deve ter resíduos distribuídos aleatoriamente em torno de zero, sem padrões definidos.
+
+    \item \textbf{Métricas de Desempenho}:
+    \begin{itemize}
+        \item \textbf{RMSE (Raiz do Erro Quadrático Médio)}:
+        Mede o desvio padrão dos resíduos. Indica, em média, o quanto o modelo "erra" na mesma unidade da variável resposta. Quanto menor, melhor.
+        $$ RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2} $$
+        
+        \item \textbf{Coeficiente de Determinação ($R^2$)}:
+        Indica a proporção da variabilidade dos dados que é explicada pelo modelo. Varia de 0 a 1 (ou 0\% a 100\%).
+        $$ R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2} $$
+        Um $R^2$ alto indica que a reta se ajusta bem aos dados observados.
+    \end{itemize}
+
+\text{\Large Sensibilidade a Outliers}
+    \item O método dos mínimos quadrados é altamente sensível a outliers (observações extremas). 
+    \item Como o método eleva os erros ao quadrado para minimizá-los, um único ponto muito distante da tendência geral pode "puxar" a reta de regressão em sua direção, distorcendo os coeficientes ($\beta$) e comprometendo a capacidade preditiva do modelo para os demais dados.
+
+\end{itemize}
+
 
 
 \subsubsection*{Respostas dos itens da questão 2:} 
@@ -522,7 +602,32 @@ da regressão
 \begin{description}[leftmargin=*]
 
 \item [2.1] \textbf{ Resposta}: \\
-.....
+
+Código para plotagem do gráfico entre a massa dos pinguins (x) e o tamanho do bico (y).
+
+\begin{lstlisting}
+# Questao 2.1
+
+x = penguins$body_mass_g #Massa dos pinguins
+
+y = penguins$bill_length_mm #Tamanho do bico
+
+# Grafico bonito e simples
+ggplot(dados_plot, aes(x = Massa, y = Bico)) +
+  geom_point(color = "darkblue", size = 3, alpha = 0.6) +
+  labs(title = "Relacao: Massa vs. Tamanho do Bico",
+       x = "Massa Corporal (g)",
+       y = "Comprimento do Bico (mm)") +
+  theme_minimal() 
+
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{Imagens/Graficos/CorrelaçãoMassaBico.png}
+\end{figure}
+
+Com base no gráfico de correlação podemos ver que sim, é plausível existir uma relação linear entre a massa e o tamanho do bico dos pinguins, pois a medida que a massa aumenta o tamanho do bico tende a acompanhar este aumento, tendo assim uma tendência positiva clara, sendo possível existir uma reta de regressão entre estes dados.
 
 \item [2.2] \textbf{ Resposta}: \\
 
@@ -587,16 +692,145 @@ Gráfico gerado:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\linewidth]{Regressão.png}
+    \includegraphics[width=0.75\linewidth]{Imagens/Graficos/Regressão.png}
 \end{figure}
 
 Os coeficientes calculados manualmente coincidiram precisamente com os resultados do comando \texttt{lm()}, sendo $\hat{\beta}_1 \approx 50.15$ e $\hat{\beta}_0 \approx -5872.093$. O valor positivo da inclinação ($\hat{\beta}_1$) confirma a forte associação linear entre as variáveis, indicando que pinguins com nadadeiras maiores tendem a apresentar maior massa corporal. A reta de regressão sobreposta aos dados observados demonstra um ajuste adequado do modelo linear à nuvem de pontos.
 
 \item [2.3] \textbf{ Resposta}: \\
-....
+Para avaliar a qualidade do ajuste do modelo de regressão linear, analisamos os resíduos e calculamos as métricas de desempenho $RMSE$ e $R^2$.
+
+Os resíduos ($e_i$) foram calculados subtraindo os valores ajustados ($\hat{y}$) dos valores observados ($y$). O gráfico abaixo apresenta a dispersão dos resíduos em relação aos valores ajustados (Fitted Values).
+
+\begin{lstlisting}[language=R]
+# Questão 2.3
+# Calcule os resíduos da regressão e apresente uma representação gráfica dos mesmos.
+library(ggplot2)
+library(palmerpenguins)
+
+# 1. Definir variáveis
+MassaPenguins = penguins$body_mass_g
+TamanhoBico = penguins$bill_length_mm
+
+# 2. Ajustar o Modelo Linear
+modelo_linear <- lm(TamanhoBico ~ MassaPenguins)
+
+# 3. Criar Data Frame com Resíduos e Valores Ajustados
+dados_residuos <- data.frame(
+  Fitted = fitted(modelo_linear),
+  Residuals = residuals(modelo_linear)
+)
+
+# 4. Plotar Gráfico de Resíduos (Residuals vs Fitted)
+ggplot(dados_residuos, aes(x = Fitted, y = Residuals)) +
+  geom_point(color = "darkred", alpha = 0.6) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "blue") +
+  labs(title = "Análise de Resíduos: Resíduos vs. Valores Ajustados",
+       x = "Valores Ajustados (Preditos)",
+       y = "Resíduos") +
+  theme_minimal()
+
+# 5. Calcular Métricas (RMSE e R2)
+rmse_valor <- sqrt(mean(residuals(modelo_linear)^2, na.rm = TRUE))
+r2_valor <- summary(modelo_linear)$r.squared
+
+# 6. Exibir os resultados no console
+cat("RMSE:", round(rmse_valor, 4), "mm\n")
+cat("R-squared:", round(r2_valor, 4), "\n")
+
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    % Substitua pelo nome do arquivo salvo no R
+    \includegraphics[width=0.75\linewidth]{Imagens/Graficos/Residuos.png}
+    \caption{Gráfico de resíduos do modelo de regressão linear.}
+    \label{fig:residuos_regressao}
+\end{figure}
+
+Com base nos cálculos realizados no R, obtivemos os seguintes resultados:
+
+O valor obtido do RME foi de aproximadamente \textbf{4.77 mm}.
+Isso indica que, em média, as previsões do modelo erram o comprimento do bico em cerca de 4.77 milímetros para mais ou para menos. Considerando a escala do bico (geralmente entre 35mm e 55mm), é um erro considerável.
+
+O valor obtido para o coeficiente de determinação foi de aproximadamente \textbf{0.354} (ou 35,4\%).
+O $R^2$ indica que apenas 35,4\% da variabilidade do comprimento do bico é explicada pela massa corporal dos pinguins.
+
+Embora exista uma relação linear positiva (como visto no item anterior), o valor baixo de $R^2$ e a dispersão dos resíduos sugerem que a massa corporal, sozinha, não é um preditor de alta precisão para o tamanho do bico. Isso provavelmente ocorre porque estamos misturando três espécies diferentes, cada uma com proporções corporais distintas, o que aumenta a variância não explicada pelo modelo simples.
 
 \item [2.4] \textbf{ Resposta}: \\
-....
+
+\textbf{Introdução de Outlier e Comparação de Modelos:}
+
+Para avaliar a robustez do estimador de Mínimos Quadrados Ordinários (MQO), introduziu-se artificialmente uma observação extrema (\textit{outlier}) no conjunto de dados, alterando a massa corporal da primeira observação para $50.000$g (valor aproximadamente 12 vezes superior à média da espécie).
+
+\begin{lstlisting}
+library(palmerpenguins)
+dados <- na.omit(penguins)
+x <- as.numeric(dados$flipper_length_mm)
+y <- as.numeric(dados$body_mass_g)
+
+# 1. Modelo Original (Item 2)
+mod_orig <- lm(y ~ x)
+summary_orig <- summary(mod_orig)
+
+# 2. Introducao de Outlier Artificial
+# Vamos pegar o primeiro pinguim e aumentar a massa dele drasticamente (ex: 50kg)
+y_outlier <- y
+y_outlier[1] <- 50000 # Valor extremo (50kg onde o normal e ~4kg)
+
+mod_outlier <- lm(y_outlier ~ x)
+summary_outlier <- summary(mod_outlier)
+
+# 3. Comparacao de Metricas
+# RMSE (Raiz do Erro Quadratico Medio)
+rmse_orig <- sqrt(mean(mod_orig$residuals^2))
+rmse_outlier <- sqrt(mean(mod_outlier$residuals^2))
+
+# R-quadrado
+r2_orig <- summary_orig$r.squared
+r2_outlier <- summary_outlier$r.squared
+
+# 4. Visualizacao
+plot(x, y_outlier, pch=16, col=rgb(0,0,0,0.3), main="Impacto de um Outlier na Regressao")
+abline(mod_orig, col="blue", lwd=2, lty=2) # Reta original
+abline(mod_outlier, col="red", lwd=2)     # Reta com outlier
+legend("topleft", legend=c("Original", "Com Outlier"), col=c("blue", "red"), lty=c(2,1))
+\end{lstlisting}
+
+\textbf{Gráfico Gerado:}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Imagens/Graficos/Impacto de Outlier na Regressão Linear Simples.png}
+\end{figure}
+
+\textbf{Comparação de Coeficientes e Métricas:}
+
+A tabela abaixo apresenta a comparação entre o modelo original (obtido no Item 2) e o modelo influenciado pelo \textit{outlier}:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l|c|c|c|c}
+\hline
+\textbf{Modelo} & $R^2$ & \textbf{RMSE} \\ \hline
+Original & 0,7620922 & 392.1603 \\ \hline
+Com Outlier & 0.03664672 & 2582.644 \\ \hline
+\end{tabular}
+\caption{Comparativo de métricas de ajuste antes e após a inclusão do outlier.}
+\end{table}
+
+A comparação dos resultados revela que uma única observação foi capaz de degradar significativamente a qualidade do ajuste. Os principais pontos observados foram:
+
+\begin{itemize}
+    \item \textbf{Deslocamento da Reta:} O MQO busca minimizar a soma dos quadrados dos resíduos. Como o resíduo do \textit{outlier} é massivo, a reta é "puxada" em sua direção para compensar esse erro, alterando drasticamente o intercepto ($\hat{\beta}_0$) e reduzindo a inclinação ($\hat{\beta}_1$).
+    \item \textbf{Colapso do $R^2$:} O coeficiente de determinação caiu de $0,759$ para $0,051$. Isso indica que, sob a influência do \textit{outlier}, o modelo linear perde quase toda sua capacidade de explicar a variabilidade dos dados.
+    \item \textbf{Aumento do RMSE:} A Raiz do Erro Quadrático Médio (RMSE) saltou de $394,46$ para $2505,12$, demonstrando que a precisão preditiva do modelo foi totalmente comprometida.
+\end{itemize}
+
+
+
+Conclui-se que o modelo de regressão linear simples não é robusto a \textit{outliers}. Na prática estatística, este comportamento reforça a importância da análise exploratória prévia e do uso de métodos de detecção de pontos influentes (como a Distância de Cook) para garantir a integridade das inferências.
 
 \end{description}
 
